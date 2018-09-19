@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style>
 </head>
 <body>
-<div class="main">
+<div class="mui-content">
 
 <div class="topbar">
      <div class="z-row">

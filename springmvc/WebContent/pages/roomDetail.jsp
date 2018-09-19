@@ -16,8 +16,6 @@
 	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <link rel="icon" href="<%=basePath%>images/ico.png" type="image/x-icon">
-<link rel="stylesheet" type="text/css"
-	href="<%=basePath%>css/css/style.min.css">
 <link href="<%=basePath%>js/layui/css/layui.css" rel="stylesheet"
 	type="text/css">
 <link href="<%=basePath%>js/fontawesome/css/font-awesome.min.css"
@@ -43,7 +41,7 @@ html, body {
 </style>
 </head>
 <body>
-	<div class="main">
+	<div class="mui-content">
 		<div class="topbar">
 			<div class="z-row">
 				<div class="topbarleft" id="back">
@@ -128,7 +126,6 @@ html, body {
 <script type="text/javascript"></script>
 <script>
 	window.Path='<%=basePath%>';
-	var publicRentalRecord = '${publicRentalRecord}';
 	var RoomInfor = '${json}';
 	var RoomAreaInfor = '${roomArea}';
 	var roomStatus = '${roomStatus}';
@@ -169,11 +166,11 @@ html, body {
     }
     //选择该户按钮点击事件
     $('#chooseThisRoom').unbind().click(function(){
-    	window.location.href = "<%=basePath%>login/chooseRoomSuccess?build="+ RoomInforJson.BUILD +"&&household="+ RoomInforJson.HOUSEHOLD +"&&publicRentalRecord="+ publicRentalRecord +"&&limitArea="+ ${limitArea} +"";
+    	window.location.href = "<%=basePath%>login/chooseRoomSuccess?build="+ RoomInforJson.BUILD +"&&household="+ RoomInforJson.HOUSEHOLD + "";
     });
     //返回按钮
     $('#back').unbind().click(function(){
-    	window.location.href = '<%=basePath%>login/chooseRoom?public_rental_record='+ publicRentalRecord +'&&limitArea='+ ${limitArea} +'';
+    	window.location.href = '<%=basePath%>login/chooseRoom';
     })
     
     //看模型参数设置

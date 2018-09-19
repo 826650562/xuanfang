@@ -48,7 +48,6 @@
 <script type="text/javascript">
 	var houseHold = '${houseHold}';
 	var error = '${error}';
-	var publicRentalRecord = '${publicRentalRecord}';
 	//提交成功ss
 	houseHold && $('#roomNum').text('您选择了'+ houseHold +'户');
 	//提交失败
@@ -58,7 +57,7 @@
 		$('#roomNum').text(error);
 	}
 	$('#back').unbind().click(function(){
-		window.location.href = '<%=basePath%>login/chooseRoom?public_rental_record='+ publicRentalRecord +'&&limitArea='+ ${limitArea} +'';
+		window.location.href = '<%=basePath%>login/chooseRoom';
 	})
 </script>
 </html>

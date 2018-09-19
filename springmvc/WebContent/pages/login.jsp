@@ -35,26 +35,26 @@
              <i class="fa fa-phone fa-fw"></i>
           </div>
           <div class="z-col">
-             <input id="phoneNum" type="tel" placeholder="手机号码" class="zInput" value="18270822008">
+             <input id="phoneNum" type="tel" placeholder="手机号码" class="zInput">
           </div>
        </div>
-       <!-- <div class="z-row loginInput">
+       <div class="z-row loginInput">
           <div class="loginInputXtb">
              <i class="fa fa-commenting fa-fw"></i>
           </div>
           <div class="z-col">
-             <input type="text" placeholder="短信验证码" class="zInput">
+             <input id="verifyCode" type="text" placeholder="短信验证码" class="zInput">
           </div>
           <div>
-             <button class="mui-btn mui-btn-success mui-btn-outlined hqyzm">获取验证码</button>
+             <button id="sendVerifyCode" class="mui-btn mui-btn-success mui-btn-outlined hqyzm">获取验证码</button>
           </div>
-       </div> -->
+       </div>
        <div class="z-row loginInput">
           <div class="loginInputXtb">
              <i class="fa fa-tag fa-fw"></i>
           </div>
           <div class="z-col">
-             <input id="publicRentalRecord" type="text" placeholder="请输入选房码" class="zInput" value="123456">
+             <input id="publicRentalRecord" type="password" placeholder="请输入选房码" class="zInput">
           </div>
        </div>
        <div class="z-row marT30">
@@ -74,28 +74,36 @@
         var laypage = layui.laypage;
     });
 	var mobilevalid = /^(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/;//(0|86|17951)?
-	$('#submitBtn').unbind().click(function(){
-		var phoneBol = mobilevalid.test($('#phoneNum').val()); 
+	var phoneBol;
+	//登录按钮事件
+	$('#submitBtn').unbind().click(function(){	
+		phoneBol = mobilevalid.test($('#phoneNum').val());	
 		if(!phoneBol){
 			layer.msg('手机号码填写有误，请重新填写！');
 		}else if(!$('#publicRentalRecord').val()){
 			layer.msg('选房码不能为空，请重新填写！');
+		}else if(!$('#verifyCode').val()){
+			layer.msg('验证码不能为空，请重新填写！');
 		}else if(phoneBol && $('#publicRentalRecord').val()){
 			$.ajax({
 				url:'<%=basePath%>login/tenement',
 				data:{
 					tenement:$('#phoneNum').val(),
-					public_rental_record:$('#publicRentalRecord').val()
+					public_rental_record:$('#publicRentalRecord').val(),
+					verifyCode:$('#verifyCode').val()
 				},
 				type:'POST',
 				dataType:'JSON',
-				success:function(res){
+				success:function(res){					
 					if(res.success){
-						window.location.href = '<%=basePath%>login/chooseRoom?public_rental_record='+ $("#publicRentalRecord").val() +'&&limitArea='+ res.limitArea +'';
+						window.location.href = '<%=basePath%>login/chooseRoom';
 					}else if(res.error){
 						layer.msg(res.error);
-					}
-					
+					}else if(res.verifyCodeOverdue){
+						layer.msg(res.verifyCodeOverdue);
+					}else if(res.verifyCodeError){
+						layer.msg(res.verifyCodeError);
+					}		
 				},
 				error:function(res){
 					layer.msg(res.status);
@@ -103,5 +111,48 @@
 			})
 		}
 	})
+	var interval;//倒计时interval
+	var num;//倒计时时间
+	$('#sendVerifyCode').unbind().click(function(){
+		phoneBol = mobilevalid.test($('#phoneNum').val());
+		if(!phoneBol){
+			layer.msg('手机号码填写有误，请重新填写！');
+		}else{
+			$(this).attr('disabled',true);
+			num=60;
+			$('#sendVerifyCode').removeClass('mui-btn-success').addClass('mui-btn-danger');
+			countDown();
+			interval = setInterval(countDown,1000);
+			$.ajax({
+				url:'sendVerifyCode',
+				data:{
+					mobile:$('#phoneNum').val()
+				},
+				dataType:'JSON',
+				type:'POST',
+				success:function(rtn){
+					if(rtn.success){
+						layer.msg(rtn.success);
+					}else if(rtn.error){
+						layer.msg(rtn.error);
+					}
+				},
+				error:function(rtn){
+					console.log(rtn);
+				}
+			})
+		}
+	});
+	//倒计时
+	function countDown(){
+		num--;
+		if(num>=0){			
+			$('#sendVerifyCode').text("("+ Number(num) +")秒后重新获取");
+		}else{
+			clearInterval(interval);
+			$('#sendVerifyCode').removeClass('mui-btn-danger').addClass('mui-btn-success');
+			$('#sendVerifyCode').text("获取验证码").attr('disabled',false);			
+		}		
+	};
 </script>
 </html>

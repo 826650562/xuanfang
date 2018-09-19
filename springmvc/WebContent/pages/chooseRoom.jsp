@@ -16,8 +16,6 @@
 	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <link rel="icon" href="<%=basePath%>images/ico.png" type="image/x-icon">
-<link rel="stylesheet" type="text/css"
-	href="<%=basePath%>css/css/style.min.css">
 <link href="<%=basePath%>js/layui/css/modules/layer/default/layer.css"
 	rel="stylesheet" type="text/css">
 <link href="<%=basePath%>js/layui/css/layui.css" rel="stylesheet"
@@ -58,7 +56,7 @@ html, body {
 </style>
 </head>
 <body>
-	<div class="main">
+	<div class="mui-content">
 		<div class="itemcont">
 			<div class="z-row">
 				<div class="z-col">
@@ -93,10 +91,6 @@ html, body {
 			</div>
 			<div class="z-row">
 				<div class="z-col" id="buildListBox">
-					<!-- <button class="mui-btn mui-btn-success ldxzbtn">15号</button>
-					<button class="mui-btn mui-btn-outlined ldxzbtn">17号</button>
-					<button class="mui-btn mui-btn-outlined ldxzbtn">21号</button>
-					<button class="mui-btn mui-btn-outlined ldxzbtn">22号</button> -->
 				</div>
 			</div>
 
@@ -125,68 +119,43 @@ html, body {
 				<form class="layui-form" id="cicleBox" action="">
 					<div class="circle"></div>
 				</form>
-				<!-- <div class="z-row marB10">
-					<div class="xflistch">F19</div>
-					<div class="z-col xflist">
-						<div class="xflistitem mui-table-view-cell bgGray">1901</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1903</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1904</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1905</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1906</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1907</div>
-					</div>
-				</div>
-				<div class="z-row marB10">
-					<div class="xflistch">F18</div>
-					<div class="z-col xflist">
-						<div class="xflistitem mui-table-view-cell bgQianRed">F1901</div>
-					</div>
-				</div>
-				<div class="z-row marB10">
-					<div class="xflistch">F17</div>
-					<div class="z-col xflist">
-						<div class="xflistitem mui-table-view-cell bgGray">1901</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1903</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1904</div>
-					</div>
-				</div>
-				<div class="z-row marB10">
-					<div class="xflistch">F16</div>
-					<div class="z-col xflist">
-						<div class="xflistitem mui-table-view-cell bgQianYellow">1901</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1903</div>
-					</div>
-				</div>
-				<div class="z-row marB10">
-					<div class="xflistch">F15</div>
-					<div class="z-col xflist">
-						<div class="xflistitem mui-table-view-cell bgGray">1901</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1903</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1904</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1906</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1907</div>
-					</div>
-				</div>
-				<div class="z-row marB10">
-					<div class="xflistch">F14</div>
-					<div class="z-col xflist">
-						<div class="xflistitem mui-table-view-cell bgGray">1901</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1903</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1904</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1907</div>
-					</div>
-				</div>
-				<div class="z-row marB10">
-					<div class="xflistch">F13</div>
-					<div class="z-col xflist">
-						<div class="xflistitem mui-table-view-cell bgGray">1901</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1903</div>
-						<div class="xflistitem mui-table-view-cell bgGray">1904</div>
-					</div>
-				</div> -->
 			</div>
 		</div>
 	</div>
+	<!--底部nav html start-->
+	<nav class="mui-bar mui-bar-tab textcenter" >
+		<div class="z-row" style="padding-top: 0.3em;">
+			<div id="chooseRoom"  class="z-col"  onclick="javascript:location.reload();">
+				<div class="mui-table-view-cell bottombaritem bottomActive">
+					<div class="z-row">
+						<div class="z-col bottombarxtb">
+							<span class="fa fa-home fa-lg"></span>
+						</div>
+					</div>
+					<div class="z-row">
+						<div class="z-col bottombartxt">
+							<span class="mui-tab-label">选房</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="toMine" class="z-col">
+				<div class=" bottombaritem">
+					<div class="z-row">
+						<div class="z-col bottombarxtb">
+							<span class="fa fa-user-circle fa-lg"></span>
+						</div>
+					</div>
+					<div class="z-row">
+						<div class="z-col bottombartxt">
+							<span class="mui-tab-label">我的</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<!--底部nav html end-->
 </body>
 <script type="text/javascript" src="<%=basePath%>js/layui/layui.js"></script>
 <script type="text/javascript">
@@ -198,7 +167,6 @@ html, body {
         var laypage = layui.laypage;
     });
 	var getJson = '${buildList}';
-	var publicRentalRecord = '${publicRentalRecord}';
 	var json = getJson.substring(1, getJson.length - 1);
 
 	var buildNumJsonArr = json.split(',');
@@ -230,14 +198,18 @@ html, body {
 			$('#xflistbox').find('.z-row').remove();
 			getRoomList();
 		})
-
+		
+		$('#toMine').unbind().click(function(){
+			window.location.href = "<%=basePath%>login/mine";
+		})
+		
+		
 		//获取楼栋户型列表
 		function getRoomList() {
 			$.ajax({
 				url : 'buildRoomByList', //获取楼栋户型列表
 				data : {
 					loudong : $('.mui-btn-success').text(),
-					limitArea:${limitArea}
 				},
 				dataType : 'JSON',
 				type : 'POST',
@@ -295,9 +267,9 @@ html, body {
 					}
 					!getCookie('closeLayer') && layer.open({
 						title: '温馨提示',
-						btn:['不在显示','确定'],
+						btn:['不再显示','确定'],
 						content: '<div>1.本次选房只能选与配租面积相等的户型。</div>'+
-								'<div>2.每个租户只能意向选取一户，若想选取其他户，请到‘我’的页面中退选之前选中的户，每个租户可以最多退选三次。</div>'+
+								'<div>2.每个租户只能意向选取一户，若想选取其他户，请到‘我的’的页面中退选之前选中的户，每个租户可以最多退选三次。</div>'+
 								'<div>3.一旦被后台判定选中成功，户列表中会显示已出租，并等待签署出租合同。</div>',
 						btn1:function(index){
 							setCookie('closeLayer',true);
@@ -340,31 +312,30 @@ html, body {
 				$('.xflistitem').unbind().click(function() {
 					if ($(this).hasClass('bgGray')) {
 						window.location.href = "<%=basePath%>login/roomDetail?build=" + $('.mui-btn-success').text() + 
-						"&&household=" + $(this).text() + "&&publicRentalRecord=" + publicRentalRecord + "&&limitArea="+ ${limitArea} +"";
+						"&&household=" + $(this).text() + "";
 					} else if ($(this).hasClass('bgQianRed')) {
 						layer.msg('该户已出租');
 					} else if($(this).hasClass('bgQianYellow')){
 						layer.msg('该户已被选');
 					}
 				})
-			}
-			//存cookie
-			function setCookie(name,value){
-				var Days = 30;
-				var exp = new Date();
-				exp.setTime(exp.getTime() + 5*60*1000);//Days*24*60*60*1000
-				document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
-			}
-			
-			//取cookie
-			function getCookie(name){
-				var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-				if(arr=document.cookie.match(reg))
-				return unescape(arr[2]);
-				else
-				return null;
-			}
-
+			}			
+		}
+		//存cookie
+		function setCookie(name,value){
+			var Days = 30;
+			var exp = new Date();
+			exp.setTime(exp.getTime() + 10*60*1000);//Days*24*60*60*1000
+			document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+		}
+		
+		//取cookie
+		function getCookie(name){
+			var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+			if(arr=document.cookie.match(reg))
+			return unescape(arr[2]);
+			else
+			return null;
 		}
 	})
 </script>

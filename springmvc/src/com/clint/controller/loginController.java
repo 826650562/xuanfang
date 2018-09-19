@@ -30,7 +30,11 @@ public class loginController {
 	@RequestMapping(value = "/index")
 	public String savePerson() {
 		System.out.println("savePerson()...");
-		return "pages/index";
+//		String addSql="";
+//	    // String ls_conditions=req.getParameter("ls_conditions");*/
+//		addSql="select t.id from T_test t";
+//	    List addrList=this.mapService.getListBySql(addSql);
+		return "index";//pages/
 	}
  
 

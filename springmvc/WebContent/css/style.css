@@ -78,6 +78,10 @@ p{color:#313131;}
 .topbarright{width:45px;height:45px;text-align:center; line-height:45px;}
 .topbarcenter{height:45px; line-height:45px; text-align:center; font-size:16px;}
 .mainbox{padding:15px;}
+.mui-content {background-color: #f6f6f6;}
+.mui-bar{padding:0px;}
+.mui-bar-tab .mui-tab-item.mui-active {color: #dd524d;}
+.mui-bar { background-color: #fff;-webkit-box-shadow: 0 0 1px rgba(0,0,0,.4);box-shadow: 0 0 1px rgba(0,0,0,.4);-webkit-backface-visibility: hidden; backface-visibility: hidden;}
 /*------框架通用 css------*/
 
 /*--login.html--*/
@@ -112,7 +116,7 @@ p{color:#313131;}
 .nofound{text-align:center; color:#313131; padding:10px 0px 20px 0px;}
 .blkhtmlblk{height:180px;}
 /*------xf.html css AND xqxq.html css-------*/
-.itemcont{margin-bottom:10px; background:#fff; padding:10px 15px;}
+.itemcont{margin-bottom:40px; background:#fff; padding:10px 15px;}
 .xmtitle{font-weight:bold; font-size:18px; line-height:26px;}
 .xmaddr{line-height:24px; font-size:14px;}
 .xmimg img{width:100%; display:block;}
@@ -131,6 +135,22 @@ p{color:#313131;}
 .xfzttxt{float:left; padding-left:5px; font-size:14px;}
 .xqxqbtn{ height:35px; line-height:33px; font-size:14px; margin:5px 0px 0px 0px; display:block; float:left; border-radius:2px; padding:0px 10px;}
 .xqxfitemtxt{line-height:26px;text-indent:2em;}
+/*-------wode html css------*/
+.wdxxybox{ background:#fff;}
+.wdxxycpName{padding:3px 0px 10px 0px; font-size:16px; color:#fff; font-weight:bold;}
+.wdxxyitembox{padding:15px; background:url(../images/dkbanner.jpg) no-repeat top center; height:125px; position:relative;}
+.wdxxyCont{ background:#fff; border-radius:5px; padding:12px 0px; margin-top:10px; text-align:center;
+moz-box-shadow: 0px 0px 10px #e6e6e6;-webkit-box-shadow: 0px 0px 10px #e6e6e6;box-shadow: 0px 0px 10px #e6e6e6;}
+.wdxxyli{ height:25px; line-height:25px; color:#666;}
+.wdxxyMain{border-radius:5px;background:#fff; margin-top:10px;}
+.wdxxyTitle{height:40px; line-height:40px; padding:0px 15px; border-bottom:1px solid #e6e6e6; font-size:15px;font-weight: bold;}
+.wdxxyMainInfo{ height:32px; line-height:32px;}
+.wdxxyinfocont{padding:10px 15px;}
+.wdxxyLabel{ color:#fff;font-size:14px; height:22px; line-height:22px;   }
+.wdxxyLabel2{color:#fff;font-size:14px; height:22px; line-height:22px; padding:3px 0px 0px 20px;}
+.wdsyhead img {width: 60px;height: 60px;border-radius: 60px;display: block;}
+.wdsyheadright {padding-left: 10px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+/* 获取房屋列表 */
 .iframeBox{padding:5px !important;height:250px}
 .circle {
     box-sizing: border-box;

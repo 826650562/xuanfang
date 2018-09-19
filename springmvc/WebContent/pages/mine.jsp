@@ -15,8 +15,6 @@
 	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <link rel="icon" href="<%=basePath%>images/ico.png" type="image/x-icon">
-<link rel="stylesheet" type="text/css"
-	href="<%=basePath%>css/css/style.min.css">
 <link href="<%=basePath%>js/layui/css/modules/layer/default/layer.css"
 	rel="stylesheet" type="text/css">
 <link href="<%=basePath%>js/layui/css/layui.css" rel="stylesheet"
@@ -31,44 +29,135 @@
 <link href="<%=basePath%>css/style.css" rel="stylesheet" type="text/css">
 <script src="<%=basePath%>js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <style>
-#roomNum{text-decoration:underline}
+#roomNum {
+	text-decoration: underline
+}
+.mui-table-view-cell {
+    padding: 0px;
+}
 </style>
 </head>
 <body>
-	<div class="tablebox">
-		<table border="1px" bordercolor="#eee" cellspacing="0px"
-			style="border-collapse:collapse; width:100%;">
-			<tr>
-				<td width="25%">承租人编号</td>
-				<td width="25%">承租人姓名</td>
-				<td width="25%">承租人手机号</td>
-				<td width="25%">承租人房屋面积</td>
-			</tr>
-			<tr>
-				<td id="tenementNum"><span>1604</span></td>
-				<td id="tenementName"><span>33</span></td>
-				<td id="tenementTel"><span>78</span></td>
-				<td id="limitArea"><span>78</span>m<sup>2</sup></td>
-			</tr>
-		</table>
+	<div class="topbar mui-bar mui-bar-nav">
+		<div class="z-row">
+			<div id="back" class="topbarleft">
+				<i class="fa fa-chevron-left fa-fw"></i>返回
+			</div>
+			<div class="z-col topbarcenter">我的</div>
+			<div class="topbarright"></div>
+		</div>
 	</div>
-	<div class="tablebox">
-		<table border="1px" bordercolor="#eee" cellspacing="0px"
-			style="border-collapse:collapse; width:100%;">
-			<tr>
-				<td width="25%">户所在楼栋</td>
-				<td width="25%">户所在楼层</td>
-				<td width="25%">所选户号</td>
-				<td width="25%">退选</td>
-			</tr>
-			<tr>
-				<td id="roomBuild"><span>1604</span></td>
-				<td id="roomFloor"><span>33</span></td>
-				<td id="roomNum"><span>78</span></td>
-				<td><button style="display:none" id="delChoose">退选</button></td>
-			</tr>
-		</table>
+	<div class="mui-content">
+		<div class="wdxxybox">
+			<div class="wdxxyitembox">
+				<div class="z-row padTB10">
+					<div class="wdsyhead">
+						<img src="<%=basePath%>images/head.jpg">
+					</div>
+					<div class="z-col wdsyheadright">
+						<div class="z-row">
+							<div id="tenementName" class="wdxxycpName">杨丞</div>
+							<div id="tenementNum" class="z-col wdxxyLabel2"><label>编号：</label><span>1</span></div>
+						</div>
+						<div class="z-row">
+							<div class="wdxxyLabel">手机号：</div>
+							<div id="tenementTel" class="z-col wdxxyLabel padR5">182****0980</div>
+						</div>
+					</div>
+				</div>
+				<div class="z-row">
+					<div class="z-col">
+						<div class="z-row wdxxyMain">
+							<div class="z-col">
+								<div class="z-row">
+									<div class="z-col wdxxyTitle">
+										<i class="fa fa-home fa-fw"></i>&nbsp;房屋基本信息
+									</div>
+								</div>
+								<div class="wdxxyinfocont">
+									<div class="z-row wdxxyMainInfo">
+										<div>户所在楼栋：</div>
+										<div id="roomBuild" class="z-col mui-text-right">22号楼</div>
+									</div>
+									<div class="z-row wdxxyMainInfo">
+										<div>户所在楼层：</div>
+										<div id="roomFloor" class="z-col mui-text-right">04层</div>
+									</div>
+									<div class="z-row wdxxyMainInfo">
+										<div>所选户号：</div>
+										<div id="roomNum" class="z-col mui-text-right">0402户</div>
+									</div>
+									<div class="z-row wdxxyMainInfo">
+										<div>房屋面积：</div>
+										<div id="roomArea" class="z-col mui-text-right">
+											<span>78</span>m<sup>2</sup>
+										</div>
+									</div>
+									<div class="z-row wdxxyMainInfo" id="delCountBox">
+										<div>可退选次数：</div>
+										<div id="delCount" class="z-col mui-text-right">
+											<span>0</span>次
+										</div>
+									</div>
+									<div class="z-row wdxxyMainInfo"  id="btnBox" style="display: none;height: 38px;line-height: 38px;">
+										<div style="float: left;">我要退选：</div>
+										<div id="delCount" style="float: right;width:70%;" class="z-col mui-text-right">
+											<button id="delChoose"
+											style="height:30px;line-height:30px;"	class="layui-btn layui-btn-radius layui-btn-warm">退选
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="z-row marTB10" id="btnBox2">
+					<div class="z-col">
+						<button id="toLogin" onclick="javascript:window.location.href='<%=basePath %>login/index'"
+							class="layui-btn width100 mui-btn-danger marT10">
+							<i class="fa fa-long-arrow-right fa-fw"></i>&nbsp;退出登录
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+<!--底部nav html start-->
+	<nav class="mui-bar mui-bar-tab textcenter">
+		<div class="z-row" style="padding-top: 0.3em;">
+			<div id="chooseRoom" class="z-col">
+				<div class="mui-table-view-cell bottombaritem bottomActive">
+					<div class="z-row">
+						<div class="z-col bottombarxtb">
+							<span class="fa fa-home fa-lg"></span>
+						</div>
+					</div>
+					<div class="z-row">
+						<div class="z-col bottombartxt">
+							<span class="mui-tab-label">选房</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="toMine" class="z-col" onclick="javascript:location.reload();">
+				<div class="mui-table-view-cell bottombaritem">
+					<div class="z-row">
+						<div class="z-col bottombarxtb">
+							<span class="fa fa-user-circle fa-lg"></span>
+						</div>
+					</div>
+					<div class="z-row">
+						<div class="z-col bottombartxt">
+							<span class="mui-tab-label">我的</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<!--底部nav html end-->
 </body>
 <script type="text/javascript" src="<%=basePath%>js/layui/layui.js"></script>
 <script type="text/javascript">
@@ -79,26 +168,46 @@
         var upload = layui.upload;
         var laypage = layui.laypage;
     });
+    var error = '${error}';
+    if(error){
+    	alert(error);
+    	window.location.href='<%=basePath%>login/index';
+    }
 	var json = ${JSONArray};
-	$('#tenementName span').text(json.NAME);
+	$('#tenementName').text(json.NAME);
 	$('#tenementNum span').text(json.ID);
-	$('#tenementTel span').text(json.TENEMENTTEL);
+	$('#tenementTel').text(json.TENEMENTTEL);
 	$('#limitArea span').text(json.LIMITAREA);
-	
+	$('#delCount span').text(json.lastCount);
+	//json.lastCount  剩余退选次数
+	if(json.STATUSID=='1'){
+		$('#btnBox').css('display','block');
+	}else if(json.STATUSID=='3'){
+		$('#delCountBox').css('display','none');
+		$('#btnBox').css('display','none');
+	}
 	if(json.LOUDONG){
-		$('#roomBuild span').text(json.LOUDONG);
-		$('#roomFloor span').text(json.FLOOR);
-		$('#roomNum span').text(json.HOUSEHOLD);
-		$('#delChoose').css("display","block");
+		$('#roomBuild').text(json.LOUDONG);
+		$('#roomFloor').text(Number(json.FLOOR)+'楼');
+		$('#roomNum').text(json.HOUSEHOLD);
+		$('#roomArea span').text(json.AREA);
 		 hasChoose();
 	}else{
-		$('#roomBuild span').text("未选房");
-		$('#roomFloor span').text("未选房");
-		$('#roomNum span').text("前往选房");
+		$('#roomBuild').text("未选房");
+		$('#roomFloor').text("未选房");
+		$('#roomNum').text("前往选房");
+		$('#roomArea span').text('0');
 		$('#roomNum').unbind().click(function(){
-			window.location.href = '<%=basePath%>login/chooseRoom?public_rental_record='+ json.PUBLIC_RENTAL_RECORD +'&&limitArea='+ json.LIMITAREA +'';
+			window.location.href = '<%=basePath%>login/chooseRoom';
 		})
 	}
+	$('#chooseRoom').unbind().click(function(){
+		window.location.href='<%=basePath%>login/chooseRoom';
+	})
+	
+	$('#back').unbind().click(function(){
+		window.location.href='<%=basePath%>login/chooseRoom';
+	})
 	function hasChoose(){
 		$('#delChoose').unbind().click(function(){
 			$.ajax({
@@ -114,6 +223,7 @@
 						location.reload();
 					}else if(res.delFailed){
 						layer.msg(res.delFailed);
+						location.reload();
 					}else if(res.delCount){
 						layer.msg(res.delCount);
 					}
@@ -125,7 +235,7 @@
 		})	
 		$('#roomNum').unbind().click(function(){
 			window.location.href = "<%=basePath%>login/roomDetail?build=" + json.LOUDONG + 
-							"&&household=" + json.HOUSEHOLD + "&&publicRentalRecord=" + json.PUBLIC_RENTAL_RECORD + "&&limitArea="+ json.LIMITAREA +"";
+							"&&household=" + json.HOUSEHOLD + "";
 		})
 	}
 </script>
