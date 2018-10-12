@@ -28,6 +28,7 @@ type="text/css">
 	rel="stylesheet" type="text/css">
 <link href="<%=basePath%>css/mcss/style.css" rel="stylesheet"
 	type="text/css">
+<script src="<%=basePath %>js/manageIndex.js"></script>
 <style>
 #showApplyDetail{display:none;}
 </style>
@@ -41,15 +42,17 @@ type="text/css">
 			</div>
 			<!-- 头部区域（可配合layui已有的水平导航） -->
 			<ul class="layui-nav layui-layout-right">
+			<c:forEach var="loginContent"  items="${username}">
 				<li class="layui-nav-item"><a href="javascript:;"> <img
 						src="<%=basePath%>images/head.png" class="layui-nav-img">
-						系统管理元ADMIN
+						系统管理员<c:out value="${username}"/>
 				</a>
 					<dl class="layui-nav-child">
 						<dd>
-							<a href="">退出登录</a>
+							<a href="<%=basePath%>chooselogin/loginout">退出登录</a>
 						</dd>
 					</dl></li>
+			</c:forEach>
 			</ul>
 		</div>
 		<div class="layui-side layui-bg-black">

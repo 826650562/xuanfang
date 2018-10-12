@@ -1,0 +1,33 @@
+html, body { height: 100%; }
+body { /*background-color: #f0f2f5; */ background:url(../images/bglogin.jpg) no-repeat center center;}
+.ai { font-family: "AI" !important; font-size: 16px; font-style: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.ai-enter:before { content: "\e766"; }
+.login-wrap { display: table; width: 100%; }
+.login-container { width: 100%; display: table-cell; vertical-align: middle; }
+.login-form { width: 400px; padding: 50px; border-radius:5px; margin: 0 auto; background: #fff; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.loginbox{padding:100px 0px 0px 0px;}
+.input-group {border-bottom:1px solid #eee; box-sizing:border-box; margin-bottom:20px;}
+.input-yzmbox{box-sizing:border-box; margin-bottom:10px;}
+.yzmsrk{border-bottom:1px solid #eee;}
+.input-field{height:50px; width:100%; line-height:50px; padding:0px 10px;color:#555; border:none; box-sizing:border-box;}
+.logintxtxtb{height:50px; line-height:50px; text-align:center; width:30px;}
+.yzm{width:100px; position:relative;}
+.yzm img{width:100%; display:block; padding-top:10px;}
+.yzmsx{ text-align:center; padding-top:20px; cursor:pointer;}
+.yzmsx:hover{ color:#29adeb;}
+.logintop{width:100%; height:80px;}
+.loginbottomtxt{padding:30px 0px; text-align:center; font-size:14px; color:#333;}
+.loginlogo1{padding:10px 5px 0px 10px;}
+.loginlogo2{padding:31px 20px 0px 10px;}
+.loginlogo1 img{ display:block; height:40px;}
+.loginlogo2 img{ display:block; height:18px;}
+.loginlogoname{height:80px; line-height:80px; font-size:16px; text-align:left; color:#555;}
+
+.login-button { position: relative; font-size:15px; letter-spacing:2px; margin-top: 40px; display: block; width: 100%; padding: 13px; background-color: #29adeb; background-repeat: repeat-y; background-image: -moz-linear-gradient(left, #62df41, #53cc33); background-image: -webkit-linear-gradient(left, #62df41, #53cc33); background-image: -o-linear-gradient(left, #62df41, #53cc33); background-image: linear-gradient(left, #62df41, #53cc33); box-shadow: 0px 7px 10px 0px rgba(23, 124, 227, 0.25); text-align: center; border-radius: 3px; color: #fff; border: none; cursor: pointer; transition: padding-right .4s ease; }
+.login-button i { position: absolute; top: 13px; font-size: 20px; margin-left: 5px; opacity: 0; transition: opacity .4s ease; }
+.login-button:hover { padding-right: 30px; }
+.login-button:hover i { opacity: .9; }
+.login-button:focus { outline: none; }
+ @-webkit-keyframes fieldUp {  50% { opacity: 0; -webkit-transform: translateY(0);transform: translateY(0);}
+ 100% {opacity: 1;-webkit-transform: translateY(-50%);transform: translateY(-50%);}
+}

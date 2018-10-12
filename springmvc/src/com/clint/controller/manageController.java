@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,10 @@ public class manageController {
 	private MapService mapService;
 
 	@RequestMapping(value = "/index")
-	public String index() {
+	public String index(HttpServletRequest req, HttpServletResponse reponse,Model model) {
+		HttpSession session = req.getSession();
+		String usr = (String) session.getAttribute("_user_");
+		model.addAttribute("username",usr );
 		return "manage/manageIndex";
 	}
 
@@ -57,6 +61,7 @@ public class manageController {
 		obj.put("rentalJson", rentalJsonArray);
 		obj.put("delJsonArray", delJsonArray);
 		obj.put("delCount", delList.size());
+		
 		try {
 			PrintWriter pw = reponse.getWriter();
 			pw.write(String.valueOf(obj));
