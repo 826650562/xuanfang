@@ -200,7 +200,7 @@ html, body {
 		})
 		
 		$('#toMine').unbind().click(function(){
-			window.location.href = "<%=basePath%>login/mine";
+			window.location.href = "<%=basePath%>chooseRoom/mine";
 		})
 		
 		
@@ -311,7 +311,7 @@ html, body {
 			function roomListClick() {
 				$('.xflistitem').unbind().click(function() {
 					if ($(this).hasClass('bgGray')) {
-						window.location.href = "<%=basePath%>login/roomDetail?build=" + $('.mui-btn-success').text() + 
+						window.location.href = "<%=basePath%>chooseRoom/roomDetail?build=" + $('.mui-btn-success').text() + 
 						"&&household=" + $(this).text() + "";
 					} else if ($(this).hasClass('bgQianRed')) {
 						layer.msg('该户已出租');

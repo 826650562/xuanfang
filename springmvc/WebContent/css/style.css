@@ -69,10 +69,10 @@ p{color:#313131;}
 
 
 .minHeight600{min-height:600px;}
-/*---mui ÖØ¶¨Òå---*/
+/*---mui ï¿½Ø¶ï¿½ï¿½ï¿½---*/
 .mui-btn, button, input[type=button], input[type=reset], input[type=submit]{font-size:16px; line-height:45px; padding:0px; text-align:center;}
 
-/*------¿ò¼ÜÍ¨ÓÃ css------*/
+/*------ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ css------*/
 .topbar{width:100%; height:45px; background:#fff;-moz-box-shadow:0px 1px 3px #e6e6e6; -webkit-box-shadow:0px 1px 3px #e6e6e6; box-shadow:0px 1px 3px #e6e6e6; color:#313131;}
 .topbarleft{padding:0px 10px;height:45px;text-align:center; line-height:45px; cursor:pointer;}
 .topbarright{width:45px;height:45px;text-align:center; line-height:45px;}
@@ -82,7 +82,7 @@ p{color:#313131;}
 .mui-bar{padding:0px;}
 .mui-bar-tab .mui-tab-item.mui-active {color: #dd524d;}
 .mui-bar { background-color: #fff;-webkit-box-shadow: 0 0 1px rgba(0,0,0,.4);box-shadow: 0 0 1px rgba(0,0,0,.4);-webkit-backface-visibility: hidden; backface-visibility: hidden;}
-/*------¿ò¼ÜÍ¨ÓÃ css------*/
+/*------ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ css------*/
 
 /*--login.html--*/
 .loginInputXtb{width:45px; height:45px; line-height:45px; text-align:center; color:#666;}
@@ -116,7 +116,7 @@ p{color:#313131;}
 .nofound{text-align:center; color:#313131; padding:10px 0px 20px 0px;}
 .blkhtmlblk{height:180px;}
 /*------xf.html css AND xqxq.html css-------*/
-.itemcont{margin-bottom:40px; background:#fff; padding:10px 15px;}
+.itemcont{background:#fff; padding:10px 15px;}
 .xmtitle{font-weight:bold; font-size:18px; line-height:26px;}
 .xmaddr{line-height:24px; font-size:14px;}
 .xmimg img{width:100%; display:block;}
@@ -150,7 +150,7 @@ moz-box-shadow: 0px 0px 10px #e6e6e6;-webkit-box-shadow: 0px 0px 10px #e6e6e6;bo
 .wdxxyLabel2{color:#fff;font-size:14px; height:22px; line-height:22px; padding:3px 0px 0px 20px;}
 .wdsyhead img {width: 60px;height: 60px;border-radius: 60px;display: block;}
 .wdsyheadright {padding-left: 10px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-/* »ñÈ¡·¿ÎÝÁÐ±í */
+/* ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ */
 .iframeBox{padding:5px !important;height:250px}
 .circle {
     box-sizing: border-box;

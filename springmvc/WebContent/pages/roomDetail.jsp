@@ -39,6 +39,7 @@ html, body {
 	position: relative;
 }
 </style>
+<script src="<%=basePath%>/js/config.js"></script>
 </head>
 <body>
 	<div class="mui-content">
@@ -166,11 +167,11 @@ html, body {
     }
     //选择该户按钮点击事件
     $('#chooseThisRoom').unbind().click(function(){
-    	window.location.href = "<%=basePath%>login/chooseRoomSuccess?build="+ RoomInforJson.BUILD +"&&household="+ RoomInforJson.HOUSEHOLD + "";
+    	window.location.href = "<%=basePath%>chooseRoom/chooseRoomSuccess?build="+ RoomInforJson.BUILD +"&&household="+ RoomInforJson.HOUSEHOLD + "";
     });
     //返回按钮
     $('#back').unbind().click(function(){
-    	window.location.href = '<%=basePath%>login/chooseRoom';
+    	window.location.href = '<%=basePath%>chooseRoom/chooseRoom';
     })
     
     //看模型参数设置
@@ -179,7 +180,7 @@ html, body {
     var floor = RoomInforJson.HOUSEHOLD.substring(0,2);
     var room = RoomInforJson.HOUSEHOLD.substring(2);
     
-    $('#showModel').attr("src","http://116.236.96.146:28080/BIM/a/bim/bimJzxx/toShowHouseType?total=JHC-"+ RoomInforJson.HOUSETYPE +"&&show=1");
+    $('#showModel').attr("src",JHCXF.ThreeUrl+"?total=JHC-"+ RoomInforJson.HOUSETYPE +"&&show=1");
     /* $('#showModel').attr("src","http://116.236.96.146:28080/BIM/a/bim/bimJzxx/toShowHouseHold?total=JHC-"+ build +"-01-"+ floor + "-" + room + "&&show=1");    
     //所在位置  3d看房按钮事件
    	$('#showRoom').unbind().click(function(){

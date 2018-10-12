@@ -198,20 +198,20 @@
 		$('#roomNum').text("前往选房");
 		$('#roomArea span').text('0');
 		$('#roomNum').unbind().click(function(){
-			window.location.href = '<%=basePath%>login/chooseRoom';
+			window.location.href = '<%=basePath%>chooseRoom/index';
 		})
 	}
 	$('#chooseRoom').unbind().click(function(){
-		window.location.href='<%=basePath%>login/chooseRoom';
+		window.location.href='<%=basePath%>chooseRoom/index';
 	})
 	
 	$('#back').unbind().click(function(){
-		window.location.href='<%=basePath%>login/chooseRoom';
+		window.location.href='<%=basePath%>chooseRoom/index';
 	})
 	function hasChoose(){
 		$('#delChoose').unbind().click(function(){
 			$.ajax({
-				url:'delChoose',
+				url:'<%=basePath%>chooseRoom/delChoose',
 				data:{
 					tenementId:json.ID
 				},
@@ -234,7 +234,7 @@
 			})
 		})	
 		$('#roomNum').unbind().click(function(){
-			window.location.href = "<%=basePath%>login/roomDetail?build=" + json.LOUDONG + 
+			window.location.href = "<%=basePath%>chooseRoom/roomDetail?build=" + json.LOUDONG + 
 							"&&household=" + json.HOUSEHOLD + "";
 		})
 	}

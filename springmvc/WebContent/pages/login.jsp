@@ -96,7 +96,7 @@
 				dataType:'JSON',
 				success:function(res){					
 					if(res.success){
-						window.location.href = '<%=basePath%>login/chooseRoom';
+						window.location.href = '<%=basePath%>chooseRoom/index';
 					}else if(res.error){
 						layer.msg(res.error);
 					}else if(res.verifyCodeOverdue){

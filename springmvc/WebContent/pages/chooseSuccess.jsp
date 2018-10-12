@@ -57,7 +57,7 @@
 		$('#roomNum').text(error);
 	}
 	$('#back').unbind().click(function(){
-		window.location.href = '<%=basePath%>login/chooseRoom';
+		window.location.href = '<%=basePath%>chooseRoom/index';
 	})
 </script>
 </html>

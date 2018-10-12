@@ -179,6 +179,8 @@ public class manageController {
 			e1.printStackTrace();
 		}
 	}
+	
+	
 	// 例子
 	// @RequestMapping(value = "/PeopleByList")
 	// public void querylistOfpeople(HttpServletRequest req, HttpServletResponse
