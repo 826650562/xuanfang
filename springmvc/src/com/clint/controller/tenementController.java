@@ -79,7 +79,7 @@ public class tenementController {
 				req.getSession().setAttribute("publicRentalRecord",public_rental_record);//存储用户公租备案号
 				req.getSession().setAttribute("limitArea",area);//存储用户选房面积限制
 				
-				req.getSession().setAttribute("_user_",tenementname);//存储用户选房面积限制
+				req.getSession().setAttribute("_user_app",tenementname);//存储用户选房面积限制
 				
 				rtns.put("success", submitVerify);
 

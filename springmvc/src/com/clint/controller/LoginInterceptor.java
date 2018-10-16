@@ -43,13 +43,20 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (requestUri.startsWith(request.getContextPath())) {
 			requestUri = requestUri.substring(request.getContextPath().length(), requestUri.length());
 		}
+
 		// 获取Session
 		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("_user_");
+		String manage_username = (String) session.getAttribute("_user_manage");
+		String app_username = (String) session.getAttribute("_user_app");
 
-		if (username != null) {
+		if (manage_username != null && requestUri.indexOf("manage/") >= 0) {
 			return true;
 		}
+
+		if (app_username != null && requestUri.indexOf("chooseRoom/") >= 0) {
+			return true;
+		}
+
 		// 放行exceptUrls中配置的url
 		for (String url : exceptUrls) {
 			if (url.endsWith("/**")) {
@@ -66,14 +73,15 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (requestUri.indexOf("login") >= 0) {
 			return true;
 		}
-		/*if (requestUri.indexOf("index") >= 0) {
-			return true;
-		}*/
-	
+
 		// 请求的路径
 		String contextPath = request.getContextPath();
+		if (requestUri.indexOf("manage/") >= 0) {
+			response.sendRedirect(contextPath + "/chooselogin/index");
+		} else  {
+			response.sendRedirect(contextPath + "/login/index");
+		}
 
-		response.sendRedirect(contextPath + "/login/index");
 		return false;
 
 	}

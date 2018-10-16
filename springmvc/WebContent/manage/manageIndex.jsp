@@ -231,7 +231,7 @@ type="text/css">
 	var delCount;
 	var treatedApplyInter;
 	indexMsg();//获取未处理信息数据
-	var indexMsg = setInterval(indexMsg,2000);
+	//var indexMsg = setInterval(indexMsg,2000);
 	//vue
 	var vm = new Vue({
 		el:'#myApp',
@@ -320,7 +320,7 @@ type="text/css">
 				$('.xxtxbox').removeClass('bgGreen');
 				$(e.target).addClass('bgGreen'); 
 				treatedApply();
-				treatedApplyInter = setInterval(treatedApply,2000);
+				//treatedApplyInter = setInterval(treatedApply,2000);
 			}
 
 		} 

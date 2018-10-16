@@ -1,6 +1,5 @@
 package com.clint.controller;
 
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -9,8 +8,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +34,7 @@ public class loginController {
 	@RequestMapping(value = "/loginout")
 	public String loginout(HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		session.setAttribute("_user_","");
+		session.setAttribute("_user_manage","");
 		return "pages/chooseLogin";
 	}
 	
@@ -59,8 +56,7 @@ public class loginController {
 					  PrintWriter  pw =	reponse.getWriter();
 					  pw.write("登陆成功");
 					  HttpSession session = req.getSession();
-					  session.setAttribute("_user_",username);
-						
+					  session.setAttribute("_user_manage",username);
 				  }else{
 					  PrintWriter  pw =	reponse.getWriter();
 					  pw.write("登陆失败"); 

@@ -34,7 +34,7 @@ public class manageController {
 	@RequestMapping(value = "/index")
 	public String index(HttpServletRequest req, HttpServletResponse reponse,Model model) {
 		HttpSession session = req.getSession();
-		String usr = (String) session.getAttribute("_user_");
+		String usr = (String) session.getAttribute("_user_manage");
 		model.addAttribute("username",usr );
 		return "manage/manageIndex";
 	}

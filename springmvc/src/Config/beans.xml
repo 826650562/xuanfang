@@ -21,10 +21,9 @@
 	<mvc:resources location="/images/" mapping="/images/**"/>
 	<!-- 组件扫描 -->
 	<context:component-scan base-package="com.clint"></context:component-scan>
-	<!-- 
-		<mvc:interceptors>
+	<mvc:interceptors>
 		<mvc:interceptor>
-			进行拦截：/**表示拦截所有controller
+			<!-- 进行拦截：/**表示拦截所有controller -->
 			<mvc:mapping path="/**" />
 			<bean class="com.clint.controller.LoginInterceptor">
 				<property name="exceptUrls">
@@ -37,9 +36,7 @@
 				</property>
 			</bean>
 		</mvc:interceptor>
-	</mvc:interceptors> -->
-	
-	
+	</mvc:interceptors>
 	<!-- 文件上传的配置 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
