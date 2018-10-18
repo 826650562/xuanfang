@@ -39,7 +39,7 @@ html, body {
 	position: relative;
 }
 </style>
-<script src="<%=basePath%>/js/config.js"></script>
+
 </head>
 <body>
 	<div class="mui-content">
@@ -124,6 +124,7 @@ html, body {
 	</div>
 </body>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
+<script src="<%=basePath%>js/config.js"></script>
 <script type="text/javascript"></script>
 <script>
 	window.Path='<%=basePath%>';

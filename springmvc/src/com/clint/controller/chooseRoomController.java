@@ -32,6 +32,7 @@ public class chooseRoomController {
 	// 打开选房页面
 	@RequestMapping(value = "/index")
 	public String chooseRoom(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		System.out.println(req.getSession().getAttribute("publicRentalRecord"));
 		String publicRentalRecord = String.valueOf(req.getSession().getAttribute("publicRentalRecord"));//获取session中的公租备案号
 		String addSql = "";
 		if (StringUtils.hasText(publicRentalRecord)) {
@@ -54,7 +55,7 @@ public class chooseRoomController {
 	public String roomDetail(HttpServletRequest req, HttpServletResponse reponse, Model model) {
 		String loudong = req.getParameter("build");// 楼栋号
 		String jz_household = req.getParameter("household");// 户号
-
+		System.out.println(req.getSession().getAttribute("publicRentalRecord"));
 		String addSql = "";
 		//根据楼栋号户号获取该户的户型等信息
 		if (StringUtils.hasText(loudong) && StringUtils.hasText(jz_household)) {
@@ -108,7 +109,7 @@ public class chooseRoomController {
 	public String chooseRoomSuccess(HttpServletRequest req, HttpServletResponse reponse,Model model) {
 		String build = req.getParameter("build");//楼栋
 		String houseHold = req.getParameter("household");//户号
-		String publicRentalRecord = String.valueOf(req.getSession().getAttribute("publicRentalRecord"));//获取session中的公租备案号
+		String publicRentalRecord = String.valueOf(req.getSession().getAttribute("publicRentalRecord"));//获取session中的公租备案号req.getSession().getAttribute("publicRentalRecord")
 		// 楼栋户列表
 		String addSql = "";
 		List addList;

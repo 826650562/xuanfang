@@ -74,13 +74,11 @@ public class tenementController {
 				JSONObject obj = (JSONObject) jsonArray.get(0);
 				String area = obj.getString("LIMITAREA");
 				submitVerify = "用户验证成功！";
+				req.getSession().setMaxInactiveInterval(15*60);
 				req.getSession().setAttribute("verifyCode",null);
-				
 				req.getSession().setAttribute("publicRentalRecord",public_rental_record);//存储用户公租备案号
 				req.getSession().setAttribute("limitArea",area);//存储用户选房面积限制
-				
 				req.getSession().setAttribute("_user_app",tenementname);//存储用户选房面积限制
-				
 				rtns.put("success", submitVerify);
 
 			} else {
