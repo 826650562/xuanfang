@@ -66,7 +66,7 @@ type="text/css">
 								<a href="javascript:;" @click='javascript:location.reload();'><i class="fa fa-registered fa-fw"></i>&nbsp;房屋申请处理</a>
 							</dd>
 							<dd>
-								<a @click='javascript:location.reload();window.open("<%=basePath%>chooseRoom/showRoomStatus")'><i
+								<a @click='javascript:location.reload();window.open("<%=basePath%>manage/showRoomStatus")'><i
 									class="fa fa-registered fa-fw"></i>&nbsp;房屋信息看板</a>
 							</dd>
 						</dl></li>

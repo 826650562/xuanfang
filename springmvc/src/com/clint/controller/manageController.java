@@ -227,5 +227,17 @@ public class manageController {
 		}
 		reponse.getWriter().write(String.valueOf(obj));
 	}
+	
+	//获取房屋列表
+	@RequestMapping(value = "/showRoomStatus")
+	public String showRoomStatus(HttpServletRequest req, HttpServletResponse reponse,Model model){
+		String addSql = "";
+		addSql = "select distinct l.ldh build,r.JZ_HOUSEHOLD household,r.JZ_FLOOR floor,r.id roomId from T_BIM_LDXX l,t_bim_room r where r.loudong=l.ldh and r.jz_housetype!='无'";
+		List addList = this.mapService.getListBySql(addSql);
+		JSONArray jsonArr = JSONArray.fromObject(addList);
+		
+		model.addAttribute("roomAll",jsonArr);
+		return "pages/showRoomStatus";
+	}
 
 }
