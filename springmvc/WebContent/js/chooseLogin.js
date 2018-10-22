@@ -2,8 +2,6 @@ $(function(){
 	
 	//登陆事件传递
 	function login(){
-	
-
 		var usrname = $('#user').val();
 		var psw = $('#password').val();
 		var codeinfo = $('#yzm').val();
@@ -24,7 +22,7 @@ $(function(){
 				if(res=="登陆成功"){
 					window.location.href = window.path +'manage/index';
 				}else{
-					alert("登陆失败")
+					layer.msg("登陆失败")
 					$('#randCodeImage').attr('src',window.path+'VerificationCode/generate?time='+new Date().getTime());
 				}
 				
@@ -40,7 +38,7 @@ $(function(){
 	function changeCodePic(){
 		$('.yzmsx').click(function(){
 			$('#randCodeImage').attr('src',window.path+'VerificationCode/generate?time='+new Date().getTime());
-			console.log("ok");
+			//layer.msg("ok");
 		})
 	}
 	
