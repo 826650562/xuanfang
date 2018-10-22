@@ -85,7 +85,7 @@ html, body {
 			</div>
 		</div>
 		<div class="contitembox iframeBox">
-			<iframe id="showModel" name="show3D" src="#" style="width:100%;height:100%"></iframe>
+			<iframe id="showModel" name="show3D" src="javascript:;" style="width:100%;height:100%"></iframe>
 		</div>
 <!-- 		<div class="contitembox">
 			<div class="z-row fwwztitle">

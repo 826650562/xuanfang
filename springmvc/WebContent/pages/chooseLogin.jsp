@@ -13,6 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="icon" href="<%=basePath%>images/ico.png" type="image/x-icon">
   <link rel="stylesheet" href="<%=basePath %>js/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="<%=basePath %>js/layui/css/layui.css" media="all">
   <link href="<%=basePath %>js/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -30,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <div class="logintop">
 <div class="z-row">
-  <div class="loginlogo1"><img src="<%=basePath %>images/logo2.png"></div>
+  <div class="loginlogo1"><img src="<%=basePath %>images/logo.png"></div>
 </div>
 </div>
 
@@ -68,4 +69,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 </div>
 </body>
+<script type="text/javascript" src="<%=basePath%>js/layui/layui.js"></script>
+<script type="text/javascript">
+layui.use([ 'form', 'laypage', 'element', 'jquery', 'laydate' ,'layer'], function() {
+	var form = layui.form;
+	var laypage = layui.laypage;
+	var element = layui.element,
+		$ = layui.jquery;
+	var laydate = layui.laydate;
+
+});
+</script>
 </html>
