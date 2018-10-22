@@ -32,10 +32,10 @@ public class manageController {
 	private MapService mapService;
 
 	@RequestMapping(value = "/index")
-	public String index(HttpServletRequest req, HttpServletResponse reponse,Model model) {
+	public String index(HttpServletRequest req, HttpServletResponse reponse, Model model) {
 		HttpSession session = req.getSession();
 		String usr = (String) session.getAttribute("_user_manage");
-		model.addAttribute("username",usr );
+		model.addAttribute("username", usr);
 		return "manage/manageIndex";
 	}
 
@@ -44,7 +44,6 @@ public class manageController {
 
 	// 接口安全秘钥
 	private static String Key = "d41d8cd98f00b204e980";
-
 
 	// 获取初始数据
 	@RequestMapping(value = "/indexMsg")
@@ -61,7 +60,7 @@ public class manageController {
 		obj.put("rentalJson", rentalJsonArray);
 		obj.put("delJsonArray", delJsonArray);
 		obj.put("delCount", delList.size());
-		
+
 		try {
 			PrintWriter pw = reponse.getWriter();
 			pw.write(String.valueOf(obj));
@@ -184,60 +183,55 @@ public class manageController {
 			e1.printStackTrace();
 		}
 	}
-	
-	
-	// 例子
-	// @RequestMapping(value = "/PeopleByList")
-	// public void querylistOfpeople(HttpServletRequest req, HttpServletResponse
-	// reponse) {
-	// // 查询人员
-	// String addSql = "";
-	// // String ls_conditions=req.getParameter("ls_conditions");*/
-	// if (StringUtils.hasText(ls_conditions)) {
-	// addSql = "select * from T_RYXX t where " + ls_conditions;
-	// } else {
-	// addSql = "select * from T_RYXX t ";
-	// }
-	// List addrList = this.mapService.getListBySql(addSql);
-	// JSONArray json = JSONArray.fromObject(addrList);
-	// try {
-	// PrintWriter pw = reponse.getWriter();
-	// pw.write(String.valueOf(json));
-	// } catch (IOException e1) {
-	// e1.printStackTrace();
-	// }
-	// }
+	 
 
 	@RequestMapping(value = "/sendMessage")
 	public void sendMessage(HttpServletRequest req, HttpServletResponse reponse) throws IOException {
 
-        HttpClientUtil client = HttpClientUtil.getInstance();
-        String smsMob = req.getParameter("mobile"); //手机号
-        String smsName = req.getParameter("name");//租户名称
-        
-        String smsText=smsName+"，您好，您申请的公租房已被审核通过，请于xx月xx日携带有效证件前往中心签合同。";
-		//UTF发送
+		HttpClientUtil client = HttpClientUtil.getInstance();
+		String smsMob = req.getParameter("mobile"); // 手机号
+		String smsName = req.getParameter("name");// 租户名称
+
+		String smsText = smsName + "，您好，您申请的公租房已被审核通过，请于xx月xx日携带有效证件前往中心签合同。";
+		// UTF发送
 		int result = client.sendMsgUtf8(Uid, Key, smsText, smsMob);
 		JSONObject obj = new JSONObject();
-		if(result>0){
+		if (result > 0) {
 			obj.put("success", "发送成功!");
-			
-		}else{
+
+		} else {
 			obj.put("error", "发送失败!");
 		}
 		reponse.getWriter().write(String.valueOf(obj));
 	}
-	
-	//获取房屋列表
+
+	// 获取房屋列表
 	@RequestMapping(value = "/showRoomStatus")
-	public String showRoomStatus(HttpServletRequest req, HttpServletResponse reponse,Model model){
+	public String showRoomStatus(HttpServletRequest req, HttpServletResponse reponse, Model model) {
 		String addSql = "";
 		addSql = "select distinct l.ldh build,r.JZ_HOUSEHOLD household,r.JZ_FLOOR floor,r.id roomId from T_BIM_LDXX l,t_bim_room r where r.loudong=l.ldh and r.jz_housetype!='无'";
 		List addList = this.mapService.getListBySql(addSql);
 		JSONArray jsonArr = JSONArray.fromObject(addList);
-		
-		model.addAttribute("roomAll",jsonArr);
+
+		model.addAttribute("roomAll", jsonArr);
 		return "pages/showRoomStatus";
+	}
+
+	// 获取房屋状态表中出租以及被选房屋数量以及列表
+	@RequestMapping(value = "/getAllRoomStatus")
+	public void getAllRoomStatus(HttpServletRequest req, HttpServletResponse reponse) throws IOException {
+		String chooseSql = "";
+		String rentalSql = "";
+		rentalSql = "select distinct c.status,s.*,r.loudong from T_BIM_CHOOSEROOM_STATUS s,T_BIM_CHOOSEROOM_CODE c,t_bim_room r where  c.id=s.statusid and delete_tag='0' and s.roomid=r.id and (c.status='已出租' or c.status='已被选')";
+		List rentalList = this.mapService.getListBySql(rentalSql);
+		JSONArray rentalArr = JSONArray.fromObject(rentalList);
+		JSONObject obj = new JSONObject();
+		obj.put("rentalArr", rentalArr);
+		try {
+			reponse.getWriter().write(String.valueOf(obj));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 }
