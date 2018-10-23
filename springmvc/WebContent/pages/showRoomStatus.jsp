@@ -164,7 +164,7 @@
 	
 	function getStatus(){
 		$.ajax({
-			url:'<%=basePath%>/manage/getAllRoomStatus',
+			url:'<%=basePath%>manage/getAllRoomStatus',
 			type:'POST',
 			dataType:'JSON',
 			success:function(res){

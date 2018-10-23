@@ -34,7 +34,7 @@ public class loginController {
 	@RequestMapping(value = "/loginout")
 	public String loginout(HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		session.setAttribute("_user_manage","");
+		session.setAttribute("_user_manage",null);
 		return "pages/chooseLogin";
 	}
 	
@@ -45,10 +45,7 @@ public class loginController {
 		 String username=req.getParameter("_usr");
 		 String psw=req.getParameter("_psw");
 		 String codeinfo=req.getParameter("_codeinfo");
-		 /*String loginsql = "select * from T_WORKORDER_ADMIN t where t.LOGINNAME = '"+username+"' and t.PASSWORD = '"+psw+"'";*/
-		
-		 
-		String code= (String) req.getSession().getAttribute(SESSION_KEY_OF_RAND_CODE);
+		 String code= (String) req.getSession().getAttribute(SESSION_KEY_OF_RAND_CODE);
 		 if(codeinfo.toLowerCase().equals(code.toLowerCase())){
 			 List loginBack =  homeService.confirmInfo(username, psw);
 			 try {
@@ -56,6 +53,7 @@ public class loginController {
 					  PrintWriter  pw =	reponse.getWriter();
 					  pw.write("登陆成功");
 					  HttpSession session = req.getSession();
+					  session.setMaxInactiveInterval(15 * 60);
 					  session.setAttribute("_user_manage",username);
 				  }else{
 					  PrintWriter  pw =	reponse.getWriter();
