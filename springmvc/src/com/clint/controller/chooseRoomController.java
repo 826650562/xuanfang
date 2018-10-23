@@ -258,16 +258,22 @@ public class chooseRoomController {
 		JSONObject obj = new JSONObject();
 		if(count>=3){			
 			obj.put("delCount", "已经退选三次!无法退选！");
-		}else{
-			delSql = "update t_bim_chooseroom_status t set delete_tag='1' where  t.tenementid='"+ tenementId +"' and t.delete_tag='0' and t.statusid='1'";
-			this.mapService.execute(delSql);
-			searchAql = "select distinct *  from t_bim_chooseroom_status t where t.tenementid='"+ tenementId +"' and t.delete_tag='0' and ( t.statusid='1' or  t.statusid='3')";
-			List searchList = this.mapService.getListBySql(searchAql);
-			JSONArray arr = JSONArray.fromObject(searchList);
-			if(searchList.size()<=0){
-				obj.put("delSuccess", "退选成功!");
-			}else{
-				obj.put("delFailed", "退选失败!");
+		}else{			
+			String sql = "select * from t_bim_chooseroom_status where t.tenementid='"+ tenementId +"' and t.statusid='3'";
+			List choosedList = this.mapService.getListBySql(sql);
+			if(choosedList.size()>0){
+				obj.put("delFailed", "当前用户选房已通过 禁止退选!");
+			}else {
+				delSql = "update t_bim_chooseroom_status t set delete_tag='1' where  t.tenementid='"+ tenementId +"' and t.delete_tag='0' and t.statusid='1'";
+				this.mapService.execute(delSql);
+				searchAql = "select distinct *  from t_bim_chooseroom_status t where t.tenementid='"+ tenementId +"' and t.delete_tag='0' and ( t.statusid='1' or  t.statusid='3')";
+				List searchList = this.mapService.getListBySql(searchAql);
+				JSONArray arr = JSONArray.fromObject(searchList);
+				if(searchList.size()<=0){
+					obj.put("delSuccess", "退选成功!");
+				}else{
+					obj.put("delFailed", "退选失败!");
+				}
 			}			
 		}
 		try {
