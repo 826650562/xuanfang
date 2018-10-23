@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.cookie.Cookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -53,7 +54,8 @@ public class tenementController {
 		String tenementname = req.getParameter("tenement");//承租人名
 		String public_rental_record = req.getParameter("public_rental_record");//公租备案号
 		String verifyCode = req.getParameter("verifyCode");
-
+		String checkCookie = req.getParameter("cookie");
+		
 		String addSql = "";
 		if (StringUtils.hasText(tenementname) && StringUtils.hasText(public_rental_record)) {
 			addSql = "select t.limitarea from t_bim_chooseroom_tenement t where t.phonenum='" + tenementname
@@ -63,13 +65,8 @@ public class tenementController {
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		String submitVerify;
 		JSONObject rtns = new JSONObject();
-		//读取验证码
-		String getVerifyCode = String.valueOf(req.getSession().getAttribute("verifyCode")) ; 
-		if(getVerifyCode.equals("null")){
-			rtns.put("verifyCodeOverdue", "验证码过期，请重新获取！");
-		}else if(!getVerifyCode.equals(verifyCode)){
-			rtns.put("verifyCodeError", "验证码错误，请重新输入！");
-		}else if(getVerifyCode.equals(verifyCode)){
+		
+		if(checkCookie.endsWith("true")){
 			if (jsonArray.size() > 0) {
 				JSONObject obj = (JSONObject) jsonArray.get(0);
 				String area = obj.getString("LIMITAREA");
@@ -80,13 +77,36 @@ public class tenementController {
 				req.getSession().setAttribute("limitArea",area);//存储用户选房面积限制
 				req.getSession().setAttribute("_user_app",tenementname);//存储用户选房面积限制
 				rtns.put("success", submitVerify);
-
 			} else {
 				submitVerify = "用户验证失败！";
 				rtns.put("error", submitVerify);
-
 			}
-		}			
+			
+		}else if(checkCookie.endsWith("false")){
+			//读取验证码
+			String getVerifyCode = String.valueOf(req.getSession().getAttribute("verifyCode")) ; 
+			if(getVerifyCode.equals("null")){
+				rtns.put("verifyCodeOverdue", "验证码过期，请重新获取！");
+			}else if(!getVerifyCode.equals(verifyCode)){
+				rtns.put("verifyCodeError", "验证码错误，请重新输入！");
+			}else if(getVerifyCode.equals(verifyCode)){
+				if (jsonArray.size() > 0) {
+					JSONObject obj = (JSONObject) jsonArray.get(0);
+					String area = obj.getString("LIMITAREA");
+					submitVerify = "用户验证成功！";
+					req.getSession().setMaxInactiveInterval(15*60);
+					req.getSession().setAttribute("verifyCode",null);
+					req.getSession().setAttribute("publicRentalRecord",public_rental_record);//存储用户公租备案号
+					req.getSession().setAttribute("limitArea",area);//存储用户选房面积限制
+					req.getSession().setAttribute("_user_app",tenementname);//存储用户选房面积限制
+					rtns.put("success", submitVerify);
+				} else {
+					submitVerify = "用户验证失败！";
+					rtns.put("error", submitVerify);
+				}
+			}	
+		}
+			
 		try {
 			reponse.getWriter().write(rtns.toString());
 		} catch (IOException e1) {
