@@ -97,7 +97,7 @@
 		</div> -->
 	</div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="<%=basePath%>js/vue.js"></script>
 <script type="text/javascript">
 	var roomAll = ${roomAll};
 	var roomAllObj = {};//{楼栋:{楼层:[{户号:户id},户号:户id},户号:户id}]}}

@@ -45,6 +45,7 @@ p{color:#333;}
 .padTB30{padding:30px 0px !important;}
 
 .bgGray{ background:#f6f6f6 !important;}
+.bgGray2{ background:#f6f6f6;}
 .bgWhite{ background:#fff !important;}
 .bgBlue{ background:#0873bd !important;}
 .bgBlack{ background:#333 !important;}
@@ -76,7 +77,8 @@ ol li a{background-color: rgba(0,0,0,1)!important;}
 .ldxzbtn{ height:35px; line-height:33px; margin:5px 10px 5px 0px; display:block; float:left; font-size:15px; border-radius:20px; padding:0px 15px;}
 .xfzt span{ float:left; display:block;}
 .xflist{border-left:1px solid #eee;}
-.xflistitem{height:45px; line-height:45px;border:1px solid #e6e6e6;float:left; width:25%; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.xflistitem{height:45px; line-height:45px;border:1px solid #e6e6e6;float:left; width:25%; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;cursor: pointer;}
+.xflistitem:hover{background-color: #f6f6f66b;}
 .xflistch{padding:10px 15px 0px 15px; font-weight:bold; font-size:16px; color:#333; border-top:1px solid #e6e6e6; border-bottom:1px solid #eee; border-left:1px solid #eee;}
 .xflistitem:nth-child(1),.xflistitem:nth-child(2),.xflistitem:nth-child(3),.xflistitem:nth-child(4){border-left:none;}
 .xflistitem:nth-child(5),.xflistitem:nth-child(6),.xflistitem:nth-child(7),.xflistitem:nth-child(8){border-left:none;border-top:none;}
@@ -87,8 +89,9 @@ ol li a{background-color: rgba(0,0,0,1)!important;}
 .xfzttxt{float:left; padding-left:5px; font-size:14px;}
 .xqxqbtn{ height:35px; line-height:33px; font-size:14px; margin:5px 0px 0px 0px; display:block; float:left; border-radius:2px; padding:0px 10px;}
 .xqxfitemtxt{line-height:26px;text-indent:2em;}
-.mui-table-view-cell{padding:o;}
-.mui-table-view-cell:after{heihgt:0;}
+.layui-body{left:20px;}
+.mui-table-view-cell{padding:0;}
+.mui-table-view-cell:after{height:0;}
 .gjbar{background:#fff; border-bottom:1px solid #e6e6e6; padding:10px 15px;}
 a:hover, a:focus {
     text-decoration: none;

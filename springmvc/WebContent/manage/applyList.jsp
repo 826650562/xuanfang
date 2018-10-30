@@ -158,7 +158,7 @@ type="text/css">
 	</div>
   </body>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="<%=basePath%>js/vue.js"></script>
 <script src="<%=basePath%>js/layui/layui.js"></script>
 <script src="<%=basePath%>js/layui/leftnav.js"></script>
 <script src="<%=basePath%>js/applyList.js"></script>

@@ -11,7 +11,8 @@ var vm = new Vue({
 	data:{
 		userInfo:[],
 		buildingAll:[],
-		roomArr:[]
+		roomArr:[],
+		limitArea:''
 	},
 	methods:{
 		toSearch:function(){				
@@ -33,6 +34,7 @@ var vm = new Vue({
 						layer.close(loading);
 						if(res.userInfo){
 							$('.userInfoContain').css('display','block');
+							vm.limitArea = res.userInfo.LIMITAREA;
 							vm.userInfo = [res.userInfo];
 							vm.buildingAll = res.buildingArray;
 							vm.roomArr = tidyRoom(res.roomArr);
@@ -46,8 +48,35 @@ var vm = new Vue({
 						console.log(res);
 					}
 				})
-				
 			}
+		},
+		searchRoom:function(build){
+			var loading = layer.load(1, {shade: [0.2, '#87888a']});
+			$('.ldxzbtn').removeClass('mui-btn-success').addClass('mui-btn-outlined');
+			$(event.target).removeClass('mui-btn-outlined').addClass('mui-btn-success');
+			$.ajax({
+				url:'getRoomByBuild',
+				data:{
+					build:build,
+					area:vm.limitArea
+				},
+				type:'POST',
+				dataType:'JSON',
+				success:function(res){					
+					if(res.roomArr){
+						vm.roomArr = [];
+						vm.roomArr = tidyRoom(res.roomArr);
+					}
+					layer.close(loading);
+				},
+				error:function(res){
+					layer.close(loading);
+					console.log(res);
+				}
+			})
+		},
+		chooseThis:function(roomId){
+			
 		}
 	}
 })
