@@ -28,9 +28,10 @@ type="text/css">
 	rel="stylesheet" type="text/css">
 <link href="<%=basePath%>css/mcss/style.css" rel="stylesheet"
 	type="text/css">
-<script src="<%=basePath %>js/manageIndex.js"></script>
 <style>
 #showApplyDetail{display:none;}
+#chooseRoomOnline{display:none;}
+.userInfoContain{display:none;}
 </style>
 <!--App自定义的css-->
 </head>
@@ -66,19 +67,25 @@ type="text/css">
 								<a href="javascript:;" @click='javascript:location.reload();'><i class="fa fa-registered fa-fw"></i>&nbsp;房屋申请处理</a>
 							</dd>
 							<dd>
+								<a @click='openChooseRoomOnline()'><i
+									class="fa fa-registered fa-fw"></i>&nbsp;在线选房</a>
+							</dd>
+							<dd>
 								<a @click='javascript:location.reload();window.open("<%=basePath%>manage/showRoomStatus")'><i
 									class="fa fa-registered fa-fw"></i>&nbsp;房屋信息看板</a>
 							</dd>
 							<dd>
 								<a href="<%=basePath%>manage/tenantList"><i class="fa fa-registered fa-fw"></i>&nbsp;预租人员信息 </a>
 							</dd>
-						</dl></li>
+							
+						</dl>
+					</li>
 				</ul>
 			</div>
 		</div>
 		<div class="layui-body" id="bodyContent">
 			<!-- 选房审核列表 内容主体区域 -->
-			<div class="pad15" id="applyListContain">
+			<div class="pad15 bodyContain" id="applyListContain">
 				<div class="row">
 					<div class="col-lg-3">
 						<a href="<%=basePath%>manage/index" class="xxtxbox bgGreen"  id="untreatedApplyMsg">意向申请未处理消息
@@ -90,11 +97,6 @@ type="text/css">
 							class="xxtxnum">{{delCount}}</span>
 						</a>
 					</div>
-					<!-- <div class="col-lg-3">
-						<a href="xxtx3.html" class="xxtxbox"> 房租到期预提醒消息 <span
-							class="xxtxnum">3</span>
-						</a>
-					</div> -->
 				</div>
 				<div class="row" style=" height:15px;">
 					<div class="col-lg-12"></div>
@@ -127,7 +129,7 @@ type="text/css">
 			</div>
 			<!-- 选房审核列表 内容主体区域 end -->
 			<!-- 选房人基本信息内容主体区域 -->
-			<div class="pad15" id="showApplyDetail">
+			<div class="pad15 bodyContain" id="showApplyDetail">
 				<div class="shadowbox"  v-for='detail in applyDetail'>
 					<form class="layui-form">
 						<div class="padTB10 colorRed">选房人基本信息</div>
@@ -135,25 +137,25 @@ type="text/css">
 							<thead>
 								<tr>
 									<th><strong>姓名</strong></th>
-									<th><strong>性别</strong></th>
-									<th><strong>年龄 </strong></th>
-									<th><strong>籍贯</strong></th>
-									<th><strong> 手机号</strong></th>
+									<th><strong>户口所在地</strong></th>
+									<th><strong>户口所在街道</strong></th>	
+									<th><strong>房型 </strong></th>							
+									<th><strong>手机号</strong></th>
 									<th><strong>身份证号</strong></th>
-									<th><strong> 婚姻状况</strong></th>
-									<th><strong>家庭成员（人数） </strong></th>
+									<th><strong>备案时间 </strong></th>
+									<th><strong>保办审核状态</strong></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>{{detail.NAME}}</td>
-									<td>男</td>
-									<td>23</td>
 									<td>{{detail.ADDRESS}}</td>
+									<td>{{detail.ADDRESSDETAIL}}</td>
+									<td>{{detail.HOUSETYPE}}</td>
 									<td>{{detail.PHONENUM}}</td>
 									<td>{{detail.IDCARD}}</td>
-									<td>未婚</td>
-									<td>1</td>
+									<td>{{detail.RECORDTIME}}</td>
+									<td>{{detail.CHECKSTATUS}}</td>	
 								</tr>
 							</tbody>
 						</table>
@@ -201,6 +203,69 @@ type="text/css">
 				</div>
 			</div>
 			<!-- 选房人基本信息内容主体区域 end -->
+			
+			<!--    在线选房   内容主体区域   start   -->
+			<div class="pad15 bodyContain" id="chooseRoomOnline">
+				<div class="row">
+					<div class="col-lg-3">
+						<input id="uerIdCard" placeholder="输入用户身份证号" type="text" value="123456666666666666">
+					</div>
+					<div class="col-lg-3">
+						<input id="chooseRoomNum" placeholder="输入用户选房码"  type="text" value="035291">
+					</div>
+					<div class="col-lg-3">
+						<input id="toSearchBtn" @click="toSearch()" type="button" value="搜索">
+					</div>
+				</div>
+				<div class="row" style=" height:15px;">
+					<div class="col-lg-12"></div>
+				</div>
+				<!-- 选房审核列表  start -->
+				<form class="layui-form userInfoContain">
+					<div class="padTB10 colorRed">选房人基本信息</div>
+					<table class="layui-table marB15">
+						<thead>
+							<tr>
+								<th><strong>姓名</strong></th>								
+								<th><strong>户口所在地</strong></th>
+								<th><strong>户口所在街道</strong></th>	
+								<th><strong>房型 </strong></th>							
+								<th><strong>手机号</strong></th>
+								<th><strong>身份证号</strong></th>
+								<th><strong>备案时间 </strong></th>
+								<th><strong>保办审核状态</strong></th>								
+							</tr>
+						</thead>
+						<tbody>
+							<tr :_id=i.ID v-for="i in userInfo">
+								<td>{{i.TENEMENTNAME}}</td>
+								<td>{{i.ADDRESS}}</td>
+								<td>{{i.ADDRESSDETAIL}}</td>
+								<td>{{i.HOUSETYPE}}</td>
+								<td>{{i.PHONENUM}}</td>
+								<td>{{i.IDCARD}}</td>
+								<td>{{i.RECORDTIME}}</td>
+								<td>{{i.CHECKSTATUS}}</td>								
+							</tr>
+						</tbody>
+					</table>
+					<!-- <div class="itemcont minHeight600" class="z-row"  >
+						<div class="xflistbox" id="buildListBox" v-for="(build,buildIndex) in buildingAll">
+							<button class="mui-btn mui-btn-outlined ldxzbtn">{{ buildIndex }}</button>
+						</div>
+						<div  v-for="(floor,floorIndex) in build" class="xflistbox" id="xflistbox">
+							<div class="z-row marB10">
+								<div class="xflistch" :id=buildIndex+Object.keys(floor)[0]>{{ Object.keys(floor)[0] }}</div>
+								<div class="z-col xflist floorRoomListBox"  v-for="(rooms,roomIndex) in floor">
+									<div  :rid=Object.values(roomObj)[0] :key="roomObj" v-for="(roomObj,index) in rooms" class="xflistitem mui-table-view-cell bgGray">{{ Object.keys(roomObj)[0] }}</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</form>
+				<!--  在线选房     内容主体区域       end -->
+			</div>
+			<!--   在线选房     内容主体区域      end -->
 		</div>
 		<div class="layui-footer">分页展示</div>
 	</div>
@@ -375,6 +440,8 @@ type="text/css">
 			}
 		});
 	}
+	<script src="<%=basePath%>js/manageIndex.js"></script>
+	<script>	
 </script>
 </body>
 </html>
