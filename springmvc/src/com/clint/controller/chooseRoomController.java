@@ -1,6 +1,8 @@
 package com.clint.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -118,7 +120,11 @@ public class chooseRoomController {
 		String TENEMENTID;//承租人id
 		String STATUSID;//房屋状态id
 		String id = UUID.randomUUID().toString();//id
-		long time=System.currentTimeMillis();//获取时间戳
+		//获取时间
+		long l = System.currentTimeMillis();
+		Date date = new Date(l);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String time = dateFormat.format(date);
 		if (StringUtils.hasText(build) && StringUtils.hasText(houseHold) && StringUtils.hasText(publicRentalRecord)) {
 			//获取户id
 			addSql = "select t.id from T_BIM_ROOM t where t.loudong='" + build + "'and t.jz_household='"+ houseHold +"'";
@@ -284,7 +290,7 @@ public class chooseRoomController {
 	}
 	
 	//获取房屋列表
-	@RequestMapping(value = "/showRoomStatus")
+/*	@RequestMapping(value = "/showRoomStatus")
 	public String showRoomStatus(HttpServletRequest req, HttpServletResponse reponse,Model model){
 		String addSql = "";
 		addSql = "select distinct l.ldh build,r.JZ_HOUSEHOLD household,r.JZ_FLOOR floor,r.id roomId from T_BIM_LDXX l,t_bim_room r where r.loudong=l.ldh and r.jz_housetype!='无'";
@@ -293,7 +299,7 @@ public class chooseRoomController {
 		
 		model.addAttribute("roomAll",jsonArr);
 		return "pages/showRoomStatus";
-	}
+	}*/
 	
 	//获取房屋状态表中出租以及被选房屋数量以及列表
 	@RequestMapping(value = "/getAllRoomStatus")
