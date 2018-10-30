@@ -159,8 +159,8 @@ $(function(){
 			dataType:'JSON',
 			type:'GET',
 			success:function(res){
-				changeTime(res.delJsonArray);
-				changeTime(res.rentalJson);
+//				changeTime(res.delJsonArray);
+//				changeTime(res.rentalJson);
 				vm.untreatedApply = res.delJsonArray;
 				vm.delCount = res.delJsonArray.length;
 				vm.untreatedCount = res.rentalJson.length;

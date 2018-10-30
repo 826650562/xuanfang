@@ -283,7 +283,7 @@ public class manageController {
 	// 获取承租人数量
 	@RequestMapping(value = "/chooseRoomPage")
 	public String chooseRoomPage(HttpServletRequest req, HttpServletResponse reponse, Model model) {
-		return "manage/chooseRoom";
+		return "manage/chooseRoomOnline";
 	}
 	
 	//在线选房 选中户
