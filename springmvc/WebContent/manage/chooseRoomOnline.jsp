@@ -71,7 +71,7 @@ type="text/css">
 							</tr>
 						</thead>
 						<tbody>
-							<tr :_id=i.ID v-for="i in userInfo">
+							<tr id="userInfo" :_id=i.ID  v-for="i in userInfo">
 								<td>{{i.TENEMENTNAME}}</td>
 								<td>{{i.ADDRESS}}</td>
 								<td>{{i.ADDRESSDETAIL}}</td>
@@ -85,13 +85,13 @@ type="text/css">
 					</table>
 					<div class="itemcont minHeight600" class="z-row"  >
 						<div class="xflistbox" id="buildListBox" >
-							<button class="mui-btn ldxzbtn" :class="index==0? 'mui-btn-success':'mui-btn-outlined' "  v-for="(i,index) in buildingAll">{{ i.LDH }}</button>
+							<button class="mui-btn ldxzbtn" :class="index==0? 'mui-btn-success':'mui-btn-outlined' "  v-for="(i,index) in buildingAll"  @click.stop.prevent="searchRoom(i.LDH)">{{ i.LDH }}</button>
 						</div>
 						<div  v-for="floor in roomArr" class="xflistbox">
 							<div class="z-row marB10" v-for="(roomArr,floorNum) in floor">
 								<div class="xflistch" :id=floorNum>{{floorNum}}</div>
 								<div class="z-col xflist floorRoomListBox" >
-									<div  :rid=roomObj.id  :key="roomObj"  v-for="roomObj in roomArr " class="xflistitem mui-table-view-cell bgGray">{{ roomObj.houseType }}</div>
+									<div  :rid=roomObj.id  @click="chooseThis(roomObj.id)"  v-for="roomObj in roomArr " class="xflistitem mui-table-view-cell bgGray2">{{ roomObj.houseType }}</div>
 								</div>
 							</div>
 						</div>
@@ -105,8 +105,7 @@ type="text/css">
     
   </body>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="<%=basePath%>js/vue.js"></script>
 <script src="<%=basePath%>js/layui/layui.js"></script>
-<script src="<%=basePath%>js/layui/leftnav.js"></script>
 <script src="<%=basePath%>js/chooseRoomOnline.js"></script>
 </html>
