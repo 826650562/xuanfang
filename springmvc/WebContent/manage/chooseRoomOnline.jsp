@@ -26,8 +26,14 @@
 type="text/css">
 <link href="<%=basePath%>js/fontawesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
+<link href="<%=basePath%>css/z-layout.css" rel="stylesheet"
+	type="text/css">
 <link href="<%=basePath%>css/mcss/style.css" rel="stylesheet"
 	type="text/css">
+	<style>
+	body{background-color: #fdfdfd;}
+	.userInfoContain{display:none;}
+	</style>
   </head>
   
   <body>
@@ -77,28 +83,30 @@ type="text/css">
 							</tr>
 						</tbody>
 					</table>
-					<!-- <div class="itemcont minHeight600" class="z-row"  >
-						<div class="xflistbox" id="buildListBox" v-for="(build,buildIndex) in buildingAll">
-							<button class="mui-btn mui-btn-outlined ldxzbtn">{{ buildIndex }}</button>
+					<div class="itemcont minHeight600" class="z-row"  >
+						<div class="xflistbox" id="buildListBox" >
+							<button class="mui-btn ldxzbtn" :class="index==0? 'mui-btn-success':'mui-btn-outlined' "  v-for="(i,index) in buildingAll">{{ i.LDH }}</button>
 						</div>
-						<div  v-for="(floor,floorIndex) in build" class="xflistbox" id="xflistbox">
-							<div class="z-row marB10">
-								<div class="xflistch" :id=buildIndex+Object.keys(floor)[0]>{{ Object.keys(floor)[0] }}</div>
-								<div class="z-col xflist floorRoomListBox"  v-for="(rooms,roomIndex) in floor">
-									<div  :rid=Object.values(roomObj)[0] :key="roomObj" v-for="(roomObj,index) in rooms" class="xflistitem mui-table-view-cell bgGray">{{ Object.keys(roomObj)[0] }}</div>
+						<div  v-for="floor in roomArr" class="xflistbox">
+							<div class="z-row marB10" v-for="(roomArr,floorNum) in floor">
+								<div class="xflistch" :id=floorNum>{{floorNum}}</div>
+								<div class="z-col xflist floorRoomListBox" >
+									<div  :rid=roomObj.id  :key="roomObj"  v-for="roomObj in roomArr " class="xflistitem mui-table-view-cell bgGray">{{ roomObj.houseType }}</div>
 								</div>
 							</div>
 						</div>
-					</div> -->
+					</div>
 				</form>
 				<!--  在线选房     内容主体区域       end -->
 			</div>
 			<!--   在线选房     内容主体区域      end -->
     </div>
+    
+    
   </body>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="<%=basePath%>js/layui/layui.js"></script>
 <script src="<%=basePath%>js/layui/leftnav.js"></script>
-<script src="<%=basePath%>js/chooseRoom.js"></script>
+<script src="<%=basePath%>js/chooseRoomOnline.js"></script>
 </html>
