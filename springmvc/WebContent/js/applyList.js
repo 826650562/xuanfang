@@ -140,15 +140,11 @@ $(function(){
 				rentalJson = res.rentalJson;
 				delJsonArray = res.delJsonArray;
 				untreatedCount = res.rentalJson.length;
-				//未处理消息
-				changeTime(rentalJson);
-				//已处理消息
-				changeTime(delJsonArray);
 				vm.untreatedApply = rentalJson;
 				vm.delCount = delJsonArray.length;
 				vm.untreatedCount = rentalJson.length;
 			},
-			error:function(){
+			error:function(res){
 				console.log(res);
 			}
 		})

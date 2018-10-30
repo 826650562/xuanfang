@@ -55,7 +55,7 @@
         <div class="layui-side-scroll">
           <div class="layui-logo">
             <div class="z-row">
-              <div class="logoimg"><img src="<%=basePath%>images/logo.png"></div>
+              <div class="logoimg"><img src="<%=basePath%>images/logo2.png"></div>
             </div>
           </div>
           <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">

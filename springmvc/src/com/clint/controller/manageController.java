@@ -224,6 +224,14 @@ public class manageController {
 		}
 	}
 	
+	//根据楼栋获取房屋状态表中出租以及被选房屋数量以及列表
+	@RequestMapping(value = "/getRoomStatusByBuild")
+	public JSONArray getRoomStatusByBuild(String build) {
+		List rentalList = this.manageService.getRoomStatusByBuild(build);
+		JSONArray rentalArr = JSONArray.fromObject(rentalList);
+		return rentalArr;
+	}
+	
 	//根据身份证号和公租备案号搜索租房人信息
 	@RequestMapping(value = "/searchUser")
 	public void searchUser(HttpServletRequest req, HttpServletResponse reponse,Model model){
@@ -248,8 +256,11 @@ public class manageController {
 		List roomList = this.manageService.getRoomByBuildArea(build,area);
 		JSONArray roomArr = JSONArray.fromObject(roomList);
 		
+		JSONArray rentalArray = this.getRoomStatusByBuild(build);
+		
 		json.put("buildingArray", buildingArray);
 		json.put("roomArr", roomArr);
+		json.put("rentalArray", rentalArray);
 		if (jsonArr.size() > 0) {
 			JSONObject obj = (JSONObject) jsonArr.get(0);
 			String tel = obj.getString("PHONENUM");
@@ -275,11 +286,16 @@ public class manageController {
 		String build = req.getParameter("build");
 		String areaString = req.getParameter("area");
 		
+		JSONObject obj = new JSONObject();
+		
 		int area = Integer.parseInt(areaString);
 		
+		JSONArray rentalArray = this.getRoomStatusByBuild(build);
+
+		obj.put("rentalArray", rentalArray);
 		List roomList = this.manageService.getRoomByBuildArea(build, area);
 		JSONArray roomArr = JSONArray.fromObject(roomList);
-		JSONObject obj = new JSONObject();
+		
 		obj.put("roomArr", roomArr);
 		try {
 			reponse.getWriter().write(String.valueOf(obj));
@@ -305,6 +321,7 @@ public class manageController {
 	public void chooseRoom(HttpServletRequest req, HttpServletResponse reponse) throws IOException {
 		String roomId = req.getParameter("roomId");
 		String tenementId = req.getParameter("tenementId");
+		String build = req.getParameter("build");
 		
 		JSONObject obj = new JSONObject();//返回数据用
 		
@@ -315,19 +332,23 @@ public class manageController {
 		String dateTime = dateFormat.format(date);
 		
 		List UserChoosedByIdList = this.manageService.getUserChoosedById(tenementId);
-		
+		List roomStatus = this.manageService.getRoomstatusByRoomId(roomId);
 		if(UserChoosedByIdList.size()>0){
 			obj.put("error", "当前用户已选房！");
+		}else if(roomStatus.size()>0){
+			obj.put("error", "该户已出租或已被选");
 		}else{
 			this.manageService.chooseRoom(tenementId,roomId,dateTime,"1");	
 			List userStatus = this.manageService.searchTenementStatus(tenementId,roomId,"1");
 			if(userStatus.size()>0){
+				
 				obj.put("success", "选房成功！");
 			}else{
 				obj.put("error", "选房失败！");
 			}
 		}			
-		
+		JSONArray rentalArray = this.getRoomStatusByBuild(build);
+		obj.put("rentalArray", rentalArray);
 		try {
 			reponse.getWriter().write(String.valueOf(obj));
 		} catch (IOException e1) {

@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="icon" href="<%=basePath%>images/ico.png" type="image/x-icon">
 <!--标准mui.css-->
-<link rel="stylesheet"
-	href="<%=basePath%>js/mui-master/dist/css/mui.min.css">
+
 <link rel="stylesheet"
 	href="<%=basePath%>js/bootstrap/css/bootstrap.css">
+
+<!-- -<link href="<%=basePath%>js/layui/css/layui.manage.css" rel="stylesheet"
+type="text/css"> -->
 <link href="<%=basePath%>js/layui/css/layui.css" rel="stylesheet"
 	type="text/css">
-<link href="<%=basePath%>js/layui/css/layui.manage.css" rel="stylesheet"
-type="text/css">
 <link href="<%=basePath%>js/fontawesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 <link href="<%=basePath%>css/z-layout.css" rel="stylesheet"
@@ -31,31 +31,37 @@ type="text/css">
 <link href="<%=basePath%>css/mcss/style.css" rel="stylesheet"
 	type="text/css">
 	<style>
-	body{background-color: #fdfdfd;}
 	.userInfoContain{display:none;}
 	</style>
   </head>
   
   <body>
-    <div class="layui-body" id="bodyContent">
+    <div class="layui-body" id="bodyContent" v-cloak>
     	<!--    在线选房   内容主体区域   start   -->
 			<div class="pad15 bodyContain" id="chooseRoomOnline">
+			
+			
+			
+			<div class="shadowbox">
 				<div class="row">
 					<div class="col-lg-3">
-						<input id="uerIdCard" placeholder="输入用户身份证号" type="text" value="123456666666666666">
+					
+						<input id="uerIdCard" class="layui-input" placeholder="输入用户身份证号" type="text" value="123456666666666666">
 					</div>
-					<div class="col-lg-3">
-						<input id="chooseRoomNum" placeholder="输入用户选房码"  type="text" value="035291">
+					<div class="col-lg-3" style="padding-left:0px;">
+						<input id="chooseRoomNum" class="layui-input"  placeholder="输入用户选房码"  type="text" value="035291" >
 					</div>
-					<div class="col-lg-3">
-						<input id="toSearchBtn" @click="toSearch()" type="button" value="搜索">
+					<div class="col-lg-3" style="padding-left:0px;">
+						<input id="toSearchBtn" class="layui-btn layui-btn-danger" @click="toSearch()" type="button"  value="搜索">
 					</div>
 				</div>
-				<div class="row" style=" height:15px;">
-					<div class="col-lg-12"></div>
-				</div>
+			</div>
+				
+				
+				
 				<!-- 选房审核列表  start -->
 				<form class="layui-form userInfoContain">
+				<div class="shadowbox">
 					<div class="padTB10 colorRed">选房人基本信息</div>
 					<table class="layui-table marB15">
 						<thead>
@@ -84,8 +90,8 @@ type="text/css">
 						</tbody>
 					</table>
 					<div class="itemcont minHeight600" class="z-row"  >
-						<div class="xflistbox" id="buildListBox" >
-							<button class="mui-btn ldxzbtn" :class="index==0? 'mui-btn-success':'mui-btn-outlined' "  v-for="(i,index) in buildingAll"  @click.stop.prevent="searchRoom(i.LDH)">{{ i.LDH }}</button>
+						<div class="xflistbox" id="buildListBox" style="padding:0px;">
+							<button class="layui-btn ldxzbtn" :class="index==0? 'layui-btn-danger':'' "  v-for="(i,index) in buildingAll"  @click.stop.prevent="searchRoom(i.LDH)">{{ i.LDH }}</button>
 						</div>
 						<div  v-for="floor in roomArr" class="xflistbox">
 							<div class="z-row marB10" v-for="(roomArr,floorNum) in floor">
@@ -96,7 +102,9 @@ type="text/css">
 							</div>
 						</div>
 					</div>
+					</div>
 				</form>
+				
 				<!--  在线选房     内容主体区域       end -->
 			</div>
 			<!--   在线选房     内容主体区域      end -->

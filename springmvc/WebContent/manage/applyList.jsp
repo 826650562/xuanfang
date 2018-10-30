@@ -32,15 +32,14 @@ type="text/css">
 #showApplyDetail{display:none;}
 </style>
 <!--App自定义的css-->
-</head>
-  
+</head>  
   <body>
-    <div class="layui-body" id="bodyContent" style="left:20px;">
+    <div class="layui-body" id="bodyContent" style="left:20px;"  v-cloak>
 		<!-- 选房审核列表 内容主体区域 -->
 		<div class="pad15 bodyContain" id="applyListContain">
 			<div class="row">
 				<div class="col-lg-3">
-					<a href="<%=basePath%>manage/index" class="xxtxbox bgGreen"  id="untreatedApplyMsg">意向申请未处理消息
+					<a href="javascript:;" onclick="window.location.reload();" class="xxtxbox bgGreen"  id="untreatedApplyMsg">意向申请未处理消息
 						<span class="xxtxnum">{{untreatedCount}}</span>
 					</a>
 				</div>

@@ -12,7 +12,8 @@ var vm = new Vue({
 		userInfo:[],
 		buildingAll:[],
 		roomArr:[],
-		limitArea:''
+		limitArea:'',
+		tenementId:''
 	},
 	methods:{
 		toSearch:function(){				
@@ -35,9 +36,11 @@ var vm = new Vue({
 						if(res.userInfo){
 							$('.userInfoContain').css('display','block');
 							vm.limitArea = res.userInfo.LIMITAREA;
+							vm.tenementId = res.userInfo.ID;
 							vm.userInfo = [res.userInfo];
 							vm.buildingAll = res.buildingArray;
 							vm.roomArr = tidyRoom(res.roomArr);
+							setTimeout(function(){vm.mapRoomStatus(res.rentalArray)},50);
 						}else{
 							$('.userInfoContain').css('display','none');
 							layer.msg("未搜索到用户")
@@ -52,8 +55,8 @@ var vm = new Vue({
 		},
 		searchRoom:function(build){
 			var loading = layer.load(1, {shade: [0.2, '#87888a']});
-			$('.ldxzbtn').removeClass('mui-btn-success').addClass('mui-btn-outlined');
-			$(event.target).removeClass('mui-btn-outlined').addClass('mui-btn-success');
+			$('.ldxzbtn').removeClass('layui-btn-danger');
+			$(event.target).addClass('layui-btn-danger');
 			$.ajax({
 				url:'getRoomByBuild',
 				data:{
@@ -66,6 +69,7 @@ var vm = new Vue({
 					if(res.roomArr){
 						vm.roomArr = [];
 						vm.roomArr = tidyRoom(res.roomArr);
+						setTimeout(function(){vm.mapRoomStatus(res.rentalArray)},50);
 					}
 					layer.close(loading);
 				},
@@ -76,7 +80,57 @@ var vm = new Vue({
 			})
 		},
 		chooseThis:function(roomId){
+			var build;
+			$('.ldxzbtn').each(function(){
+				if($(this).hasClass('layui-btn-danger')){
+					build = $(this).text();
+				}
+			})
+			if($(event.target).hasClass('bgQianRed')){
+				layer.msg('该户已出租');
+			}else if($(event.target).hasClass('bgQianYellow')){
+				layer.msg('该户已被选');
+			}else{
+				layer.confirm('是否选择该户？', {
+					  btn: ['确定','取消'] //按钮
+				}, function(index){				
+					layer.close(index);
+					$.ajax({
+						url:'chooseRoom',
+						data:{
+							roomId:roomId,
+							tenementId:vm.tenementId,
+							build:build
+						},
+						type:'POST',
+						dataType:'JSON',
+						success:function(res){
+							if(res.success){
+								layer.msg(res.success);
+								setTimeout(function(){vm.mapRoomStatus(res.rentalArray)},10);
+							}else if(res.error){
+								layer.msg(res.error);
+							}
+						},
+						error:function(res){
+							console.log(res);
+						}
+					})
+				}, function(index){
+					layer.close(index);
+				});
+			}
 			
+		},
+		mapRoomStatus:function(arr){
+			$('.xflistitem').removeClass('bgQianRed').removeClass('bgQianYellow').addClass('bgGray2');
+			arr.map(function(item){
+				if(item.STATUS=="已出租"){
+					$('.xflistitem[rid="'+ item.ROOMID +'"]').removeClass('bgGray2').addClass('bgQianRed');
+				}else if(item.STATUS=="已被选"){
+					$('.xflistitem[rid="'+ item.ROOMID +'"]').removeClass('bgGray2').addClass('bgQianYellow');
+				}
+			})
 		}
 	}
 })

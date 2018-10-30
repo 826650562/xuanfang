@@ -81,7 +81,7 @@
 				<div class="z-row marB10">
 					<div class="xflistch" :id=buildIndex+Object.keys(floor)[0]>{{ Object.keys(floor)[0] }}</div>
 					<div class="z-col xflist floorRoomListBox"  v-for="(rooms,roomIndex) in floor">
-						<div  :rid=Object.values(roomObj)[0] :key="roomObj" v-for="(roomObj,index) in rooms" class="xflistitem mui-table-view-cell bgGray">{{ Object.keys(roomObj)[0] }}</div>
+						<div  :rid=Object.values(roomObj)[0]  v-for="(roomObj,index) in rooms" class="xflistitem mui-table-view-cell bgGray">{{ Object.keys(roomObj)[0] }}</div>
 					</div>
 				</div>
 			</div>

@@ -50,4 +50,8 @@ public interface ManageService {
 	List getTenantByPage(int currentNum, int limitNum);
 
 	int getTenementCount();
+
+	List getRoomStatusByBuild(String build);
+
+	List getRoomstatusByRoomId(String roomId);
 }

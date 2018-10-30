@@ -169,6 +169,20 @@ public class ManageServiceImpl implements ManageService {
 		int res = this.mapService.countAll(workerSql);
 		return res;
 	}
+
+	@Override
+	public List getRoomStatusByBuild(String build) {
+		String sql = "select distinct c.status,s.*,r.loudong from T_BIM_CHOOSEROOM_STATUS s,T_BIM_CHOOSEROOM_CODE c,t_bim_room r where  c.id=s.statusid and delete_tag='0' and s.roomid=r.id and (c.status='已出租' or c.status='已被选') and r.loudong='"+ build +"'";
+		List res = this.mapService.getListBySql(sql);
+		return res;
+	}
+
+	@Override
+	public List getRoomstatusByRoomId(String roomId) {
+		String sql = "select * from T_BIM_CHOOSEROOM_STATUS where roomid='"+ roomId +"' and (statusid='0' or statusid='3') and delete_tag='0'";
+		List res = this.mapService.getListBySql(sql);
+		return res;
+	}
 		
 
 }
