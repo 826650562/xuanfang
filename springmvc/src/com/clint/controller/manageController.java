@@ -192,7 +192,8 @@ public class manageController {
 		reponse.getWriter().write(String.valueOf(obj));
 	}
 
-
+	//房屋看板页面
+	@RequestMapping(value = "/showRoomStatus")
 	public String showRoomStatus(HttpServletRequest req, HttpServletResponse reponse,Model model){
 		List addList = this.manageService.getAllRoom();
 		JSONArray jsonArr = JSONArray.fromObject(addList);
@@ -277,6 +278,12 @@ public class manageController {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	// 获取承租人数量
+	@RequestMapping(value = "/chooseRoomPage")
+	public String chooseRoomPage(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		return "manage/chooseRoom";
 	}
 	
 	//在线选房 选中户
