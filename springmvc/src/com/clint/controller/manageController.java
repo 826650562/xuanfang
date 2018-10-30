@@ -233,5 +233,35 @@ public class manageController {
 			e1.printStackTrace();
 		}
 	}
-
+	
+	// 获取房屋列表
+	@RequestMapping(value = "/tenantList")
+	public String tenantList(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		
+		String workerSql = "SELECT COUNT(*) FROM T_BIM_CHOOSEROOM_TENEMENT";
+		int bxList = this.mapService.countAll(workerSql);
+		model.addAttribute("listOfPage", bxList);
+		return "pages/tenantList";
+	}
+	
+	@RequestMapping(value = "/showTenantList")
+	public void showTenantList(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		String current = req.getParameter("current");
+		String limit = req.getParameter("limit");
+		
+ 		int currentNum = Integer.valueOf(current);
+ 		int limitNum = Integer.valueOf(limit);
+ 		
+		
+		String tenantSql = "SELECT * FROM (select e.*,rownum r from (SELECT t.*,rownum FROM T_BIM_CHOOSEROOM_TENEMENT t) e WHERE rownum <= "+ (currentNum)*limitNum +") w WHERE w.r > "+ (currentNum-1)*limitNum ;
+		List tenantList = this.mapService.getListBySql(tenantSql);
+		JSONArray jsonArr = JSONArray.fromObject(tenantList);
+		
+		try {
+			PrintWriter pw = reponse.getWriter();
+			pw.write(String.valueOf(jsonArr));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 }

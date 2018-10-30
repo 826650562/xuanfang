@@ -124,9 +124,13 @@ html, body {
 	</div>
 </body>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/layui/layui.js"></script>
 <script src="<%=basePath%>js/config.js"></script>
 <script type="text/javascript"></script>
 <script>
+    layui.use('layer', function(){
+ 		var layer = layui.layer;
+	}); 
 	window.Path='<%=basePath%>';
 	var RoomInfor = '${json}';
 	var RoomAreaInfor = '${roomArea}';
@@ -168,7 +172,11 @@ html, body {
     }
     //选择该户按钮点击事件
     $('#chooseThisRoom').unbind().click(function(){
-    	window.location.href = "<%=basePath%>chooseRoom/chooseRoomSuccess?build="+ RoomInforJson.BUILD +"&&household="+ RoomInforJson.HOUSEHOLD + "";
+		layer.confirm('是否确认选择该户，选择后您只有三次退选机会，请谨慎选择！', {icon: 3, title:'提示'}, function(index){
+		  window.location.href = "<%=basePath%>chooseRoom/chooseRoomSuccess?build="+ RoomInforJson.BUILD +"&&household="+ RoomInforJson.HOUSEHOLD + "";
+		  layer.close(index);
+		}); 
+    	
     });
     //返回按钮
     $('#back').unbind().click(function(){

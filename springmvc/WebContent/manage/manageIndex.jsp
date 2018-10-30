@@ -69,6 +69,9 @@ type="text/css">
 								<a @click='javascript:location.reload();window.open("<%=basePath%>manage/showRoomStatus")'><i
 									class="fa fa-registered fa-fw"></i>&nbsp;房屋信息看板</a>
 							</dd>
+							<dd>
+								<a href="<%=basePath%>manage/tenantList"><i class="fa fa-registered fa-fw"></i>&nbsp;预租人员信息 </a>
+							</dd>
 						</dl></li>
 				</ul>
 			</div>
