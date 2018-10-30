@@ -35,7 +35,7 @@ type="text/css">
 </head>
   
   <body>
-    <div class="layui-body" id="bodyContent">
+    <div class="layui-body" id="bodyContent" style="left:20px;">
 		<!-- 选房审核列表 内容主体区域 -->
 		<div class="pad15 bodyContain" id="applyListContain">
 			<div class="row">

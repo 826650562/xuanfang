@@ -8,40 +8,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>选房系统管理</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="icon" href="<%=basePath%>images/ico.png" type="image/x-icon">
-<!--标准mui.css-->
-<link rel="stylesheet"
-	href="<%=basePath%>js/mui-master/dist/css/mui.min.css">
-<link rel="stylesheet"
-	href="<%=basePath%>js/bootstrap/css/bootstrap.css">
-<link href="<%=basePath%>js/layui/css/layui.css" rel="stylesheet"
-	type="text/css">
-<link href="<%=basePath%>js/layui/css/layui.manage.css" rel="stylesheet"
-type="text/css">
-<link href="<%=basePath%>js/fontawesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=basePath%>css/mcss/style.css" rel="stylesheet"
-	type="text/css">
-<style>
-#showApplyDetail{display:none;}
-</style>
-<!--App自定义的css-->
+  <meta charset="utf-8">
+  <title>选房系统</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="<%=basePath%>js/layui/css/layui.css" media="all">
+  <link href="<%=basePath%>js/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="<%=basePath%>css/indexcss/admin.css" media="all">
+  <link rel="stylesheet" href="<%=basePath%>css/indexcss/style.css" media="all">
+  
+  <script>
+  ///^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
+  </script>
 </head>
 <body class="layui-layout-body">
-	<div class="layui-layout layui-layout-admin" id="myApp" v-cloak>
-		<div class="layui-header" style=" background-color: #53cc33;">
-			<div class="layui-logo">
-				<img src="<%=basePath%>images/logo.png">
-			</div>
-			<!-- 头部区域（可配合layui已有的水平导航） -->
-			<ul class="layui-nav layui-layout-right">
-			<c:forEach var="loginContent"  items="${username}">
+  
+  <div id="LAY_app">
+    <div class="layui-layout layui-layout-admin" id="myApp" v-cloak>
+      <div class="layui-header">
+        <!-- 头部区域 -->
+        <ul class="layui-nav layui-layout-left">
+          <li class="layui-nav-item layadmin-flexible" lay-unselect>
+            <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+              <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+            </a>
+          </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right padR15" lay-filter="layadmin-layout-right">
+          <c:forEach var="loginContent"  items="${username}">
 				<li class="layui-nav-item"><a href="javascript:;"> <img
 						src="<%=basePath%>images/head.png" class="layui-nav-img">
 						系统管理员<c:out value="${username}"/>
@@ -52,41 +47,89 @@ type="text/css">
 						</dd>
 					</dl></li>
 			</c:forEach>
-			</ul>
-		</div>
-		<div class="layui-side layui-bg-black">
-			<div class="layui-side-scroll">
-				<ul class="layui-nav layui-nav-tree" lay-filter="test">
-					<li class="layui-nav-item layui-nav-itemed"><a
-						class="" href="javascript:;"><i
-							class="fa fa-home fa-fw"></i>&nbsp;选房管理</a>
-						<dl class="layui-nav-child">
-							<dd class="layui-this">
-								<a href="javascript:;" @click='javascript:window.open("<%=basePath%>manage/applyList");'><i class="fa fa-registered fa-fw"></i>&nbsp;房屋申请处理</a>
-							</dd>
-							<dd>
-								<a @click='openChooseRoomOnline()'><i
-									class="fa fa-registered fa-fw"></i>&nbsp;在线选房</a>
-							</dd>
-							<dd>
-								<a @click='javascript:location.reload();window.open("<%=basePath%>manage/showRoomStatus")'><i
-									class="fa fa-registered fa-fw"></i>&nbsp;房屋信息看板</a>
-							</dd>
-							<dd>
-								<a href="<%=basePath%>manage/tenantList"><i class="fa fa-registered fa-fw"></i>&nbsp;预租人员信息 </a>
-							</dd>							
-						</dl>
-					</li>
-				</ul>
-			</div>
-		</div>
+        </ul>
+      </div>
+      
+      <!-- 侧边菜单 -->
+      <div class="layui-side layui-side-menu">
+        <div class="layui-side-scroll">
+          <div class="layui-logo">
+            <div class="z-row">
+              <div class="logoimg"><img src="<%=basePath%>images/logo.png"></div>
+            </div>
+          </div>
+          <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+            <li data-name="gdlb" class="layui-nav-item layui-nav-itemed">
+              <a href="javascript:;"  lay-tips="工单列表" lay-direction="2">
+                <i class="fa fa-home fa-fw"></i>
+                <cite>选房管理</cite>
+              </a>
+              <dl class="layui-nav-child">
+                <dd data-name="console" class="layui-this"><a lay-href="applyList"  class="layui-nav-erjinav">房屋申请处理</a></dd>
+              </dl>
+              <dl class="layui-nav-child">
+                <dd data-name="console"><a lay-href="chooseRoomPage"  class="layui-nav-erjinav">在线选房</a></dd>
+              </dl>
+              <dl class="layui-nav-child">
+                <dd data-name="console"><a lay-href="showRoomStatus"  class="layui-nav-erjinav">房屋信息看板</a></dd>
+              </dl>
+              <dl class="layui-nav-child">
+                <dd data-name="console"><a lay-href="tenantList"  class="layui-nav-erjinav">预租人员信息</a></dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-		<div class="layui-footer">分页展示</div>
-	</div>
-	<script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-	<script src="<%=basePath%>js/layui/layui.js"></script>
-	<script src="<%=basePath%>js/layui/leftnav.js"></script>
-	<script>window.path = "<%=basePath%>";</script>
+      <!-- 页面标签 -->
+      <div class="layadmin-pagetabs" id="LAY_app_tabs">
+        <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+        <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+        <!-- <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div> -->
+        <div class="layui-icon layadmin-tabs-control layui-icon-down">
+          <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+            <li class="layui-nav-item" lay-unselect>
+              <a href="javascript:;"></a>
+              <dl class="layui-nav-child layui-anim-fadein">
+                <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+        <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+          <ul class="layui-tab-title" id="LAY_app_tabsheader">
+            <li lay-id="console.html" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+          </ul>
+        </div>
+      </div>
+      
+      
+      <!-- 主体内容 -->
+      <div class="layui-body" id="LAY_app_body">
+        <div class="layadmin-tabsbody-item layui-show">
+          <iframe src="applyList" frameborder="0" class="layadmin-iframe" id="iframe01"></iframe>
+      </div>
+      </div>
+      
+      <!-- 辅助元素，一般用于移动设备下遮罩 -->
+      <div class="layadmin-body-shade" layadmin-event="shade"></div>
+    </div>
+  </div>
+  <script src="<%=basePath%>js/jquery-1.9.1.min.js" type="text/javascript"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  	  <script src="<%=basePath%>js/layui/layui.js"></script>
+<%--   <script src="<%=basePath%>js/manageIndex.js"></script> --%>
+  <script>window.path = "<%=basePath%>";</script>
+  <script>
+  layui.config({
+    base: '<%=basePath%>' //静态资源所在路径
+  }).extend({
+    index: 'js/lib/index' //主入口模块
+  }).use('index');
+  </script>
 </body>
 </html>
+
+

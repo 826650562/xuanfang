@@ -38,13 +38,13 @@ public class manageController {
 		return "manage/manageIndex";
 	}
 	
-	@RequestMapping(value = "/indextest")
+/*	@RequestMapping(value = "/indextest")
 	public String indextest(HttpServletRequest req, HttpServletResponse reponse, Model model) {
 		HttpSession session = req.getSession();
 		String usr = (String) session.getAttribute("_user_manage");
 		model.addAttribute("username", usr);
 		return "pages/manageIndex";
-	}
+	}*/
 
 	// 用户名
 	private static String Uid = "luos890719";
