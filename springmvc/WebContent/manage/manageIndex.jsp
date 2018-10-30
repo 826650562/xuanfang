@@ -62,7 +62,7 @@ type="text/css">
 							class="fa fa-home fa-fw"></i>&nbsp;选房管理</a>
 						<dl class="layui-nav-child">
 							<dd class="layui-this">
-								<a href="javascript:;" @click='javascript:location.reload();'><i class="fa fa-registered fa-fw"></i>&nbsp;房屋申请处理</a>
+								<a href="javascript:;" @click='javascript:window.open("<%=basePath%>manage/applyList");'><i class="fa fa-registered fa-fw"></i>&nbsp;房屋申请处理</a>
 							</dd>
 							<dd>
 								<a @click='openChooseRoomOnline()'><i
@@ -87,7 +87,6 @@ type="text/css">
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<script src="<%=basePath%>js/layui/layui.js"></script>
 	<script src="<%=basePath%>js/layui/leftnav.js"></script>
-	<script src="<%=basePath%>js/manageIndex.js"></script>
 	<script>window.path = "<%=basePath%>";</script>
 </body>
 </html>

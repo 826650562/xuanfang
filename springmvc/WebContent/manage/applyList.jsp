@@ -161,6 +161,6 @@ type="text/css">
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="<%=basePath%>js/layui/layui.js"></script>
 <script src="<%=basePath%>js/layui/leftnav.js"></script>
-<script src="<%=basePath%>js/manageIndex.js"></script>
+<script src="<%=basePath%>js/applyList.js"></script>
 <script>window.path = "<%=basePath%>";</script>
 </html>

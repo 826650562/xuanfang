@@ -28,7 +28,7 @@ $(function(){
 	var indexMsg = setInterval(indexMsg,2000);
 	//vue
 	var vm = new Vue({
-		el:'#myApp',
+		el:'#bodyContent',
 		data:{
 			untreatedApply:rentalJson,
 			applyDetail:applyDetail,
@@ -159,8 +159,6 @@ $(function(){
 			dataType:'JSON',
 			type:'GET',
 			success:function(res){
-//				changeTime(res.delJsonArray);
-//				changeTime(res.rentalJson);
 				vm.untreatedApply = res.delJsonArray;
 				vm.delCount = res.delJsonArray.length;
 				vm.untreatedCount = res.rentalJson.length;

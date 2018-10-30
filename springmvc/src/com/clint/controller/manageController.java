@@ -294,6 +294,12 @@ public class manageController {
 		return "manage/chooseRoomOnline";
 	}
 	
+	// 获取承租人选房信息管理页面
+	@RequestMapping(value = "/applyList")
+	public String applyList(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		return "manage/applyList";
+	}
+	
 	//在线选房 选中户
 	@RequestMapping(value = "/chooseRoom")
 	public void chooseRoom(HttpServletRequest req, HttpServletResponse reponse) throws IOException {
