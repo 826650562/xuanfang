@@ -1,6 +1,10 @@
 package com.clint.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -12,11 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.clint.model.ExcelOperate;
 import com.clint.model.HttpClientUtil;
 import com.clint.service.ManageService;
 
@@ -364,6 +372,95 @@ public class manageController {
 		model.addAttribute("listOfPage", bxList);
 		return "pages/tenantList";
 	}
+	
+	//导入导出excel
+	//导入维修工人excel
+			@RequestMapping(value = "/importTenantXls")
+			public void importTenantXls(HttpServletRequest req, HttpServletResponse reponse,MultipartFile file) throws IOException {
+		 		//List appraiseList = this.homeService.getAppraise();
+				JSONObject jobj= new JSONObject();
+				if (null != file) {
+		            String myFileName = file.getOriginalFilename();// 文件原名称 
+		            if(myFileName.endsWith(".xls")||myFileName.endsWith(".xlsx")){
+		            	CommonsMultipartFile commonsmultipartfile = (CommonsMultipartFile) file;
+		                DiskFileItem diskFileItem = (DiskFileItem) commonsmultipartfile.getFileItem();  
+		                File files = diskFileItem.getStoreLocation();
+		                
+		                String[][] result = ExcelOperate.getData(files, 1);
+		                int rowLength = result.length;              
+		        		int index = 0;
+		        		while (index < rowLength) {
+		        			//JSONObject ExclObj = (JSONObject) Exclarr.getJSONObject(index);
+		        			Boolean bol = this.manageService.setTenant(String.valueOf(result[index][0]),String.valueOf(result[index][1]),String.valueOf(result[index][2]),String.valueOf(result[index][3]),String.valueOf(result[index][4]),
+		        					String.valueOf(result[index][5]),String.valueOf(result[index][6]),String.valueOf(result[index][7]),String.valueOf(result[index][8]),String.valueOf(result[index][9]),
+		        					String.valueOf(result[index][10]),String.valueOf(result[index][11]),String.valueOf(result[index][12]),String.valueOf(result[index][13]));
+		        			if(bol){
+		        				index++;
+		        				
+		        			}else{
+		        				jobj.put("error","数据更新失败！");
+		        				break;
+		        			}
+		                }
+		        		if(index== rowLength && rowLength>0){
+		        			jobj.put("success","数据更新完成！");
+		        		}
+		            }else{
+		            	jobj.put("error","请选择xls或xlsx文件");
+		            }    		
+				}		 			
+				try {
+					reponse.getWriter().write(String.valueOf(jobj));
+				} catch (IOException e) {
+					//obj.put("error", "获取评价列表失败！");
+					reponse.getWriter().write(String.valueOf(jobj));
+					e.printStackTrace();
+				}
+			}
+			
+
+			//导出维修工人excel
+				@RequestMapping(value = "/exportTenantXLS")
+			public void exportWorkerXLS(HttpServletRequest req, HttpServletResponse reponse) throws IOException {
+				
+				List superVisorList = this.manageService.getAllTenant();
+				JSONArray arr = JSONArray.fromObject(superVisorList);
+				JSONObject obj  = new JSONObject();
+				obj.put("arr", arr);
+				try {
+					//reponse.getOutputStream();
+					reponse.getWriter().write(String.valueOf(obj));
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			}
+				
+				
+				@RequestMapping(value = "/downloadFile")
+			    public void downloadFile(HttpServletResponse response,HttpServletRequest request) throws Exception {
+					String name = request.getParameter("name");
+			        File f = new File(request.getSession().getServletContext().getRealPath("/xls/") +name);
+			        if (!f.exists()) {
+			            response.sendError(404, "File not found!");
+			            return;
+			        }
+			        String fileName = f.getName();
+			        fileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+
+			        BufferedInputStream br = new BufferedInputStream(new FileInputStream(f));
+			        byte[] buf = new byte[1024];
+			        int len = 0;
+			        response.reset(); // 非常重要
+			        response.setContentType("application/x-msdownload");
+		            response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+			        OutputStream out = response.getOutputStream();
+			        while ((len = br.read(buf)) > 0)
+			            out.write(buf, 0, len);
+			        br.close();
+			        out.close();
+			    }	
+	//excel部分结束
 	
 	// 分页获取承租人信息
 	@RequestMapping(value = "/showTenantList")

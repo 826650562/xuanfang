@@ -26,12 +26,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script>window.path='<%=basePath %>'</script>
 </head>
 <body>
-<div class="container" style="margin:20px auto;width:1800px">
-   <div class="orderT"></div>
+	<div class="container" style="margin:20px auto;width:1800px">
+	   <div class="orderT"><div class='layui-elem-quote'><span  class="marR20">预租人员信息列表</span><div style="display:inline-block;margin-left: 20px;"><button class="layui-btn layui-btn-xs marR20" id="importXls">导入xls表</button><button class="layui-btn layui-btn-xs" id="exportXls">导出xls表</button></div></div>
+	</div>
    <div  class="z-col" style="text-align: center;"><div id="tenantListPageChange"></div></div>
-</div>
   <script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
   <script type="text/javascript" src="<%=basePath%>js/layui/layui.js"></script>
   <script src="<%=basePath %>js/tenantList.js"></script>
+  <script src="<%=basePath %>js/Export.js"></script>
 </body>
 </html>

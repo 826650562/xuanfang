@@ -48,8 +48,7 @@ public class ExcelOperate {
             throws FileNotFoundException, IOException {
         List<String[]> result = new ArrayList<String[]>();
         int rowSize = 0;
-        BufferedInputStream in = new BufferedInputStream(new FileInputStream(
-                file));
+        BufferedInputStream in = new BufferedInputStream(new FileInputStream(file));
         //HSSFWorkbook
         POIFSFileSystem fs = new POIFSFileSystem(in);
         HSSFWorkbook wb = new HSSFWorkbook(fs);

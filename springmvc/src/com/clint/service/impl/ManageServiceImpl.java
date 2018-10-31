@@ -150,8 +150,8 @@ public class ManageServiceImpl implements ManageService {
 			String housetype, String housetypeorder, String lotterorder, String recordtime, String optional,
 			String checkstatus, String current,String publicrentalrecord,String limitarea) {
 		String id =  UUID.randomUUID().toString().replace("-", "");
-		String addSql = "insert into T_BIM_CHOOSEROOM_TENEMENT (id,name, address, addressdetail, idcard, phonenum,housetype,housetypeorder,lotterorder,recordtime,optional,checkstatus,current,PUBLIC_RENTAL_RECORD,limitarea) values "+
-		"('"+ id +"', '"+ name +"', '"+ address +"', '"+ addressdetail +"','"+ idcard +"','"+ phonenum +"','"+ housetype +"','"+ housetypeorder +"','"+ lotterorder +"','"+ optional +"','"+ checkstatus +"','"+ current +"','"+ publicrentalrecord +"','"+ limitarea +"')";
+		String addSql = "insert into T_BIM_CHOOSEROOM_TENEMENT (id,name, address, addressdetail, idcard, phonenum,housetype,housetypeorder,lotterorder,recordtime,optional,checkstatus,current_time,PUBLIC_RENTAL_RECORD) values "+
+		"('"+ id +"', '"+ name +"', '"+ address +"', '"+ addressdetail +"','"+ idcard +"','"+ phonenum +"','"+ housetype +"','"+ housetypeorder +"','"+ lotterorder +"','"+ optional +"','"+ checkstatus +"','"+ current +"','"+ publicrentalrecord +"')";
 		this.mapService.execute(addSql);
 		
 	}
@@ -182,6 +182,44 @@ public class ManageServiceImpl implements ManageService {
 		String sql = "select * from T_BIM_CHOOSEROOM_STATUS where roomid='"+ roomId +"' and (statusid='0' or statusid='3') and delete_tag='0'";
 		List res = this.mapService.getListBySql(sql);
 		return res;
+	}
+
+	@Override
+	public Boolean setTenant(String name, String address, String addressdetail, String idcard, String phonenum,
+			String housetype, String housetypeorder, String lotterorder, String recordtime, String optional,
+			String checkstatus, String current,String publicrentalrecord,String limitarea) {
+		String sql = "select count(*) from T_BIM_CHOOSEROOM_TENEMENT where PHONENUM = '"+ phonenum +"' and TENEMENTNAME = '"+ name +"'";
+		int had = this.mapService.countAll(sql);
+		if(had>0){
+			sql = "update T_BIM_CHOOSEROOM_TENEMENT set(TENEMENTNAME, ADDRESS, PUBLIC_RENTAL_RECORD, IDCARD,HOUSETYPE,HOUSETYPEORDER,"
+					+ "ADDRESSDETAIL,LOTTERYORDER,RECORDTIME,OPTIONAL,CHECKSTATUS,CURRENT_TIME) = ( select '"+ name +"', '"+ address +"', '"+ addressdetail +"',"
+							+ "'"+ idcard +"','"+ housetype +"','"+ housetypeorder +"','"+ lotterorder +"','"+ recordtime +"','"+ optional +"',"
+							+ "'"+ checkstatus +"','"+ current +"','"+ publicrentalrecord +"' from dual) where PHONENUM='" + phonenum +"'";
+		}else{
+			String id = UUID.randomUUID().toString().replaceAll("-", "");
+			sql = "insert into T_BIM_CHOOSEROOM_TENEMENT values "+
+		"('"+ id +"', '"+ name +"', '"+ address +"', '"+ addressdetail +"','"+ idcard +"','"+ phonenum +"','"+ housetype +"','"+ housetypeorder +"',"
+				+ "'"+ lotterorder +"','"+ recordtime +"','"+ optional +"','"+ checkstatus +"','"+ current +"','"+ publicrentalrecord +"','27')";
+		}
+		
+		this.mapService.execute(sql);
+		sql = "select count(*) from T_BIM_CHOOSEROOM_TENEMENT where  PHONENUM = '"+ phonenum +"' and TENEMENTNAME = '"+ name +"'";
+		int setOrUpdate = this.mapService.countAll(sql);
+		
+		Boolean bol = false;
+		
+		if(setOrUpdate>0){
+			bol = true;
+		}
+				
+		return bol;
+	}
+
+	@Override
+	public List getAllTenant() {
+		String sql = "select * from T_BIM_CHOOSEROOM_TENEMENT";
+		List<?> list = this.mapService.getListBySql(sql);
+		return list;
 	}
 		
 

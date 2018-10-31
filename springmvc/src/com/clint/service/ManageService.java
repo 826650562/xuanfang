@@ -54,4 +54,10 @@ public interface ManageService {
 	List getRoomStatusByBuild(String build);
 
 	List getRoomstatusByRoomId(String roomId);
+
+	List getAllTenant();
+
+	Boolean setTenant(String name, String address, String addressdetail, String idcard, String phonenum,
+			String housetype, String housetypeorder, String lotterorder, String recordtime, String optional,
+			String checkstatus, String current, String publicrentalrecord, String limitarea);
 }
