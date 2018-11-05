@@ -8,41 +8,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>选房系统管理</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="icon" href="<%=basePath%>images/ico.png" type="image/x-icon">
-<!--标准mui.css-->
-<link rel="stylesheet"
-	href="<%=basePath%>js/mui-master/dist/css/mui.min.css">
-<link rel="stylesheet"
-	href="<%=basePath%>js/bootstrap/css/bootstrap.css">
-<link href="<%=basePath%>js/layui/css/layui.css" rel="stylesheet"
-	type="text/css">
-<link href="<%=basePath%>js/layui/css/layui.manage.css" rel="stylesheet"
-type="text/css">
-<link href="<%=basePath%>js/fontawesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=basePath%>css/mcss/style.css" rel="stylesheet"
-	type="text/css">
-<script src="<%=basePath %>js/manageIndex.js"></script>
-<style>
-#showApplyDetail{display:none;}
-</style>
-<!--App自定义的css-->
+  <meta charset="utf-8">
+  <title>选房系统</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="<%=basePath%>js/layui/css/layui.css" media="all">
+  <link href="<%=basePath%>js/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="<%=basePath%>css/indexcss/admin.css" media="all">
+  <link rel="stylesheet" href="<%=basePath%>css/indexcss/style.css" media="all">
+  
+  <script>
+  ///^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
+  </script>
 </head>
 <body class="layui-layout-body">
-	<div class="layui-layout layui-layout-admin" id="myApp" v-cloak>
-		<div class="layui-header" style=" background-color: #53cc33;">
-			<div class="layui-logo">
-				<img src="<%=basePath%>images/logo.png">
-			</div>
-			<!-- 头部区域（可配合layui已有的水平导航） -->
-			<ul class="layui-nav layui-layout-right">
-			<c:forEach var="loginContent"  items="${username}">
+  
+  <div id="LAY_app">
+    <div class="layui-layout layui-layout-admin" id="myApp" v-cloak>
+      <div class="layui-header">
+        <!-- 头部区域 -->
+        <ul class="layui-nav layui-layout-left">
+          <li class="layui-nav-item layadmin-flexible" lay-unselect>
+            <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+              <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+            </a>
+          </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right padR15" lay-filter="layadmin-layout-right">
+          <c:forEach var="loginContent"  items="${username}">
 				<li class="layui-nav-item"><a href="javascript:;"> <img
 						src="<%=basePath%>images/head.png" class="layui-nav-img">
 						系统管理员<c:out value="${username}"/>
@@ -53,325 +47,102 @@ type="text/css">
 						</dd>
 					</dl></li>
 			</c:forEach>
-			</ul>
-		</div>
-		<div class="layui-side layui-bg-black">
-			<div class="layui-side-scroll">
-				<ul class="layui-nav layui-nav-tree" lay-filter="test">
-					<li class="layui-nav-item layui-nav-itemed"><a
-						class="" href="javascript:;"><i
-							class="fa fa-home fa-fw"></i>&nbsp;选房管理</a>
-						<dl class="layui-nav-child">
-							<dd class="layui-this">
-								<a href="javascript:;" @click='javascript:location.reload();'><i class="fa fa-registered fa-fw"></i>&nbsp;房屋申请处理</a>
-							</dd>
-							<dd>
-								<a @click='javascript:location.reload();window.open("<%=basePath%>manage/showRoomStatus")'><i
-									class="fa fa-registered fa-fw"></i>&nbsp;房屋信息看板</a>
-							</dd>
-						</dl></li>
-				</ul>
-			</div>
-		</div>
-		<div class="layui-body" id="bodyContent">
-			<!-- 选房审核列表 内容主体区域 -->
-			<div class="pad15" id="applyListContain">
-				<div class="row">
-					<div class="col-lg-3">
-						<a href="<%=basePath%>manage/index" class="xxtxbox bgGreen"  id="untreatedApplyMsg">意向申请未处理消息
-							<span class="xxtxnum">{{untreatedCount}}</span>
-						</a>
-					</div>
-					<div class="col-lg-3">
-						<a href="javascript:;" class="xxtxbox" @click='changeList($event)' id="treatedApplyMsg"> 意向申请已处理信息<span
-							class="xxtxnum">{{delCount}}</span>
-						</a>
-					</div>
-					<!-- <div class="col-lg-3">
-						<a href="xxtx3.html" class="xxtxbox"> 房租到期预提醒消息 <span
-							class="xxtxnum">3</span>
-						</a>
-					</div> -->
-				</div>
-				<div class="row" style=" height:15px;">
-					<div class="col-lg-12"></div>
-				</div>
-				<!-- 选房审核列表  start -->
-				<div class="row" id="showApplyList">
-					<div class="col-lg-12">
-						<div class="layui-form">
-							<table class="layui-table mar0">
-								<colgroup>
-									<col>
-									<col width="300">
-									<col width="200">
-								</colgroup>
-								<tbody>
-									<tr v-for='i in untreatedApply' :_id=i.ID>
-										<td>{{i.TENEMENTNAME}}选择了&nbsp;<strong class="colorRed">{{i.BUILD}}</strong>
-											<strong class="colorRed">{{i.HOUSEHOLD}}</strong>&nbsp;户
-										</td>
-										<td>{{i.TIME}}</td>
-										<td><a href="#" class="showDetailBtn" @click='showApply(i.ID)'><i
-												class="fa fa-eye fa-f2"></i>&nbsp;查看</a></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- 选房审核列表  end -->
-			</div>
-			<!-- 选房审核列表 内容主体区域 end -->
-			<!-- 选房人基本信息内容主体区域 -->
-			<div class="pad15" id="showApplyDetail">
-				<div class="shadowbox"  v-for='detail in applyDetail'>
-					<form class="layui-form">
-						<div class="padTB10 colorRed">选房人基本信息</div>
-						<table class="layui-table marB15">
-							<thead>
-								<tr>
-									<th><strong>姓名</strong></th>
-									<th><strong>性别</strong></th>
-									<th><strong>年龄 </strong></th>
-									<th><strong>籍贯</strong></th>
-									<th><strong> 手机号</strong></th>
-									<th><strong>身份证号</strong></th>
-									<th><strong> 婚姻状况</strong></th>
-									<th><strong>家庭成员（人数） </strong></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{{detail.NAME}}</td>
-									<td>男</td>
-									<td>23</td>
-									<td>{{detail.ADDRESS}}</td>
-									<td>{{detail.PHONENUM}}</td>
-									<td>{{detail.IDCARD}}</td>
-									<td>未婚</td>
-									<td>1</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="padTB10 colorRed">选房信息</div>
-						<table class="layui-table mar0">
-							<thead>
-								<tr>
-									<th><strong>项目名称</strong></th>
-									<th><strong>楼栋</strong></th>
-									<th><strong>单元</strong></th>
-									<th><strong>房号</strong></th>
-									<th><strong>户型编号</strong></th>
-									<th><strong>建筑面积</strong></th>
-									<th><strong>室内使用面积</strong></th>
-									<th><strong>户型</strong></th>
-									<th><strong>三维模型</strong></th>
-									<th><strong>全景图</strong></th>
-									<th><strong>户型平面图</strong></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>保障房项目01（东区）</td>
-									<td>{{detail.LOUDONG}}</td>
-									<td>{{detail.DY}}单元</td>
-									<td>{{detail.HOUSEHOLD}}</td>
-									<td>{{detail.HOUSETYPE}}</td>
-									<td>{{detail.INSIDE}}m²</td>
-									<td>{{detail.INSIDE}}m²</td>
-									<td>两室一厅一卫</td>
-									<td><img src="<%=basePath%>images/swmx1.png"></td>
-									<td><img src="<%=basePath%>images/qjt1.jpg"></td>
-									<td><img src="<%=basePath%>images/hxt01.png"></td>
-								</tr>
-							</tbody>
-						</table>
-					</form>					
-				</div>
-				<div class="row" id="btnBox" v-if='btnShow'>
-					<div class="col-lg-5"></div>
-					<div class="col-lg-2">
-						<a href="#"  @click.prevent='toSetApply(detailId)' class="layui-btn"><i class="fa fa-hdd-o fa-fw"></i>&nbsp;受理并通知对方</a>
-					</div>
-					<div class="col-lg-5"></div>
-				</div>
-			</div>
-			<!-- 选房人基本信息内容主体区域 end -->
-		</div>
-		<div class="layui-footer">分页展示</div>
-	</div>
-	<script type="text/javascript" src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-	<script src="<%=basePath%>js/layui/layui.js"></script>
-	<script src="<%=basePath%>js/layui/leftnav.js"></script>
-	<script>
-	Date.prototype.toLocaleString = function() {
-		return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate() + "   " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds() + "";
-	};
-	//JavaScript代码区域
-	layui.use([ 'form', 'element', 'jquery' ], function() {
-		var form = layui.form;
-		var element = layui.element,
-			$ = layui.jquery;
-		$(".menu_three").on("click", function() {
-			$(this).next().toggle();
-		})
-		$("ol").on("click", "li a", function() {
-			$.each($(this).parent().siblings(), function(i, e) {
-				$(e).find("a").removeClass('three_this')
-			});
-			$(this).addClass('three_this'); // 添加当前元素的样式
-		})
-	});
-	var rentalJson ;
-	var delJsonArray ;
-	var applyDetail = [];
-	var untreatedCount;
-	var delCount;
-	var treatedApplyInter;
-	indexMsg();//获取未处理信息数据
-	var indexMsg = setInterval(indexMsg,2000);
-	//vue
-	var vm = new Vue({
-		el:'#myApp',
-		data:{
-			untreatedApply:rentalJson,
-			applyDetail:applyDetail,
-			detailId:'',
-			delCount:delCount,
-			untreatedCount:untreatedCount,
-			btnShow:true
-		},
-		methods:{
-			showApply(id){
-				$.ajax({
-					url:'getApplyDetail',
-					data:{
-						id:id
-					},
-					type:'POST',
-					dataType:'JSON',
-					success:function(rtn){
-						var res = rtn.arr;
-						var arr = [res];						
-						if(rtn.error){
-							layer.msg(rtn.error);
-						}else{
-							$('#applyListContain').css('display','none');
-							$('#showApplyDetail').css('display','block');
-							vm.applyDetail = arr;
-							vm.detailId = res.SID;
-							if(res.STATUSID=='1'){
-								vm.btnShow = true;
-							}else if(res.STATUSID=='3'){
-								vm.btnShow = false;
-							}
-						}												
-					},
-					error:function(res){
-						console.log(res);
-					}
-				})
-			},
-			toSetApply(id){
-				indexMsg && clearInterval(indexMsg);
-				treatedApplyInter && clearInterval(treatedApplyInter);
-				$.ajax({
-					url:'toSetApply',
-					data:{
-						id:id
-					},
-					type:'POST',
-					dataType:'JSON',
-					success:function(rtn){
-						var res = rtn[0];						
-						if(res.setSuccess){
-							layer.msg(res.setSuccess);
-							$.ajax({
-								url:'sendMessage',
-								data:{
-									mobile:res.PHONENUM,
-									name:res.TENEMENTNAME
-								},
-								type:'POST',
-								dataType:'JSON',
-								success:function(back){
-									if(back.success){
-										$('#btnBox').css('display','none');
-										layer.msg(back.success);
-									}else if(back.error){
-										layer.msg(back.error);
-									}
-								},
-								error:function(back){
-									layer.msg(back.reason);
-								}
-							})
-						}
-					},
-					error:function(res){
-						console.log(res);
-					}
-				})
-			},
-			changeList(e){
-				clearInterval(indexMsg);
-				$('.xxtxbox').removeClass('bgGreen');
-				$(e.target).addClass('bgGreen'); 
-				treatedApply();
-			    treatedApplyInter = setInterval(treatedApply,2000);
-			}
+        </ul>
+      </div>
+      
+      <!-- 侧边菜单 -->
+      <div class="layui-side layui-side-menu">
+        <div class="layui-side-scroll">
+          <div class="layui-logo">
+            <div class="z-row">
+              <div class="logoimg"><img src="<%=basePath%>images/logo2.png"></div>
+            </div>
+          </div>
+          <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+            <li data-name="gdlb" class="layui-nav-item">
+              <a href="javascript:;"  lay-tips="工单列表" lay-direction="2">
+                <i class="fa fa-home fa-fw"></i>
+                <cite>选房管理</cite>
+              </a>
+              <dl class="layui-nav-child">
+                <dd data-name="console" class="layui-this"><a lay-href="applyList"  class="layui-nav-erjinav">房屋申请处理</a></dd>
+              </dl>
+              <dl class="layui-nav-child">
+                <dd data-name="console"><a lay-href="chooseRoomPage"  class="layui-nav-erjinav">在线选房</a></dd>
+              </dl>
+              <dl class="layui-nav-child">
+                <dd data-name="console"><a lay-href="showRoomStatus"  class="layui-nav-erjinav">房屋信息看板</a></dd>
+              </dl>
 
-		} 
-	});
-	function changeTime(arr){
-		arr.map(function(item){
-			var newDate = new Date();
-		    newDate.setTime( Number(item.TIME));
-			item.TIME =newDate.toLocaleString();
-		});
-	}
-	function indexMsg(){
-		$.ajax({
-			url:'indexMsg',
-			dataType:'JSON',
-			type:'GET',
-			success:function(res){
-				rentalJson = res.rentalJson;
-				delJsonArray = res.delJsonArray;
-				untreatedCount = res.rentalJson.length;
-				//未处理消息
-				changeTime(rentalJson);
-				//已处理消息
-				changeTime(delJsonArray);
-				vm.untreatedApply = rentalJson;
-				vm.delCount = delJsonArray.length;
-				vm.untreatedCount = rentalJson.length;
-			},
-			error:function(){
-				console.log(res);
-			}
-		})
-	}
-	function treatedApply(){
-		$.ajax({
-			url:'treatedApply',
-			dataType:'JSON',
-			type:'GET',
-			success:function(res){
-				changeTime(res.delJsonArray);
-				changeTime(res.rentalJson);
-				vm.untreatedApply = res.delJsonArray;
-				vm.delCount = res.delJsonArray.length;
-				vm.untreatedCount = res.rentalJson.length;
-				vm.btnShow = false;
-			},
-			error:function(res){
-				console.log(res);
-			}
-		});
-	}
-</script>
+            </li>
+            <li data-name="gdlb" class="layui-nav-item">
+              <a href="javascript:;">
+                <i class="fa fa-bars fa-fw"></i>
+                <cite>预租信息</cite>
+              </a>
+              <dl class="layui-nav-child">
+                <dd  data-name="console"><a lay-href="tenantList"  class="layui-nav-erjinav">预租人员信息</a></dd>
+              </dl>
+              <dl class="layui-nav-child">
+                <dd data-name="console"><a lay-href="allRoomList"  class="layui-nav-erjinav">所有房屋信息</a></dd>
+              </dl>
+              <dl class="layui-nav-child">
+                <dd data-name="console"><a lay-href="roomListForRental"  class="layui-nav-erjinav">预租房屋信息</a></dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 页面标签 -->
+      <div class="layadmin-pagetabs" id="LAY_app_tabs">
+        <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+        <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+        <!-- <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div> -->
+        <div class="layui-icon layadmin-tabs-control layui-icon-down">
+          <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+            <li class="layui-nav-item" lay-unselect>
+              <a href="javascript:;"></a>
+              <dl class="layui-nav-child layui-anim-fadein">
+                <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+        <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+          <ul class="layui-tab-title" id="LAY_app_tabsheader">
+            <li lay-id="console.html" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+          </ul>
+        </div>
+      </div>
+      
+      
+      <!-- 主体内容 -->
+      <div class="layui-body" id="LAY_app_body">
+        <div class="layadmin-tabsbody-item layui-show">
+          <iframe src="applyList" frameborder="0" class="layadmin-iframe" id="iframe01"></iframe>
+      </div>
+      </div>
+      
+      <!-- 辅助元素，一般用于移动设备下遮罩 -->
+      <div class="layadmin-body-shade" layadmin-event="shade"></div>
+    </div>
+  </div>
+  <script src="<%=basePath%>js/jquery-1.9.1.min.js" type="text/javascript"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  	  <script src="<%=basePath%>js/layui/layui.js"></script>
+<%--   <script src="<%=basePath%>js/manageIndex.js"></script> --%>
+  <script>window.path = "<%=basePath%>";</script>
+  <script>
+  layui.config({
+    base: '<%=basePath%>' //静态资源所在路径
+  }).extend({
+    index: 'js/lib/index' //主入口模块
+  }).use('index');
+  </script>
 </body>
 </html>
+
+

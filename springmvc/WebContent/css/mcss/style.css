@@ -1,6 +1,6 @@
 *{padding:0px;margin:0px;}
 html,body{height:100%;}
-body {font-family: 'microsoft yahei', Arial, Helvetica, sans-serif;color: #333;background-color: #f6f6f6; font-size:15px;padding:0px;margin:0px; position:relative;}
+body {font-family: 'microsoft yahei', Arial, Helvetica, sans-serif;color: #333;background-color: #f6f6f6; font-size:14px;padding:0px;margin:0px; position:relative;}
 a{color:#333;}
 a:hover{color:#333; text-decoration:none;}
 p{color:#333;}
@@ -45,6 +45,7 @@ p{color:#333;}
 .padTB30{padding:30px 0px !important;}
 
 .bgGray{ background:#f6f6f6 !important;}
+.bgGray2{ background:#f6f6f6;}
 .bgWhite{ background:#fff !important;}
 .bgBlue{ background:#0873bd !important;}
 .bgBlack{ background:#333 !important;}
@@ -52,12 +53,19 @@ p{color:#333;}
 .bgGreen{background:#53cc33 !important;}
 .bgqGray{ background:#ddd !important;}
 .bgqBlue{ background:#f0f9fe !important;}
+.bgGreen{ background:#04ae0f;}
+.bgQianRed{ background:rgba(221,82,71,.3);}
+.bgQianGreen{ background:rgba(110,185,43,.3);}
+.bgQianYellow{ background:rgba(250,190,0,.3);}
 .ellipsis{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 
 .zInput{width:100%; height:45px;border:none; border-top-right-radius:4px; border-bottom-right-radius:4px;}
 .width100{width:100% !important;}
 
-
+.layui-btn:hover {
+    opacity: .8;
+    color: #ffffff !important;
+}
 ol li a{background-color: rgba(0,0,0,1)!important;}
 .three_this{ background-color: #333!important; color:#fdd103 !important;}
 .layui-tab-title li{font-size:15px; padding:0px 30px;}
@@ -73,6 +81,25 @@ ol li a{background-color: rgba(0,0,0,1)!important;}
 .xfbq4{position:absolute;top:0px; right:0px; background:#aaa; color:#fff;padding:1px 10px; border-bottom-left-radius:5px; font-size:12px;}
 .tybtn{border-radius:30px; height:30px; line-height:28px;}
 .footczbtn{float:left; margin:0px 30px 0px 0px;}
+.ldxzbtn{ height:35px; line-height:33px; margin:5px 10px 5px 0px; display:block; float:left; font-size:15px; border-radius:20px; padding:0px 15px;}
+.xfzt span{ float:left; display:block;}
+.xflist{border-left:1px solid #eee;}
+.xflistitem{height:45px; line-height:45px;border:1px solid #e6e6e6;float:left; width:20%; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;cursor: pointer;}
+.xflistitem:hover{    color: #9e9191;}
+.xflistch{padding:10px 15px 0px 15px; width: 100px;
+    text-align: center;font-weight:bold; font-size:16px; color:#333; border-top:1px solid #e6e6e6; border-bottom:1px solid #eee; border-left:1px solid #eee;}
+.xflistitem:nth-child(1),.xflistitem:nth-child(2),.xflistitem:nth-child(3),.xflistitem:nth-child(4){border-left:none;}
+.xflistitem:nth-child(5),.xflistitem:nth-child(6),.xflistitem:nth-child(7),.xflistitem:nth-child(8){border-left:none;border-top:none;}
+.xflistitem:nth-child(9),.xflistitem:nth-child(10),.xflistitem:nth-child(11),.xflistitem:nth-child(12){border-left:none;border-top:none;}
+.xflistbox{padding:10px 0px 0px 0px;min-height:50px;}
+.xuanfangzt{float:left; margin:5px 15px 5px 0px;}
+.xfztcolor{float:left; height:20px; width:20px; border-radius:2px;}
+.xfzttxt{float:left; padding-left:5px; font-size:14px;}
+.xqxqbtn{ height:35px; line-height:33px; font-size:14px; margin:5px 0px 0px 0px; display:block; float:left; border-radius:2px; padding:0px 10px;}
+.xqxfitemtxt{line-height:26px;text-indent:2em;}
+.layui-body{left:0px;}
+.mui-table-view-cell{padding:0;}
+.mui-table-view-cell:after{height:0;}
 .gjbar{background:#fff; border-bottom:1px solid #e6e6e6; padding:10px 15px;}
 a:hover, a:focus {
     text-decoration: none;
