@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.aspectj.weaver.ast.Var;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -134,10 +135,7 @@ public class manageController {
 
 	// 获取已处理信息
 	@RequestMapping(value = "/treatedApply")
-	public void treatedApply(HttpServletRequest req, HttpServletResponse reponse) {
-		String rentalSql = "";
-		String delSql = "";
-		
+	public void treatedApply(HttpServletRequest req, HttpServletResponse reponse) {		
 		List delList = this.manageService.delAllInfo();
 		JSONArray delJsonArray = JSONArray.fromObject(delList);
 		
@@ -362,7 +360,112 @@ public class manageController {
 	public String tenantList(HttpServletRequest req, HttpServletResponse reponse, Model model) {		
 		int bxList = this.manageService.getTenementCount();
 		model.addAttribute("listOfPage", bxList);
-		return "pages/tenantList";
+		return "manage/tenantList";
+	}
+	
+	// 获取所有房屋信息
+	@RequestMapping(value = "/allRoomList")
+	public String allRoomList(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		int roomCout = this.manageService.getAllRoomCount();
+		List buildList = this.manageService.getAllBuild();
+		JSONArray buildArr = JSONArray.fromObject(buildList);
+		model.addAttribute("buildArr",buildArr);
+		model.addAttribute("roomCout",roomCout);
+		return "manage/allRoomList";
+	}
+	
+	// 根据楼栋 获取户总数
+	@RequestMapping(value = "/getRoomCountByBuild")
+	public void getRoomCountByBuild(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		String build = req.getParameter("build");
+		int roomCout = this.manageService.getAllRoomCountByBuild(build);
+		JSONObject obj = new JSONObject();
+		obj.put("count", roomCout);
+		try {
+			reponse.getWriter().write(String.valueOf(obj));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	// 通过分页获取房屋信息
+	@RequestMapping(value = "/getRoomListByPage")
+	public void getRoomListByPage(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		String limit = req.getParameter("limit");
+		String cur = req.getParameter("cur");
+		String build = req.getParameter("build");
+		
+		int limitNum = Integer.valueOf(limit); 
+		int currentNum = Integer.valueOf(cur); 
+
+		List roomList = new ArrayList();
+		if(StringUtils.hasText(build)){
+			roomList = this.manageService.getRoomByBuild(limitNum,currentNum,build);
+		}else{
+			roomList = this.manageService.getRoomListByPage(limitNum,currentNum);
+		}
+		
+		JSONArray roomArr = JSONArray.fromObject(roomList);
+		JSONObject obj = new JSONObject();
+		obj.put("roomArr", roomArr);
+		try {
+			reponse.getWriter().write(String.valueOf(obj));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	
+	// 通过分页获取房屋信息
+	@RequestMapping(value = "/insertIntoTable")
+	public void insertIntoTable(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		String choosedStr = req.getParameter("choosedStr");
+		String starttime = req.getParameter("starttime");
+		String endtime = req.getParameter("endtime");
+		String[] list = choosedStr.split(",");
+		for(int i=0;i<list.length;i++){
+			String roomid = list[i];
+			this.manageService.insertIntoTable(roomid,starttime,endtime);
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("success", "选择预选房成功！");
+		try {
+			reponse.getWriter().write(String.valueOf(obj));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	// 获取所有预租房屋信息
+	@RequestMapping(value = "/roomListForRental")
+	public String roomListForRental(HttpServletRequest req, HttpServletResponse reponse, Model model) {		
+		//
+		int rentalRoomCount = this.manageService.getRentalRoomCount();
+		model.addAttribute("rentalRoomCount",rentalRoomCount);
+		
+		return "manage/roomListForRental";
+	}
+	
+	// 分页获取预选房屋信息
+	@RequestMapping(value = "/getRoomListForRentalByPage")
+	public void getRoomListForRentalByPage(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		String current = req.getParameter("current");
+		String limit = req.getParameter("limit");
+		
+ 		int currentNum = Integer.valueOf(current);
+ 		int limitNum = Integer.valueOf(limit);
+		
+		
+ 		List roomList = this.manageService.getRoomListForRentalByPage(limitNum,currentNum);
+		JSONArray jsonArr = JSONArray.fromObject(roomList);
+		JSONObject object = new JSONObject();
+		object.put("roomList", roomList);
+		
+		try {
+			reponse.getWriter().write(String.valueOf(object));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	// 分页获取承租人信息
@@ -381,6 +484,33 @@ public class manageController {
 		try {
 			PrintWriter pw = reponse.getWriter();
 			pw.write(String.valueOf(jsonArr));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	
+	// 删除预选房屋信息
+	@RequestMapping(value = "/deleteRentalRoom")
+	public void deleteRentalRoom(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		String choosedStr = req.getParameter("choosedStr");
+		String[] list = choosedStr.split(",");
+		int j = 0;
+		Boolean bol;
+		for(int i=0;i<list.length;i++){
+			String roomid = list[i];
+			bol = this.manageService.deleteRentalRoom(roomid);
+			if(bol){
+				j++;
+			}
+		}		
+		JSONObject obj = new JSONObject();
+		if(j==list.length){
+			obj.put("success", "删除预选房成功！");
+		}
+		
+		try {
+			reponse.getWriter().write(String.valueOf(obj));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

@@ -183,6 +183,77 @@ public class ManageServiceImpl implements ManageService {
 		List res = this.mapService.getListBySql(sql);
 		return res;
 	}
+
+	@Override
+	public List getRoomListForRentalByPage(int limitNum,int curNum) {
+		String sql = "select * from (select r.*,a.starttime,a.endtime,rownum rn from T_CHOOSEROOM_APPOINT a,T_BIM_ROOM r where a.roomid=r.id and rownum<="+ curNum*limitNum +")  w where w.rn>"+ (curNum-1)*limitNum +"";
+		List res = this.mapService.getListBySql(sql);
+		return res;
+	}
+
+	@Override
+	public int getAllRoomCount() {
+		int count = this.mapService.countAll("SELECT count(*) FROM T_BIM_ROOM WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "."+"\\" + "-]"+"\\"+ "d*"+"\\" + ".{0,1}"+"\\" + "d*$') IS NOT NULL");
+		return count;
+	}
+	@Override
+	public int getAllRoomCountByBuild(String build) {
+		int count = this.mapService.countAll("SELECT count(*) FROM T_BIM_ROOM WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "."+"\\" + "-]"+"\\"+ "d*"+"\\" + ".{0,1}"+"\\" + "d*$') IS NOT NULL and loudong='"+ build +"'");
+		return count;
+	}
+	@Override
+	public List getRoomListByPage(int limitNum, int currentNum) {
+		String sql = "select * from (SELECT i.*,rownum as rn from (SELECT DISTINCT  a.*"+
+ " FROM (select DISTINCT r.* from T_BIM_ROOM r  left join T_CHOOSEROOM_APPOINT n on r.id = n.roomid where n.roomid  is null) a,T_BIM_CHOOSEROOM_STATUS s "+
+ " WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "."+"\\" + "-]"+"\\"+ "d*"+"\\" + ".{0,1}"+"\\" + "d*$') IS NOT NULL  and (s.DELETE_TAG='0' and a.id!=s.ROOMID and s.statusid='3' or s.statusid='1' )  ) i  where rownum<="+ currentNum*limitNum  +")w  where w.rn>" + (currentNum-1)*limitNum + "";
+		List res = this.mapService.getListBySql(sql);
+		return res;
+	}
+
+	@Override
+	public void insertIntoTable(String roomid, String starttime, String endtime) {
+		String id = UUID.randomUUID().toString().replace("-", "");
+		String sql = "insert into T_CHOOSEROOM_APPOINT(id,roomid,starttime,endtime) values('"+ id +"','"+ roomid +"','"+ starttime +"','"+ endtime +"')";
+		this.mapService.execute(sql);
+		
+	}
+
+	@Override
+	public int getRentalRoomCount() {
+		String sql = "select count(*) from T_CHOOSEROOM_APPOINT where starttime!='null'";
+		int res = this.mapService.countAll(sql);
+		
+		return res;
+	}
+
+	@Override
+	public Boolean deleteRentalRoom(String roomid) {
+		String sqlString = "delete from T_CHOOSEROOM_APPOINT where roomid='"+ roomid +"'";
+		this.mapService.execute(sqlString);
+		
+		int res = this.mapService.countAll("select count(*) from T_CHOOSEROOM_APPOINT where roomid='"+ roomid +"'");
+		Boolean bol = false;
+		if(res<=0){
+			bol = true;
+		}
+		return bol;
+	}
+
+	@Override
+	public List getAllBuild() {
+		String sql = "select ldh from T_BIM_LDXX";
+		List res = this.mapService.getListBySql(sql);				
+		return res;
+	}
+
+	@Override
+	public List getRoomByBuild(int limitNum, int currentNum, String build) {
+		String sql = "select * from (SELECT i.*,rownum as rn from (SELECT DISTINCT  a.*"+
+				 " FROM (select DISTINCT r.* from T_BIM_ROOM r  left join T_CHOOSEROOM_APPOINT n on r.id = n.roomid where n.roomid  is null) a,T_BIM_CHOOSEROOM_STATUS s "+
+				 " WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "."+"\\" + "-]"+"\\"+ "d*"+"\\" + ".{0,1}"+"\\" + "d*$') IS NOT NULL and loudong='"+ build +"'  and (s.DELETE_TAG='0' and a.id!=s.ROOMID and s.statusid='3' or s.statusid='1' )  ) i  where rownum<="+ currentNum*limitNum  +")w  where w.rn>" + (currentNum-1)*limitNum + "";
+						List res = this.mapService.getListBySql(sql);
+						return res;
+	}
 		
 
 }

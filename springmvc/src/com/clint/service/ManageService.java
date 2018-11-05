@@ -54,4 +54,22 @@ public interface ManageService {
 	List getRoomStatusByBuild(String build);
 
 	List getRoomstatusByRoomId(String roomId);
+
+	List getRoomListForRentalByPage(int limitNum,int curNum);
+
+	int getAllRoomCount();
+
+	List getRoomListByPage(int limitNum, int currentNum);
+
+	void insertIntoTable(String roomid, String starttime, String endtime);
+
+	int getRentalRoomCount();
+
+	Boolean deleteRentalRoom(String roomid);
+
+	List getAllBuild();
+
+	List getRoomByBuild(int limitNum, int currentNum, String build);
+
+	int getAllRoomCountByBuild(String build);
 }
