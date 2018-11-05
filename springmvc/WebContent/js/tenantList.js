@@ -1,8 +1,8 @@
 
 	var html = '<table class="layui-table">'+
 	 '<colgroup>'+
+	    '<col width="100">'+
 	    '<col width="150">'+
-	    '<col width="200">'+
 	    '<col>'+
 	  '</colgroup>'+
 	  '<thead>'+

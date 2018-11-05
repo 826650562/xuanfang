@@ -82,7 +82,7 @@ public class ExcelOperate {
                                 if (HSSFDateUtil.isCellDateFormatted(cell)) {
                                     Date date = cell.getDateCellValue();
                                     if (date != null) {
-                                        value = new SimpleDateFormat("yyyy-MM-dd")
+                                        value = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
                                                 .format(date);
                                     } else {
                                         value = "";

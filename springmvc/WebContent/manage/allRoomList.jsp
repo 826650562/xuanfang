@@ -78,7 +78,7 @@
 							@click.stop.prevent="insertToTem">添加预租房屋</button>
 					</div>
 				</div>
-				<div class="layui-elem-quote" style="border:0;background-color:#f6f6f6;">
+				<div class="layui-elem-quote" style="border:0;background-color:#f6f6f6;margin-bottom:0;padding:9px">
 					<button style="margin-right:20px;" class="layui-btn layui-btn-radius layui-btn-primary buildBtn" @click.stop.prevent="serachByBuild()">全部</button>					
 					<button style="margin-right:20px;" class="layui-btn layui-btn-radius layui-btn-primary buildBtn" v-for="i in buildArr" @click.stop.prevent="serachByBuild(i.LDH)">{{i.LDH}}</button>
 				</div>

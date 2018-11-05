@@ -317,6 +317,12 @@ public class chooseRoomController {
 			e1.printStackTrace();
 		}
 	}
+	
+	//获取房屋列表
+	@RequestMapping(value = "/vtour")
+		public String vtour(HttpServletRequest req, HttpServletResponse reponse,Model model){
+			return "js/vtour/tour";
+		}
  
 
 }
