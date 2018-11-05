@@ -60,4 +60,22 @@ public interface ManageService {
 	Boolean setTenant(String name, String address, String addressdetail, String idcard, String phonenum,
 			String housetype, String housetypeorder, String lotterorder, String recordtime, String optional,
 			String checkstatus, String current, String publicrentalrecord, String limitarea);
+
+	List getRoomListForRentalByPage(int limitNum,int curNum);
+
+	int getAllRoomCount();
+
+	List getRoomListByPage(int limitNum, int currentNum);
+
+	void insertIntoTable(String roomid, String starttime, String endtime);
+
+	int getRentalRoomCount();
+
+	Boolean deleteRentalRoom(String roomid);
+
+	List getAllBuild();
+
+	List getRoomByBuild(int limitNum, int currentNum, String build);
+
+	int getAllRoomCountByBuild(String build);
 }

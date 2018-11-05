@@ -59,7 +59,7 @@
             </div>
           </div>
           <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-            <li data-name="gdlb" class="layui-nav-item layui-nav-itemed">
+            <li data-name="gdlb" class="layui-nav-item">
               <a href="javascript:;"  lay-tips="工单列表" lay-direction="2">
                 <i class="fa fa-home fa-fw"></i>
                 <cite>选房管理</cite>
@@ -73,8 +73,21 @@
               <dl class="layui-nav-child">
                 <dd data-name="console"><a lay-href="showRoomStatus"  class="layui-nav-erjinav">房屋信息看板</a></dd>
               </dl>
+
+            </li>
+            <li data-name="gdlb" class="layui-nav-item">
+              <a href="javascript:;">
+                <i class="fa fa-bars fa-fw"></i>
+                <cite>预租信息</cite>
+              </a>
               <dl class="layui-nav-child">
-                <dd data-name="console"><a lay-href="tenantList"  class="layui-nav-erjinav">预租人员信息</a></dd>
+                <dd  data-name="console"><a lay-href="tenantList"  class="layui-nav-erjinav">预租人员信息</a></dd>
+              </dl>
+              <dl class="layui-nav-child">
+                <dd data-name="console"><a lay-href="allRoomList"  class="layui-nav-erjinav">所有房屋信息</a></dd>
+              </dl>
+              <dl class="layui-nav-child">
+                <dd data-name="console"><a lay-href="roomListForRental"  class="layui-nav-erjinav">预租房屋信息</a></dd>
               </dl>
             </li>
           </ul>

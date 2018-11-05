@@ -120,7 +120,7 @@
 							      '<td>'+res[i].RECORDTIME+'</td>'+
 							      '<td>'+res[i].OPTIONAL+'</td>'+
 							      '<td>'+res[i].CHECKSTATUS+'</td>'+
-							      '<td>'+res[i].CURRENT+'</td>'+
+							      '<td>'+res[i].CURRENT_TIME+'</td>'+
 							      '</tr>');	
 					}
 				},
