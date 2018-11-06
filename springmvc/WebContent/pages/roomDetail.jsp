@@ -124,6 +124,7 @@
 					<div class="z-row">
 						<div class="z-col">
 							<!--百度地图容器-->
+							<div id="full-screen-btn"><i class="fa fa-arrows-alt" aria-hidden="true" style="z-index:10000"></i></div>
                             <div style="width:100%;height:100%;border:#ccc solid 1px; min-height:150px;min-widht:330px" id="dituContent"></div>
 						</div>
 					</div>

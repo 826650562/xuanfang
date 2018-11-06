@@ -63,7 +63,8 @@ $(function(){
     
     //$('#showModel').attr("src",JHCXF.ThreeUrl+"?total=JHC-"+ RoomInforJson.HOUSETYPE +"&&show=1");
     
-    $('#3d a').attr("href",JHCXF.ThreeUrl+"?total=JHC-"+ RoomInforJson.HOUSETYPE +"&&show=1");
+//    $('#3d a').attr("href",JHCXF.ThreeUrl+"?total=JHC-"+ RoomInforJson.HOUSETYPE +"&&show=1");
+    $('#3d a').attr("href",window.Path+'chooseRoom/roomModel?roomInfoDetail='+RoomInforJson.HOUSETYPE);
 
     
 	$("#img").click(function() {
@@ -92,5 +93,18 @@ $(function(){
 		$("#quanjing").css("color", "black");
 		;
 	});
+	
+	$("#full-screen-btn").click(function(){
+		if($("#dituContent").css("position","relative")){
+			$("#dituContent").attr("height","100%");
+			$("#dituContent").attr("width","100%");
+			$("#dituContent").css("position","absolute");
+			$("#dituContent").css("top","0");
+			$("#dituContent").css("left","0");
+		}else if($("#dituContent").css("position","absolute")){
+			window.location.reload();
+		}
+		initMap();
+	})
 	
 })

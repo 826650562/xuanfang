@@ -47,6 +47,12 @@ public class chooseRoomController {
 	}
 
 	// 打开小区详情页面
+	@RequestMapping(value = "/roomModel")
+	public String showRoomModel() {
+		return "pages/roomModel";
+	}
+	
+	// 打开小区详情页面
 	@RequestMapping(value = "/communityDstail")
 	public String communityDstail() {
 		return "pages/communityDstail";
