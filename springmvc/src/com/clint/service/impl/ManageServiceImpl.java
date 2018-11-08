@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.clint.service.ManageService;
@@ -45,7 +44,7 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public void updateRoomStatus(String id) {
 		String addSql = "update t_bim_chooseroom_status t set statusid='3' where t.id='" + id + "'";
-		this.mapService.execute(addSql);		
+		this.mapService.execute(addSql);
 	}
 
 	@Override
@@ -83,7 +82,7 @@ public class ManageServiceImpl implements ManageService {
 	public List getAllRoom() {
 		String addSql = "";
 		addSql = "select distinct l.ldh build,r.JZ_HOUSEHOLD household,r.JZ_FLOOR floor,r.id roomId from T_BIM_LDXX l,t_bim_room r where r.loudong=l.ldh and r.jz_housetype!='无'";
-		List res = this.mapService.getListBySql(addSql) ;
+		List res = this.mapService.getListBySql(addSql);
 		return res;
 	}
 
@@ -97,7 +96,8 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public List getUserInfoByIdRental(String idCard, String publicRental) {
-		String addSql = "select *  from T_BIM_CHOOSEROOM_TENEMENT r where r.IDCARD='"+ idCard +"' and PUBLIC_RENTAL_RECORD = '"+ publicRental +"'";
+		String addSql = "select *  from T_BIM_CHOOSEROOM_TENEMENT r where r.IDCARD='" + idCard
+				+ "' and PUBLIC_RENTAL_RECORD = '" + publicRental + "'";
 		List res = this.mapService.getListBySql(addSql);
 		return res;
 	}
@@ -111,29 +111,34 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public List getRoomByBuildArea(String build, int area) {
-		String sql = "select distinct t.loudong,t.id id, t.jz_floor floor, t.jz_household houseHold  from T_BIM_ROOM t ,t_bim_roomtype r  where t.loudong='"+ build +"'and t.jz_housetype=r.roomtypename and  to_number(r.roominsidearea) between to_number("+ (area-1) +") and to_number("+ (area+1) +")";
+		String sql = "select distinct t.loudong,t.id id, t.jz_floor floor, t.jz_household houseHold  from T_BIM_ROOM t ,t_bim_roomtype r  where t.loudong='"
+				+ build + "'and t.jz_housetype=r.roomtypename and  to_number(r.roominsidearea) between to_number("
+				+ (area - 1) + ") and to_number(" + (area + 1) + ")";
 		List res = this.mapService.getListBySql(sql);
 		return res;
 	}
 
 	@Override
-	public void chooseRoom(String tenementId, String roomId, String dateTime,String statusId) {
-		String id = UUID.randomUUID().toString().replace("-","");
-		String addSql = "insert into t_bim_chooseroom_status (id, roomId, TENEMENTID, time, STATUSID,delete_tag) values ('"+ id +"', '"+ roomId +"', '"+ tenementId +"', '"+ dateTime +"','"+ statusId +"','0')";
+	public void chooseRoom(String tenementId, String roomId, String dateTime, String statusId) {
+		String id = UUID.randomUUID().toString().replace("-", "");
+		String addSql = "insert into t_bim_chooseroom_status (id, roomId, TENEMENTID, time, STATUSID,delete_tag) values ('"
+				+ id + "', '" + roomId + "', '" + tenementId + "', '" + dateTime + "','" + statusId + "','0')";
 		this.mapService.execute(addSql);
-		
+
 	}
 
 	@Override
 	public List searchTenementStatus(String tenementId, String roomId, String statusId) {
-		String sql = "select * from t_bim_chooseroom_status where tenementid='"+ tenementId +"' and roomid='"+ roomId +"' and statusid='"+ statusId +"' and delete_tag='0'";
+		String sql = "select * from t_bim_chooseroom_status where tenementid='" + tenementId + "' and roomid='" + roomId
+				+ "' and statusid='" + statusId + "' and delete_tag='0'";
 		List res = this.mapService.getListBySql(sql);
 		return res;
 	}
 
 	@Override
 	public List getUserChoosedById(String tenementId) {
-		String addSql = "select t.id from t_bim_chooseroom_status t where delete_tag='0'  and t.TENEMENTID='" + tenementId +"'";
+		String addSql = "select t.id from t_bim_chooseroom_status t where delete_tag='0'  and t.TENEMENTID='"
+				+ tenementId + "'";
 		List addList = this.mapService.getListBySql(addSql);
 		return addList;
 	}
@@ -148,19 +153,22 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public void insertTenement(String name, String address, String addressdetail, String idcard, String phonenum,
 			String housetype, String housetypeorder, String lotterorder, String recordtime, String optional,
-			String checkstatus, String current,String publicrentalrecord,String limitarea) {
-		String id =  UUID.randomUUID().toString().replace("-", "");
-		String addSql = "insert into T_BIM_CHOOSEROOM_TENEMENT (id,name, address, addressdetail, idcard, phonenum,housetype,housetypeorder,lotterorder,recordtime,optional,checkstatus,current_time,PUBLIC_RENTAL_RECORD) values "+
-		"('"+ id +"', '"+ name +"', '"+ address +"', '"+ addressdetail +"','"+ idcard +"','"+ phonenum +"','"+ housetype +"','"+ housetypeorder +"','"+ lotterorder +"','"+ optional +"','"+ checkstatus +"','"+ current +"','"+ publicrentalrecord +"')";
+			String checkstatus, String current, String publicrentalrecord, String limitarea) {
+		String id = UUID.randomUUID().toString().replace("-", "");
+		String addSql = "insert into T_BIM_CHOOSEROOM_TENEMENT (id,name, address, addressdetail, idcard, phonenum,housetype,housetypeorder,lotterorder,recordtime,optional,checkstatus,current_time,PUBLIC_RENTAL_RECORD) values "
+				+ "('" + id + "', '" + name + "', '" + address + "', '" + addressdetail + "','" + idcard + "','"
+				+ phonenum + "','" + housetype + "','" + housetypeorder + "','" + lotterorder + "','" + optional + "','"
+				+ checkstatus + "','" + current + "','" + publicrentalrecord + "')";
 		this.mapService.execute(addSql);
-		
+
 	}
 
 	@Override
 	public List getTenantByPage(int currentNum, int limitNum) {
- 		String tenantSql = "SELECT * FROM (select e.*,rownum r from (SELECT t.*,rownum FROM T_BIM_CHOOSEROOM_TENEMENT t) e WHERE rownum <= "+ (currentNum)*limitNum +") w WHERE w.r > "+ (currentNum-1)*limitNum ;		
- 		List res = this.mapService.getListBySql(tenantSql);
- 		return res;
+		String tenantSql = "SELECT * FROM (select e.*,rownum r from (SELECT t.*,rownum FROM T_BIM_CHOOSEROOM_TENEMENT t) e WHERE rownum <= "
+				+ (currentNum) * limitNum + ") w WHERE w.r > " + (currentNum - 1) * limitNum;
+		List res = this.mapService.getListBySql(tenantSql);
+		return res;
 	}
 
 	@Override
@@ -172,14 +180,16 @@ public class ManageServiceImpl implements ManageService {
 
 	@Override
 	public List getRoomStatusByBuild(String build) {
-		String sql = "select distinct c.status,s.*,r.loudong from T_BIM_CHOOSEROOM_STATUS s,T_BIM_CHOOSEROOM_CODE c,t_bim_room r where  c.id=s.statusid and delete_tag='0' and s.roomid=r.id and (c.status='已出租' or c.status='已被选') and r.loudong='"+ build +"'";
+		String sql = "select distinct c.status,s.*,r.loudong from T_BIM_CHOOSEROOM_STATUS s,T_BIM_CHOOSEROOM_CODE c,t_bim_room r where  c.id=s.statusid and delete_tag='0' and s.roomid=r.id and (c.status='已出租' or c.status='已被选') and r.loudong='"
+				+ build + "'";
 		List res = this.mapService.getListBySql(sql);
 		return res;
 	}
 
 	@Override
 	public List getRoomstatusByRoomId(String roomId) {
-		String sql = "select * from T_BIM_CHOOSEROOM_STATUS where roomid='"+ roomId +"' and (statusid='0' or statusid='3') and delete_tag='0'";
+		String sql = "select * from T_BIM_CHOOSEROOM_STATUS where roomid='" + roomId
+				+ "' and (statusid='0' or statusid='3') and delete_tag='0'";
 		List res = this.mapService.getListBySql(sql);
 		return res;
 	}
@@ -187,81 +197,96 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public Boolean setTenant(String name, String address, String addressdetail, String idcard, String phonenum,
 			String housetype, String housetypeorder, String lotterorder, String recordtime, String optional,
-			String checkstatus, String current,String publicrentalrecord,String limitarea) {
-		String sql = "select count(*) from T_BIM_CHOOSEROOM_TENEMENT where PHONENUM = '"+ phonenum +"' and TENEMENTNAME = '"+ name +"'";
+			String checkstatus, String current, String publicrentalrecord, String limitarea) {
+		String sql = "select count(*) from T_BIM_CHOOSEROOM_TENEMENT where PHONENUM = '" + phonenum
+				+ "' and TENEMENTNAME = '" + name + "'";
 		int had = this.mapService.countAll(sql);
-		if(had>0){
+		if (had > 0) {
 			sql = "update T_BIM_CHOOSEROOM_TENEMENT set(TENEMENTNAME, ADDRESS, PUBLIC_RENTAL_RECORD, IDCARD,HOUSETYPE,HOUSETYPEORDER,"
-					+ "ADDRESSDETAIL,LOTTERYORDER,RECORDTIME,OPTIONAL,CHECKSTATUS,CURRENT_TIME) = ( select '"+ name +"', '"+ address +"', '"+ addressdetail +"',"
-							+ "'"+ idcard +"','"+ housetype +"','"+ housetypeorder +"','"+ lotterorder +"','"+ recordtime +"','"+ optional +"',"
-							+ "'"+ checkstatus +"','"+ current +"','"+ publicrentalrecord +"' from dual) where PHONENUM='" + phonenum +"'";
-		}else{
+					+ "ADDRESSDETAIL,LOTTERYORDER,RECORDTIME,OPTIONAL,CHECKSTATUS,CURRENT_TIME) = ( select '" + name
+					+ "', '" + address + "', '" + addressdetail + "'," + "'" + idcard + "','" + housetype + "','"
+					+ housetypeorder + "','" + lotterorder + "','" + recordtime + "','" + optional + "'," + "'"
+					+ checkstatus + "','" + current + "','" + publicrentalrecord + "' from dual) where PHONENUM='"
+					+ phonenum + "'";
+		} else {
 			String id = UUID.randomUUID().toString().replaceAll("-", "");
-			sql = "insert into T_BIM_CHOOSEROOM_TENEMENT values "+
-		"('"+ id +"', '"+ name +"', '"+ address +"', '"+ addressdetail +"','"+ idcard +"','"+ phonenum +"','"+ housetype +"','"+ housetypeorder +"',"
-				+ "'"+ lotterorder +"','"+ recordtime +"','"+ optional +"','"+ checkstatus +"','"+ current +"','"+ publicrentalrecord +"','27')";
+			sql = "insert into T_BIM_CHOOSEROOM_TENEMENT values " + "('" + id + "', '" + name + "', '" + address
+					+ "', '" + addressdetail + "','" + idcard + "','" + phonenum + "','" + housetype + "','"
+					+ housetypeorder + "'," + "'" + lotterorder + "','" + recordtime + "','" + optional + "','"
+					+ checkstatus + "','" + current + "','" + publicrentalrecord + "','27')";
 		}
-		
+
 		this.mapService.execute(sql);
-		sql = "select count(*) from T_BIM_CHOOSEROOM_TENEMENT where  PHONENUM = '"+ phonenum +"' and TENEMENTNAME = '"+ name +"'";
+		sql = "select count(*) from T_BIM_CHOOSEROOM_TENEMENT where  PHONENUM = '" + phonenum + "' and TENEMENTNAME = '"
+				+ name + "'";
 		int setOrUpdate = this.mapService.countAll(sql);
-		
+
 		Boolean bol = false;
-		
-		if(setOrUpdate>0){
+
+		if (setOrUpdate > 0) {
 			bol = true;
 		}
 		return bol;
 	}
-	public List getRoomListForRentalByPage(int limitNum,int curNum) {
-		String sql = "select * from (select r.*,a.starttime,a.endtime,rownum rn from T_CHOOSEROOM_APPOINT a,T_BIM_ROOM r where a.roomid=r.id and rownum<="+ curNum*limitNum +")  w where w.rn>"+ (curNum-1)*limitNum +"";
+
+	public List getRoomListForRentalByPage(int limitNum, int curNum) {
+		String sql = "select * from (select r.*,a.starttime,a.endtime,rownum rn from T_CHOOSEROOM_APPOINT a,T_BIM_ROOM r where a.roomid=r.id and rownum<="
+				+ curNum * limitNum + ")  w where w.rn>" + (curNum - 1) * limitNum + "";
 		List res = this.mapService.getListBySql(sql);
 		return res;
 	}
 
 	@Override
 	public int getAllRoomCount() {
-		int count = this.mapService.countAll("SELECT count(*) FROM T_BIM_ROOM WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "."+"\\" + "-]"+"\\"+ "d*"+"\\" + ".{0,1}"+"\\" + "d*$') IS NOT NULL");
+		int count = this.mapService.countAll("SELECT count(*) FROM T_BIM_ROOM WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9"
+				+ "\\" + "." + "\\" + "-]" + "\\" + "d*" + "\\" + ".{0,1}" + "\\" + "d*$') IS NOT NULL");
 		return count;
 	}
+
 	@Override
 	public int getAllRoomCountByBuild(String build) {
-		int count = this.mapService.countAll("SELECT count(*) FROM T_BIM_ROOM WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "."+"\\" + "-]"+"\\"+ "d*"+"\\" + ".{0,1}"+"\\" + "d*$') IS NOT NULL and loudong='"+ build +"'");
+		int count = this.mapService.countAll(
+				"SELECT count(*) FROM T_BIM_ROOM WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "." + "\\" + "-]"
+						+ "\\" + "d*" + "\\" + ".{0,1}" + "\\" + "d*$') IS NOT NULL and loudong='" + build + "'");
 		return count;
 	}
+
 	@Override
 	public List getRoomListByPage(int limitNum, int currentNum) {
-		String sql = "select * from (SELECT i.*,rownum as rn from (SELECT DISTINCT  a.*"+
- " FROM (select DISTINCT r.* from T_BIM_ROOM r  left join T_CHOOSEROOM_APPOINT n on r.id = n.roomid where n.roomid  is null) a,T_BIM_CHOOSEROOM_STATUS s "+
- " WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "."+"\\" + "-]"+"\\"+ "d*"+"\\" + ".{0,1}"+"\\" + "d*$') IS NOT NULL  and (s.DELETE_TAG='0' and a.id!=s.ROOMID and s.statusid='3' or s.statusid='1' )  ) i  where rownum<="+ currentNum*limitNum  +")w  where w.rn>" + (currentNum-1)*limitNum + "";
+		String sql = "select * from (SELECT i.*,rownum as rn from (SELECT DISTINCT  a.*"
+				+ " FROM (select DISTINCT r.* from T_BIM_ROOM r  left join T_CHOOSEROOM_APPOINT n on r.id = n.roomid where n.roomid  is null) a,T_BIM_CHOOSEROOM_STATUS s "
+				+ " WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "." + "\\" + "-]" + "\\" + "d*" + "\\" + ".{0,1}"
+				+ "\\"
+				+ "d*$') IS NOT NULL  and (s.DELETE_TAG='0' and a.id!=s.ROOMID and s.statusid='3' or s.statusid='1' )  ) i  where rownum<="
+				+ currentNum * limitNum + ")w  where w.rn>" + (currentNum - 1) * limitNum + "";
 		List res = this.mapService.getListBySql(sql);
 		return res;
 	}
 
 	@Override
-	public void insertIntoTable(String roomid, String starttime, String endtime) {
+	public void insertIntoTable(String roomid) {
 		String id = UUID.randomUUID().toString().replace("-", "");
-		String sql = "insert into T_CHOOSEROOM_APPOINT(id,roomid,starttime,endtime) values('"+ id +"','"+ roomid +"','"+ starttime +"','"+ endtime +"')";
+		String sql = "insert into T_CHOOSEROOM_APPOINT(id,roomid) values('" + id + "','" + roomid + "')";
 		this.mapService.execute(sql);
-		
+
 	}
 
 	@Override
 	public int getRentalRoomCount() {
 		String sql = "select count(*) from T_CHOOSEROOM_APPOINT where starttime!='null'";
 		int res = this.mapService.countAll(sql);
-		
+
 		return res;
 	}
 
 	@Override
 	public Boolean deleteRentalRoom(String roomid) {
-		String sqlString = "delete from T_CHOOSEROOM_APPOINT where roomid='"+ roomid +"'";
+		String sqlString = "delete from T_CHOOSEROOM_APPOINT where roomid='" + roomid + "'";
 		this.mapService.execute(sqlString);
-		
-		int res = this.mapService.countAll("select count(*) from T_CHOOSEROOM_APPOINT where roomid='"+ roomid +"'");
+
+		int res = this.mapService.countAll("select count(*) from T_CHOOSEROOM_APPOINT where roomid='" + roomid + "'");
 		Boolean bol = false;
-		if(res<=0){
+		if (res <= 0) {
 			bol = true;
 		}
 		return bol;
@@ -274,21 +299,106 @@ public class ManageServiceImpl implements ManageService {
 		List<?> list = this.mapService.getListBySql(sql);
 		return list;
 	}
+
 	public List getAllBuild() {
 		String sql = "select ldh from T_BIM_LDXX";
-		List res = this.mapService.getListBySql(sql);				
+		List res = this.mapService.getListBySql(sql);
 		return res;
 	}
 
 	@Override
 	public List getRoomByBuild(int limitNum, int currentNum, String build) {
-		String sql = "select * from (SELECT i.*,rownum as rn from (SELECT DISTINCT  a.*"+
-				 " FROM (select DISTINCT r.* from T_BIM_ROOM r  left join T_CHOOSEROOM_APPOINT n on r.id = n.roomid where n.roomid  is null) a,T_BIM_CHOOSEROOM_STATUS s "+
-				 " WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "."+"\\" + "-]"+"\\"+ "d*"+"\\" + ".{0,1}"+"\\" + "d*$') IS NOT NULL and loudong='"+ build +"'  and (s.DELETE_TAG='0' and a.id!=s.ROOMID and s.statusid='3' or s.statusid='1' )  ) i  where rownum<="+ currentNum*limitNum  +")w  where w.rn>" + (currentNum-1)*limitNum + "";
-						List res = this.mapService.getListBySql(sql);
-						return res;
+		String sql = "select * from (SELECT i.*,rownum as rn from (SELECT DISTINCT  a.*"
+				+ " FROM (select DISTINCT r.* from T_BIM_ROOM r  left join T_CHOOSEROOM_APPOINT n on r.id = n.roomid where n.roomid  is null) a,T_BIM_CHOOSEROOM_STATUS s "
+				+ " WHERE REGEXP_SUBSTR(JZ_HOUSEHOLD, '^[0-9" + "\\" + "." + "\\" + "-]" + "\\" + "d*" + "\\" + ".{0,1}"
+				+ "\\" + "d*$') IS NOT NULL and loudong='" + build
+				+ "'  and (s.DELETE_TAG='0' and a.id!=s.ROOMID and s.statusid='3' or s.statusid='1' )  ) i  where rownum<="
+				+ currentNum * limitNum + ")w  where w.rn>" + (currentNum - 1) * limitNum + "";
+		List res = this.mapService.getListBySql(sql);
+		return res;
 	}
-		
+
+	@Override
+	public Boolean updateTime(String tenementId, String starttime, String endtime) {
+		String id = UUID.randomUUID().toString().replace("-", "");
+		int count = this.mapService
+				.countAll("select count(*) from t_chooseroom_person where tenementid='" + tenementId + "'");
+		String sql = "";
+		if (count > 0) {
+			sql = "update t_chooseroom_person set(starttime,endtime)=(select '" + starttime + "','" + endtime
+					+ "' from dual) where tenementid='" + tenementId + "'";
+		} else {
+			sql = "insert into t_chooseroom_person(id,tenementid,starttime,endtime) values('" + id + "','" + tenementId
+					+ "','" + starttime + "','" + endtime + "')";
+		}
+		this.mapService.execute(sql);
+		int i = this.mapService.countAll("select count(*) from t_chooseroom_person where tenementid='" + tenementId
+				+ "' and starttime='" + starttime + "' and endtime='" + endtime + "'");
+		Boolean bol = false;
+		if (i > 0) {
+			bol = true;
+		}
+		return bol;
+	}
+
+	@Override
+	public List getPersonByPage(int limitNum, int currentNum) {
+		String sql = "select  p.* from (select a.*,rownum rn,p.starttime,p.endtime from (select DISTINCT t.* from T_BIM_CHOOSEROOM_TENEMENT t  left join T_BIM_CHOOSEROOM_STATUS s on t.id = s.tenementid where s.tenementid  is null) a,T_CHOOSEROOM_PERSON p where a.id=p.TENEMENTID and rownum<"
+				+ (currentNum * limitNum) + ")p where p.rn>" + ((currentNum - 1) * limitNum) + "";
+		List res = this.mapService.getListBySql(sql);
+		return res;
+	}
+
+	@Override
+	public Boolean delPersonByTenementId(String tenementId) {
+		String sql = "delete from t_chooseroom_person where tenementid='" + tenementId + "'";
+		this.mapService.execute(sql);
+		int i = this.mapService.countAll("select * from t_chooseroom_person where tenementid='" + tenementId + "'");
+		Boolean bol = false;
+		if (i <= 0) {
+			bol = true;
+		}
+		return bol;
+	}
+
+	@Override
+	public int getPersonCount() {
+		int i = this.mapService.countAll("select count(*) from t_chooseroom_person");
+		return i;
+	}
+
+	@Override
+	public List getRentalOrPerson() {
+		String sql = "select s.* from T_BIM_CHOOSEROOM_STATUS s,T_CHOOSEROOM_PERSON p where s.tenementid=p.tenementid and s.delete_tag='0' and (statusid='1' or statusid='3')";
+		List res = this.mapService.getListBySql(sql);
+		return res;
+	}
+
+	@Override
+	public List getToldPerson() {
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String current = dateFormat.format(date.getTime());
+		String sql = "select DISTINCT n.* from (select DISTINCT p.* from T_CHOOSEROOM_PERSON p  where to_date('"
+				+ current + "','yyyy-mm-dd hh24:mi:ss')>to_date(starttime,'yyyy-mm-dd hh24:mi:ss') and to_date('"
+				+ current
+				+ "','yyyy-mm-dd hh24:mi:ss')<to_date(endtime,'yyyy-mm-dd hh24:mi:ss') ) n left join T_BIM_CHOOSEROOM_STATUS s on n.tenementid = s.tenementid where s.tenementid  is null ";
+
+		List res = this.mapService.getListBySql(sql);
+		return res;
+	}
+
+	@Override
+	public List getNoRentalPerson() {
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String current = dateFormat.format(date.getTime());
+		String sql = "select DISTINCT n.* from (select DISTINCT p.* from T_CHOOSEROOM_PERSON p  where to_date('"
+				+ current + "','yyyy-mm-dd hh24:mi:ss')>to_date(endtime,'yyyy-mm-dd hh24:mi:ss') or to_date('" + current
+				+ "','yyyy-mm-dd hh24:mi:ss')<to_date(starttime,'yyyy-mm-dd hh24:mi:ss') ) n left join T_BIM_CHOOSEROOM_STATUS s on n.tenementid = s.tenementid where s.tenementid  is null ";
+
+		List res = this.mapService.getListBySql(sql);
+		return res;
+	}
 
 }
-

@@ -50,8 +50,8 @@ $(function(){
 						url:'insertIntoTable',
 						data:{
 							choosedStr : choosedStr,
-							starttime:$('#dateStart').text(),
-							endtime:$('#dateEnd').text()
+//							starttime:$('#dateStart').text(),
+//							endtime:$('#dateEnd').text()
 						},
 						type:'POST',
 						dataType:'JSON',

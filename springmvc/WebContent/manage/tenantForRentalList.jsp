@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 }
 </style>
 <script>
-  	var tenantList=${listOfPage}
+  	var personCount = '${personCount}';
   </script>
 <script>
   ///^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
@@ -60,28 +60,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="contain" class="container" style="margin:20px auto;width:100%">
 		<div class="orderT layui-form">
 			<div class='layui-elem-quote'>
-				<span class="marR20">所有人员信息列表</span>
-				<div style="display:inline-block;margin-left: 20px;">
-					<button class="layui-btn layui-btn-xs marR20" id="importXls">导入xls表</button>
-					<button class="layui-btn layui-btn-xs" id="exportXls">导出xls表</button>
-				</div>
-			</div>
-			<div class="layui-elem-quote"
-				style="border:0;background-color:#f6f6f6;margin-bottom:0;padding:9px">
-				<div class="layui-inline">
-					<label class="layui-form-label">预租时间段</label>
-					<div class="layui-input-inline">
-						<div id="dateStart" class=" datetime"></div>
-					</div>
-					<div class="layui-form-mid">-</div>
-					<div class="layui-input-inline">
-						<div id="dateEnd" class=" datetime"></div>
-					</div>
-				</div>
+				<span class="marR20">预租人员信息列表</span>
 				<button style="margin-left:20px;"
 					class="layui-btn layui-btn-radius layui-btn-warm"
-					@click.stop.prevent="setRenderTime">添加预租时间</button>
-			</div>
+					@click.stop.prevent="setRenderTime">删除预租人员</button>
+			</div>			
 			<table class="layui-table ">
 				<thead>
 					<tr>
@@ -95,8 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<th>备案时间</th>
 						<th>正备选</th>
 						<th>保办审核状态</th>
-						<th>当前状态</th>
-						<th>选房结果</th>
+						<th>开始时间</th>
+						<th>结束时间</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -104,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<tr v-show='tenementList.length<=0'>
 						<td colspan="13">暂无数据</td>						      
 					</tr>
-					<tr :rid=i.ID  v-for='i in tenementList'>
+					<tr :tid=i.ID  v-for='i in tenementList'>
 						<td>{{i.TENEMENTNAME}}</td>
 						<td>{{i.ADDRESS}}</td>
 						<td>{{i.PUBLIC_RENTAL_RECORD}}</td>
@@ -115,8 +98,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>{{i.RECORDTIME}}</td>
 						<td>{{i.OPTIONAL}}</td>
 						<td>{{i.CHECKSTATUS}}</td>
-						<td class="curStatus"></td>
-						<td class="choosed">无</td>	
+						<td>{{i.STARTTIME?i.STARTTIME:''}}</td>
+						<td>{{i.ENDTIME?i.ENDTIME:''}}</td>	
 						<td><input :_id=i.ID type="checkbox" lay-skin="primary"
 								name="choose">
 						</td>						      
@@ -132,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="<%=basePath%>js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/layui/layui.js"></script>
 	<script src="<%=basePath%>js/vue.js"></script>
-	<script src="<%=basePath%>js/tenantList.js"></script>
+	<script src="<%=basePath%>js/tenementForRentalList.js"></script>
 	<script src="<%=basePath%>js/Export.js"></script>
 </body>
 </html>

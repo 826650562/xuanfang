@@ -63,7 +63,7 @@
 					<span>可租房屋信息列表</span>
 					<div class="z-col"
 						style="text-align: left;height:50px;display: contents;">
-						<div class="layui-inline">
+						<!-- <div class="layui-inline">
 							<label class="layui-form-label">预租时间段</label>
 							<div class="layui-input-inline">
 								<div id="dateStart" class=" datetime"></div>
@@ -72,7 +72,7 @@
 							<div class="layui-input-inline">
 								<div id="dateEnd" class=" datetime"></div>
 							</div>
-						</div>
+						</div> -->
 						<button style="margin-left:20px;"
 							class="layui-btn layui-btn-radius layui-btn-warm"
 							@click.stop.prevent="insertToTem">添加预租房屋</button>

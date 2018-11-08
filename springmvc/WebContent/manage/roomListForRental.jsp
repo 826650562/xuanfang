@@ -42,8 +42,8 @@
 			      <th>所属楼层</th>
 			      <th>户号</th>
 			      <th>户型</th>
-			      <th>预租开始时间</th>
-			      <th>预租结束时间</th>
+			      <!-- <th>预租开始时间</th>
+			      <th>预租结束时间</th> -->
 			      <th>选择</th>
 			    </tr> 
 			  </thead>
@@ -54,8 +54,8 @@
 				      <td>{{i.JZ_FLOOR}}楼</td>
 				      <td>{{i.JZ_HOUSEHOLD}}户</td>
 				      <td>{{i.JZ_HOUSETYPE}}</td>
-				      <td>{{i.STARTTIME}}</td>
-				      <td>{{i.ENDTIME}}</td>
+				      <!-- <td>{{i.STARTTIME}}</td>
+				      <td>{{i.ENDTIME}}</td> -->
 				      <td><input :_id=i.ID  type="checkbox"  lay-skin="primary" name="choose"></td>			      
 				    </tr>
 			  </tbody>

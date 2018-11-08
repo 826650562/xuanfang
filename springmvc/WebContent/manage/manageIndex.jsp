@@ -81,7 +81,10 @@
                 <cite>预租信息</cite>
               </a>
               <dl class="layui-nav-child">
-                <dd  data-name="console"><a lay-href="tenantList"  class="layui-nav-erjinav">预租人员信息</a></dd>
+                <dd  data-name="console"><a lay-href="tenantList"  class="layui-nav-erjinav">所有人员信息</a></dd>
+              </dl>
+              <dl class="layui-nav-child">
+                <dd  data-name="console"><a lay-href="tenantForRentalList"  class="layui-nav-erjinav">预租人员信息</a></dd>
               </dl>
               <dl class="layui-nav-child">
                 <dd data-name="console"><a lay-href="allRoomList"  class="layui-nav-erjinav">所有房屋信息</a></dd>
@@ -134,7 +137,10 @@
   	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
   	  <script src="<%=basePath%>js/layui/layui.js"></script>
 <%--   <script src="<%=basePath%>js/manageIndex.js"></script> --%>
-  <script>window.path = "<%=basePath%>";</script>
+  <script>
+  	
+  	window.path = "<%=basePath%>";
+  </script>
   <script>
   layui.config({
     base: '<%=basePath%>' //静态资源所在路径
