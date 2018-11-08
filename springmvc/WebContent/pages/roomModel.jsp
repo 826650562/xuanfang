@@ -18,8 +18,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body sytle="padding:0;margin:0">
   <div id="wrapper" sytle="padding:0;margin:0">
-	<div class="leftback" id="roomBack" style="position: absolute;color: white;left: 40px;top: 40px;font-size: 40px;margin-right: 5px;z-index:10000;">
-        <i class="fa fa-chevron-left" style="margin-right: 10px;font-size: 40px;"></i>返回
+	<div class="leftback" id="roomBack" style="position: absolute;color: white;left: 40px;top: 40px;font-size: 30px;margin-right: 5px;z-index:10000;">
+        <i class="fa fa-chevron-left" style="margin-right: 10px;font-size: 30px;"></i>返回
     </div>
   </div>
 </body>

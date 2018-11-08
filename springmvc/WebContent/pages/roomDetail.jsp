@@ -13,6 +13,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>选房系统</title>
 <link href="<%=basePath%>js/fontawesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
@@ -25,37 +26,54 @@
 	type="text/css">
 <link href="<%=basePath%>css/layer.css" rel="stylesheet"
 	type="text/css">
+<link href="<%=basePath%>css/swipeslider.css" rel="stylesheet"
+	type="text/css">
 <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
 </head>
 <body>
-	<div class="layui-main">
+	<div class="layui-main" style="position:relative;height: 100%;">
 		<div class="z-row1">
 			<div class="leftback"  id="back">
 				<i class="fa fa-chevron-left" style="margin-right: 5px;"></i>返回
 			</div>
-			<div class="z-col1 bg">
-				<img src="<%=basePath%>images/bg.jpg">
+			<div class="z-col1 bg" id="photoDemo" class="photoDemo">
+				<figure id="full_feature" class="swipslider" style="margin: 0 auto; ">
+				    <ul class="sw-slides">
+				        <li class="sw-slide">
+				           <img src="<%=basePath%>images/roomBG1.jpg" layer-pid="1" layer-src="<%=basePath%>images/roomBG1.jpg" style="height:221px;width:100%;">
+				        </li>
+				        <li class="sw-slide">
+				            <img src="<%=basePath%>images/roomBG2.jpg" layer-pid="2" layer-src="<%=basePath%>images/roomBG2.jpg" style="height:221px;width:100%;">
+				        </li>
+				        <li class="sw-slide">
+				           	<img src="<%=basePath%>images/roomBG3.jpg" layer-pid="3" layer-src="<%=basePath%>images/roomBG3.jpg" style="height:221px;width:100%;">
+				        </li>
+				    </ul>
+				</figure>
 			</div>
-			<div class="z-col btn">
-				<button class="layui-btn-radius layui-btn-primary" id="img">图片</button>
-				<button class="layui-btn-radius layui-btn-primary" id="quanjing">
-					<a href="<%=basePath%>chooseRoom/vtour" style="color: black">全景</a>
-				</button>
-				<button class="layui-btn-radius layui-btn-primary" id="3d">
-					<a href="" style="color: black">3D</a>
-				</button>
-				<button class="layui-btn-radius layui-btn-primary" id="btn-change">1/2</button>
+			<div class="z-row"style="position: absolute;width: 100%;bottom: 15px;">
+				<div class="z-col btn">
+					<button class="layui-btn-radius layui-btn-primary" id="img">图片</button>
+					<button class="layui-btn-radius layui-btn-primary" id="quanjing">
+						<a href="<%=basePath%>chooseRoom/vtour" style="color: black">全景</a>
+					</button>
+					<button class="layui-btn-radius layui-btn-primary" id="3d">
+						<a href="" style="color: black">3D</a>
+					</button>
+					<!-- <button class="layui-btn-radius layui-btn-primary" id="btn-change">1/3</button> -->
+				</div>
 			</div>
+			
 		</div>
 		<div class="itemcontent">
 			<div class="layui-row"
-				style="height: 30px;border-bottom: 1px solid #e2e2e2;">
+				style="height: 23px;border-bottom: 1px solid #e2e2e2;">
 				<div class="layui-col-md9">基本信息</div>
 				<div class="layui-col-md3">
 					查看全部<i class="fa fa-chevron-right" style="margin-left: 5px"></i>
 				</div>
 			</div>
-			<div class="layui-row">
+			<div class="layui-row" style="height:300px;">
 				<div class="layui-col-md12" style="font-size: 13px;">
 					<!--1-->
 					<div class="z-row lineheight">
@@ -124,24 +142,24 @@
 					<div class="z-row">
 						<div class="z-col">
 							<!--百度地图容器-->
-							<div id="full-screen-btn"><i class="fa fa-arrows-alt" aria-hidden="true" style="z-index:10000"></i></div>
                             <div style="width:100%;height:100%;border:#ccc solid 1px; min-height:150px;min-widht:330px" id="dituContent"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="layui-row"
-				style="height: 30px;border-bottom: 1px solid #e2e2e2;">
+				style="height: 23px;border-bottom: 1px solid #e2e2e2;">
 				<div class="layui-col-md9">房源描述</div>
 				<div class="layui-col-md3">
 					查看全部<i class="fa fa-chevron-right" style="margin-left: 5px"></i>
 				</div>
 			</div>
-			<div class="z-row">
+			<div class="z-row" style="height: 63px;">
 				<div class="z-col fwxxms" style="font-size: 14px;">
 					整体户型方正，活动区域开阔，居住舒适度高；整个 空间全明通透，采光良好，同时利于居住空间通风； 整个户型空间布局合理，做到了...</div>
 			</div>
 		</div>
+		<div></div>
 		<div class="bottombtnbox">
 			<button id="chooseThisRoom" class="mui-btn mui-btn-danger xdfjbtn width100">选择该房间<i class="fa fa-long-arrow-right fa-fw"></i>&nbsp;
 			</button>
@@ -152,8 +170,9 @@
 <script src="<%=basePath%>js/jquery-1.9.1.min.js"
 	type="text/javascript"></script>
 <script type="text/javascript" src="<%=basePath%>js/layui/layui.js"></script>
+<script src="<%=basePath%>js/swipeslider.min.js"></script>
 <script src="<%=basePath%>js/config.js"></script>
-<script src="<%=basePath%>js/roomDetail.js"></script>
+
 <script> 
 	window.Path='<%=basePath%>';
 	var RoomInfor = '${json}';
@@ -168,6 +187,24 @@
         setMapEvent();//设置地图事件
         addMapControl();//向地图添加控件
         addMarker();//向地图中添加marker
+        $("#dituContent").append('<div id="full-screen-btn"><i class="fa fa-expand full-screen-btn" aria-hidden="true" style="z-index:10000"></i></div>');
+  	   $("#full-screen-btn").click(function(){
+		if($("#dituContent").hasClass("fullScreenMap")){
+			$("#dituContent").find(".full-screen-btn").removeClass("fa fa-compress").addClass("fa fa-expand");
+			window.location.reload();
+			$("#dituContent").removeClass("fullScreenMap");
+		}else {
+			$("#dituContent").css("height","100%");
+			$("#dituContent").css("width","100%");
+			$("#dituContent").css("position","absolute");
+			$("#dituContent").css("top","0");
+			$("#dituContent").css("left","0");
+			$("#dituContent").css("paddingTop","2%");
+			$("#dituContent").addClass("fullScreenMap");
+			initMap();
+			$("#dituContent").find(".full-screen-btn").removeClass("fa fa-expand").addClass("fa fa-compress");
+		}
+	  })	
     }
     
     //创建地图函数：
@@ -252,6 +289,6 @@
     
     initMap();//创建和初始化地图
 </script>
+<script src="<%=basePath%>js/roomDetail.js"></script>
 </html>
-</script>
 </html>
