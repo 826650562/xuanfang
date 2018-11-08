@@ -4,6 +4,17 @@
 $(function(){
 	layui.use('layer', function(){
  		var layer = layui.layer;
+ 		
+ 		
+ 		//图片查看器
+ 		layer.photos({
+ 			  photos: '#full_feature',
+ 			  anim: 0, //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+ 			  tab: function(pic, layero){
+ 			    console.log(pic) //当前图片的一些信息    
+ 			  }
+ 		}); 
+ 		
 	});
 	
 	RoomInfor =RoomInfor.substring(1,RoomInfor.length-1);
@@ -91,20 +102,9 @@ $(function(){
 		$("#img").css("color", "black");
 		$("#quanjing").css("background-color", "white");
 		$("#quanjing").css("color", "black");
-		;
 	});
 	
-	$("#full-screen-btn").click(function(){
-		if($("#dituContent").css("position","relative")){
-			$("#dituContent").attr("height","100%");
-			$("#dituContent").attr("width","100%");
-			$("#dituContent").css("position","absolute");
-			$("#dituContent").css("top","0");
-			$("#dituContent").css("left","0");
-		}else if($("#dituContent").css("position","absolute")){
-			window.location.reload();
-		}
-		initMap();
-	})
+
 	
+	$('#full_feature').swipeslider();
 })
