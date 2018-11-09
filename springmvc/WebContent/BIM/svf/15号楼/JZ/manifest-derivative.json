@@ -1,0 +1,148 @@
+{
+  "guid": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0",
+  "success": "100%",
+  "owner": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0",
+<<<<<<< HEAD
+  "startedAt": "Fri, 12 Oct 2018 08:57:19 GMT",
+=======
+  "startedAt": "Fri, 12 Oct 2018 10:15:02 GMT",
+>>>>>>> 9ab43f1b8ad326be21ce124363f217e43f9b9d76
+  "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0",
+  "type": "design",
+  "progress": "complete",
+  "status": "success",
+  "hasThumbnail": "false",
+  "region": "US",
+  "children": [
+    {
+      "type": "folder",
+      "role": "viewable",
+      "status": "success",
+      "name": "input.rvt",
+      "hasThumbnail": "false",
+      "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0",
+      "progress": "complete",
+<<<<<<< HEAD
+      "guid": "1a5dc505-255c-41c2-a17f-9ca09d7ff976",
+=======
+      "guid": "9481a203-321b-4efc-be61-1cc9354b6f6c",
+>>>>>>> 9ab43f1b8ad326be21ce124363f217e43f9b9d76
+      "properties": {},
+      "success": "100%",
+      "children": [
+        {
+          "type": "view",
+          "role": "3d",
+          "status": "success",
+          "name": "3d",
+          "progress": "complete",
+          "guid": "c6e0b74f-103c-4728-a008-fc78d84c52e7-0023ab08",
+          "camera": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "type": "folder",
+          "status": "success",
+          "name": "视图",
+          "hasThumbnail": "false",
+          "progress": "complete",
+<<<<<<< HEAD
+          "guid": "1d65c766-197e-4ac7-9ad6-e9dde27d57ef",
+=======
+          "guid": "994401aa-6e57-4e2a-927d-cb834d1fba4f",
+>>>>>>> 9ab43f1b8ad326be21ce124363f217e43f9b9d76
+          "success": "100%",
+          "children": [
+            {
+              "type": "folder",
+              "status": "success",
+              "name": "三维视图",
+              "hasThumbnail": "false",
+              "progress": "complete",
+<<<<<<< HEAD
+              "guid": "24286403-18ac-4087-b1e9-b54cc6e19f3b",
+=======
+              "guid": "d9c5a571-3be9-4456-85b3-bc0cd8fee338",
+>>>>>>> 9ab43f1b8ad326be21ce124363f217e43f9b9d76
+              "success": "100%",
+              "children": [
+                {
+                  "type": "geometry",
+                  "role": "3d",
+                  "status": "success",
+                  "name": "3d",
+                  "hasThumbnail": "false",
+                  "progress": "complete",
+<<<<<<< HEAD
+                  "guid": "00de3122-8f83-44b7-a49d-6467399e7a02",
+=======
+                  "guid": "4085c8a2-a170-47f7-ace1-b8080ac429c6",
+>>>>>>> 9ab43f1b8ad326be21ce124363f217e43f9b9d76
+                  "success": "100%",
+                  "children": [
+                    {
+                      "type": "view",
+                      "role": "3d",
+                      "status": "success",
+                      "name": "3d",
+                      "progress": "complete",
+                      "guid": "c6e0b74f-103c-4728-a008-fc78d84c52e7-0023ab08",
+                      "camera": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    {
+                      "type": "resource",
+                      "role": "3d",
+                      "mime": "application/autodesk-svf",
+                      "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0/3d.svf",
+                      "progress": "graphics",
+<<<<<<< HEAD
+                      "guid": "0d675fca-b09a-4ace-98b6-2804fb53bced",
+                      "size": 5926981
+                    }
+                  ],
+                  "size": 5926981,
+=======
+                      "guid": "ba127f55-3357-49cd-97ba-51bdd38aa763",
+                      "size": 6264226
+                    }
+                  ],
+                  "size": 6264226,
+>>>>>>> 9ab43f1b8ad326be21ce124363f217e43f9b9d76
+                  "viewableID": "c6e0b74f-103c-4728-a008-fc78d84c52e7-0023ab08"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "version": "2.0"
+    }
+  ]
+}

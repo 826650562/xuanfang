@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0",
+  "type": "manifest",
+  "progress": "complete",
+  "status": "success",
+  "hasThumbnail": "false",
+  "region": "US",
+  "derivatives": [
+    {
+      "outputType": "svf",
+      "status": "success",
+      "name": "input.rvt",
+      "hasThumbnail": "false",
+      "progress": "complete",
+      "children": [
+        {
+          "type": "geometry",
+          "role": "3d",
+          "status": "success",
+          "name": "3d",
+          "hasThumbnail": "false",
+          "progress": "complete",
+<<<<<<< HEAD
+          "guid": "00de3122-8f83-44b7-a49d-6467399e7a02",
+=======
+          "guid": "4085c8a2-a170-47f7-ace1-b8080ac429c6",
+>>>>>>> 9ab43f1b8ad326be21ce124363f217e43f9b9d76
+          "children": [
+            {
+              "type": "view",
+              "role": "3d",
+              "status": "success",
+              "name": "3d",
+              "progress": "complete",
+              "guid": "c6e0b74f-103c-4728-a008-fc78d84c52e7-0023ab08",
+              "camera": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "type": "resource",
+              "role": "3d",
+              "mime": "application/autodesk-svf",
+              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0/3d.svf",
+              "progress": "graphics",
+<<<<<<< HEAD
+              "guid": "0d675fca-b09a-4ace-98b6-2804fb53bced"
+=======
+              "guid": "ba127f55-3357-49cd-97ba-51bdd38aa763"
+>>>>>>> 9ab43f1b8ad326be21ce124363f217e43f9b9d76
+            }
+          ],
+          "viewableID": "c6e0b74f-103c-4728-a008-fc78d84c52e7-0023ab08"
+        }
+      ]
+    }
+  ]
+}

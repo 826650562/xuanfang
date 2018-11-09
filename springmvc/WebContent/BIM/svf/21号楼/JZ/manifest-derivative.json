@@ -1,0 +1,120 @@
+{
+  "guid": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0",
+  "success": "100%",
+  "owner": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0",
+  "startedAt": "Sat, 14 Jul 2018 21:09:09 GMT",
+  "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0",
+  "type": "design",
+  "progress": "complete",
+  "status": "success",
+  "hasThumbnail": "false",
+  "region": "US",
+  "children": [
+    {
+      "type": "folder",
+      "role": "viewable",
+      "status": "success",
+      "name": "input.rvt",
+      "hasThumbnail": "false",
+      "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0",
+      "progress": "complete",
+      "guid": "2f195f05-b42b-48ab-af7f-aeb8ba468826",
+      "properties": {},
+      "success": "100%",
+      "children": [
+        {
+          "type": "view",
+          "role": "3d",
+          "status": "success",
+          "name": "3d",
+          "progress": "complete",
+          "guid": "e4a18004-8b05-4c0b-bf48-b6c4db48db68-0006141c",
+          "camera": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "type": "folder",
+          "status": "success",
+          "name": "视图",
+          "hasThumbnail": "false",
+          "progress": "complete",
+          "guid": "52e4bf3f-99cc-414a-b3a2-40d73fb054d4",
+          "success": "100%",
+          "children": [
+            {
+              "type": "folder",
+              "status": "success",
+              "name": "三维视图",
+              "hasThumbnail": "false",
+              "progress": "complete",
+              "guid": "ef8dcff2-2364-4b78-bc39-07e1c777cffd",
+              "success": "100%",
+              "children": [
+                {
+                  "type": "geometry",
+                  "role": "3d",
+                  "status": "success",
+                  "name": "3d",
+                  "hasThumbnail": "false",
+                  "progress": "complete",
+                  "guid": "ddc9d0c9-927a-47d2-868c-2cd08a50efd1",
+                  "success": "100%",
+                  "children": [
+                    {
+                      "type": "view",
+                      "role": "3d",
+                      "status": "success",
+                      "name": "3d",
+                      "progress": "complete",
+                      "guid": "e4a18004-8b05-4c0b-bf48-b6c4db48db68-0006141c",
+                      "camera": [
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0
+                      ]
+                    },
+                    {
+                      "type": "resource",
+                      "role": "3d",
+                      "mime": "application/autodesk-svf",
+                      "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YmltYW5nbGUvaW5wdXQucnZ0/3d.svf",
+                      "progress": "graphics",
+                      "guid": "36fbbffe-32bc-4f76-87d3-c1415f5584f4",
+                      "size": 11538424
+                    }
+                  ],
+                  "size": 11538424,
+                  "viewableID": "e4a18004-8b05-4c0b-bf48-b6c4db48db68-0006141c"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "version": "2.0"
+    }
+  ]
+}

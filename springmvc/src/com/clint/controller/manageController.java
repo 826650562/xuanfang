@@ -43,9 +43,28 @@ public class manageController {
 		HttpSession session = req.getSession();
 		String usr = (String) session.getAttribute("_user_manage");
 		model.addAttribute("username", usr);
+		return "manage/mainframe";
+	}
+	
+	@RequestMapping(value = "/manageIndex")
+	public String manageIndex(HttpServletRequest req, HttpServletResponse reponse, Model model) {
+		HttpSession session = req.getSession();
+		String usr = (String) session.getAttribute("_user_manage");
+		model.addAttribute("username", usr);
 		return "manage/manageIndex";
 	}
-
+	
+	// 右边首页
+	@RequestMapping(value = "/rightIndex")
+	public String rightIndex(HttpServletRequest req, Model model) {
+		return "manage/rightIndex";
+	}
+	
+	@RequestMapping(value = "/twoScreen")
+	public String twoScreen(HttpServletRequest req, Model model) {
+		return "manage/mainframe_2screen";
+	}
+	
 	/*
 	 * @RequestMapping(value = "/indextest") public String
 	 * indextest(HttpServletRequest req, HttpServletResponse reponse, Model

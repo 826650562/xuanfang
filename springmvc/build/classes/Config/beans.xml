@@ -16,6 +16,7 @@
 
 	<!-- 注解驱动 -->
 	<mvc:annotation-driven />
+	<mvc:resources location="/BIM/" mapping="/BIM/**" />
 	<mvc:resources location="/js/" mapping="/js/**"/>
 	<mvc:resources location="/css/" mapping="/css/**"/>
 	<mvc:resources location="/images/" mapping="/images/**"/>
@@ -28,6 +29,7 @@
 			<bean class="com.clint.controller.LoginInterceptor">
 				<property name="exceptUrls">
 					<list>
+						<value>/BIM/**</value>
 						<value>/js/**</value>
 						<value>/css/**</value>
 						<value>/images/**</value>

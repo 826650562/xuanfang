@@ -1,0 +1,85 @@
+/*查看传感器*/
+.cgq_info_contri,.HouseHoldBox{
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(37, 37, 37, 0.76);
+    border-radius: 6px;
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    width: 200px;
+    height: auto;
+    display: none;
+}
+
+.cgq_info_contri .iSpan,.HouseHoldBox .iSpan,.baseinfodiv  .iSpan{
+    width:24px;
+    height:24px;
+    position:absolute;
+    top:-9px;
+    right:-9px;
+    color:white;
+    line-height:22px;
+    text-align: center;
+    background-color:rgba(0,0,0,0.5);
+    -webkit-border-radius: 50% 50%;
+    -moz-border-radius: 50% 50%;
+    border-radius: 50% 50%;
+    cursor:pointer;
+}
+.cgq_info_contri .temBox,.HouseHoldBox .temBox {
+    margin-bottom: 6px;
+}
+.cgq_info_contri .arrow {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    color: #000;
+    line-height: 22px;
+    text-align: center;
+}
+.cgq_info_contri .arrow i{
+    width:16px;
+    height:16px;
+    color: rgba(37, 37, 37, 0.76);
+    font-size: 28px;
+}
+
+/*查看楼层户型*/
+.HouseHoldBox{
+    width: 160px;
+    top:50%;
+    left:30%;
+}
+.HouseHoldBox .iSpan i{
+    width: 16px;
+    height: 16px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.baseinfodiv {
+    position: fixed;
+    top: 180px;
+    right: 650px;
+    display: none;
+    z-index: 2;
+    background-color: rgba(38, 62, 62, 0.7);
+    border-radius: 6px;
+    color: rgb(255, 255, 255);
+    width: 286px;
+}
+.baseinfodiv .basetitle {
+    border-radius: 6px 6px 0px 0px;
+    padding: 10px;
+    background: rgba(0,0,0,0.7);
+}
+.baseinfodiv .basecontent {
+    padding: 10px;
+}
+
+.baseinfodiv .iSpan i{
+    width: 16px;
+    height: 16px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
