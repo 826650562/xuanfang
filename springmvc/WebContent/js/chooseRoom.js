@@ -111,7 +111,8 @@ $(function() {
 					btn:['不再显示','确定'],
 					content: '<div>1.本次选房只能选与配租面积相等的户型。</div>'+
 							'<div>2.每个租户只能意向选取一户，若想选取其他户，请到‘我的’的页面中退选之前选中的户，每个租户可以最多退选三次。</div>'+
-							'<div>3.一旦被后台判定选中成功，户列表中会显示已出租，并等待签署出租合同。</div>',
+							'<div>3.一旦被后台判定选中成功，户列表中会显示已出租，并等待签署出租合同。</div>'+
+							'<div style="font-size=24px;">您的选房时间段在'+ startTime +'-'+  endTime +',请注意选房时间！</div>',
 					btn1:function(index){
 						setCookie('closeLayer',true);
 						layer.close(index);
